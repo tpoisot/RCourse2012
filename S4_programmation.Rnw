@@ -2,11 +2,10 @@
 \documentclass[10pt]{article}
 \usepackage{geometry}
 \geometry{letterpaper}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[mathdesign]{charter}
-\usepackage[scaled]{helvet}
-\usepackage[noae]{Sweave}
+\usepackage{ucs}
+\usepackage[utf8]{inputenx}
+\usepackage[LGR,T2A,T1]{fontenc}
+\usepackage{Sweave}
 
 \begin{document}
 
@@ -15,39 +14,39 @@ options(continue="  ")
 options(width=60)
 @
 
-\title{Introduction à la programmation}
-\author{Timothée Poisot}
+\title{Introduction Ã  la programmation}
+\author{TimothÃ©e Poisot}
 
 \maketitle
 
 \begin{abstract}
-L'objectif de cette séance est l'initation à la programmation. Les principales structures d'algoritmes et les opérateurs logiques seront abordés.  
+L'objectif de cette sÃ©ance est l'initation Ã  la programmation. Les principales structures d'algoritmes et les opÃ©rateurs logiques seront abordÃ©s.  
 \end{abstract}
 
 \section{Programmer, pourquoi?}
 
-Dans les séances précédentes, nous avons utilisé des fichiers \texttt{.R} pour sauvegarder des listes d'instructions.
-Nous avons aussi chargé et manipulé des jeux de données.
-Il est souvent nécessaire d'automatiser tout ou partie de ce processus, ce qui implique de faire appel à de la programmation.
+Dans les sÃ©ances prÃ©cÃ©dentes, nous avons utilisÃ© des fichiers \texttt{.R} pour sauvegarder des listes d'instructions.
+Nous avons aussi chargÃ© et manipulÃ© des jeux de donnÃ©es.
+Il est souvent nÃ©cessaire d'automatiser tout ou partie de ce processus, ce qui implique de faire appel Ã  de la programmation.
 
-L'objectif de cette séance est de
+L'objectif de cette sÃ©ance est de
 
 \section{Boucles}
 
-Les boucles permettent parcourir une liste, ou de répéter une série d'instructions, dans des conditions bien définies; c'est une des structures de base de l'algorithmique.
+Les boucles permettent parcourir une liste, ou de rÃ©pÃ©ter une sÃ©rie d'instructions, dans des conditions bien dÃ©finies; c'est une des structures de base de l'algorithmique.
 R propose deux types de boucles, les boucles \texttt{for} et les boucles \texttt{while}.
-En français, on peut les résumer par ``jusqu'à ce que'' et ``tant que''. 
+En franÃ§ais, on peut les rÃ©sumer par ``jusqu'Ã  ce que'' et ``tant que''. 
 
 \subsection{Boucles de type \texttt{for}}
 
-Une boucle \texttt{for} permet de répéter un bloc d'instructions un nombre prédéfini de fois, ou d'éxécuter des commandes pour chaque élément d'un tableau de données.
+Une boucle \texttt{for} permet de rÃ©pÃ©ter un bloc d'instructions un nombre prÃ©dÃ©fini de fois, ou d'Ã©xÃ©cuter des commandes pour chaque Ã©lÃ©ment d'un tableau de donnÃ©es.
 La syntaxe de base est la suivante:
 
 <<>>=
 for (step in c(1:10)) cat(step)
 @
 
-On peut bien spécifier plusieurs instructions qui doivent être éxécutées à chaque \emph{itération} (étapes de la boucle) en utilisant les accolades:
+On peut bien spÃ©cifier plusieurs instructions qui doivent Ãªtre Ã©xÃ©cutÃ©es Ã  chaque \emph{itÃ©ration} (Ã©tapes de la boucle) en utilisant les accolades:
 
 <<>>=
 for (step in c(1:3))
@@ -57,19 +56,19 @@ for (step in c(1:3))
 }
 @
 
-Cette commande affiche le numéro de l'itération en cours (\texttt{cat(step)}), puis affiche les information de base (\texttt{summary}) sur une distribution normale (\texttt{rnorm}) centrée sur \texttt{step}.
-Les boucles \texttt{for} peuvent contenir des instructions aussi longues que souhaité.
+Cette commande affiche le numÃ©ro de l'itÃ©ration en cours (\texttt{cat(step)}), puis affiche les information de base (\texttt{summary}) sur une distribution normale (\texttt{rnorm}) centrÃ©e sur \texttt{step}.
+Les boucles \texttt{for} peuvent contenir des instructions aussi longues que souhaitÃ©.
 
 Une autre application des boucles \texttt{for} est de parcourir un object.
-Par exemple, on peut souhaiter, pour chaque élément d'un objet, afficher sa valeur.
-R permet de réaliser ce genre d'opérations, avec la syntaxe suivante:
+Par exemple, on peut souhaiter, pour chaque Ã©lÃ©ment d'un objet, afficher sa valeur.
+R permet de rÃ©aliser ce genre d'opÃ©rations, avec la syntaxe suivante:
 
 <<>>=
 vect =  c('a','b','c','d')
 for (val in vect) cat(val)
 @ 
 
-Pour chaque élément du vecteur \texttt{vect}, que l'on nomme \texttt{val} pour pouvoir y accéder pendant les itérations, R va afficher la valeur que l'élément contient.
+Pour chaque Ã©lÃ©ment du vecteur \texttt{vect}, que l'on nomme \texttt{val} pour pouvoir y accÃ©der pendant les itÃ©rations, R va afficher la valeur que l'Ã©lÃ©ment contient.
 
 \subsection{Boucles de type \texttt{while}}
 
@@ -86,30 +85,34 @@ if (a == 4){
 
 \section{Mise en application}
 
-\subsection{Dérive génétique}
-
 \subsection{Test par permutation}
 
-Lorsque les données devient de la normalité, on peut préférer réaliser un test paramétrique avec des permutations plutôt qu'un test non paramétrique.
-La plupart des programmes de statistique n'offrent pas cette possibilité, qui est pourtant très simple a implémenter dans R.
-Dans cette mise en application, on veut effectuer un test t, pour comparer deux distributions, disponibles dans un fichier \texttt{s4_t.txt}.
+Lorsque les donnÃ©es devient de la normalitÃ©, on peut prÃ©fÃ©rer rÃ©aliser un test paramÃ©trÃ©tique avec des permutations plutÃ´t qu'un test non paramÃ©trique.
+La plupart des programmes de statistique n'offrent pas cette possibilitÃ© qui demande pourtant trÃ¨s peu d'efforts pour Ãªtre implÃ©mentÃ©e dans R.
+Dans cette mise en application, on veut effectuer un test t, pour comparer deux distributions, disponibles dans un fichier \texttt{s4-data.txt}.
 
 Le principe d'un test par permutations est simple.
-La première étape est d'effectuer le test sur l'échantillon non permuté, pour obtenir la valeur de la statistique ($T$).
-Dans le cas du test t, R propose la fonction \texttt{t.test}, et un rapide survol de \texttt{?t.test} vous donnera les arguments nécessaires et la manière de récupérer la statistique. 
-Commencent ensuite les permutations à proprement parler. Pour un nombre $n$ d'itérations choisies (en général 9999), on mélange l'ensemble des valeurs des deux distributions.
-On reconstruit ensuite, en tirant au hasard dans le \emph{pool} de valeurs ainsi formées, deux distributions de taille égale.
-Cette étape peut, par example, prendre la forme d'une fonction \texttt{resample}, qui prendrait une \texttt{data.frame} avec deux colonnes (la valeur, et le groupe d'origine) en argument.
-R propose la fonction \texttt{sample}, qui permettra de mélanger la colonne correspondant au groupe (ce qui recréra automatiquement les deux distributions -- économisons nous!).
+La premiÃ¨re Ã©tape est d'effectuer le test sur l'Ã©chantillon non permutÃ©, pour obtenir la valeur de la statistique ($T$).
+Dans le cas du test t, R propose la fonction \texttt{t.test}, et un rapide survol de \texttt{?t.test} vous donnera les arguments nÃ©cÃ©ssaires et la maniÃ¨re de rÃ©cupÃ©rer la statistique. 
+Commencent ensuite les permutations a proprement parler. Pour un nombre $n$ d'itÃ©rations choisies (en gÃ©nÃ©ral 9999), on mÃ©lange l'ensemble des valeurs des deux distributions.
+On reconstruit ensuite, en tirant au hasard dans le \emph{pool} de valeurs ainsi formÃ©es, deux distributions de taille Ã©gale.
+Cette Ã©tape peut, par example, prendre la forme d'une fonction \texttt{resample}, qui prendrait une \texttt{data.frame} avec deux colonnes (la valeur, et le groupe d'origine) en argument.
+R propose la fonction \texttt{sample}, qui permettra de mÃ©langer la colonne correspondant au groupe (ce qui recrÃ©ra automatiquement les deux distributions -- Ã©conomisons nous!).
 Une fois les deux distributions reconstruites, on calcule la nouvelle statistique $T'$.
+Si la valeur de $T'$ est infÃ©rieure Ã  la valeur de $T$, on incrÃ©mente une varaible $N$ de 1.
+Sinon, la valeur de $N$ reste la mÃªme.
 
-Le calcul de la \emph{p-value} se fait de la manière suivante:
+Le calcul de la \emph{p-value} se fait de la maniÃ¨re suivante:
 
+\begin{equation}
+	p = \frac{N}{n}
+\end{equation}
+
+Ã€ partir de ces informations, et des informations donnÃ©es dans l'introduction de cette sÃ©ance, vous devez Ãªtre en mesure de programmer sans difficultÃ©s une fonction \texttt{t.test.permut}, qui rÃ©aliser un test t par permutations.
+En bonus, vous pouvez ajouter des arguments qui permettent de contrÃ´ler le nombre de permutations qui doivent Ãªtre rÃ©alisÃ©es. 
 
 \clearpage
 \section{Solution des mises en application}  
-
-\subsection{Dérive génétique}
 
 \subsection{Test par permutation}
 
