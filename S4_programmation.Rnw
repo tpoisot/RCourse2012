@@ -69,6 +69,8 @@ vect =  c('a','b','c','d')
 for (val in vect) cat(val)
 @ 
 
+Pour chaque élément du vecteur \texttt{vect}, que l'on nomme \texttt{val} pour pouvoir y accéder pendant les itérations, R va afficher la valeur que l'élément contient.
+
 \section{Tests}
 
 <<>>=
