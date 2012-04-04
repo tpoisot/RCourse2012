@@ -94,8 +94,17 @@ Lorsque les données devient de la normalité, on peut préférer réaliser un test p
 La plupart des programmes de statistique n'offrent pas cette possibilité, qui est pourtant très simple a implémenter dans R.
 Dans cette mise en application, on veut effectuer un test t, pour comparer deux distributions, disponibles dans un fichier \texttt{s4_t.txt}.
 
-Le principe d'un test par permutations est simple. On mélange l'ensemble des valeurs des deux distributions, puis on reconstruit en tirant au hasard deux distributions de taille égale.
+Le principe d'un test par permutations est simple.
+La première étape est d'effectuer le test sur l'échantillon non permuté, pour obtenir la valeur de la statistique ($T$).
+Dans le cas du test t, R propose la fonction \texttt{t.test}, et un rapide survol de \texttt{?t.test} vous donnera les arguments nécessaires et la manière de récupérer la statistique. 
+Commencent ensuite les permutations à proprement parler. Pour un nombre $n$ d'itérations choisies (en général 9999), on mélange l'ensemble des valeurs des deux distributions.
+On reconstruit ensuite, en tirant au hasard dans le \emph{pool} de valeurs ainsi formées, deux distributions de taille égale.
 Cette étape peut, par example, prendre la forme d'une fonction \texttt{resample}, qui prendrait une \texttt{data.frame} avec deux colonnes (la valeur, et le groupe d'origine) en argument.
+R propose la fonction \texttt{sample}, qui permettra de mélanger la colonne correspondant au groupe (ce qui recréra automatiquement les deux distributions -- économisons nous!).
+Une fois les deux distributions reconstruites, on calcule la nouvelle statistique $T'$.
+
+Le calcul de la \emph{p-value} se fait de la manière suivante:
+
 
 \clearpage
 \section{Solution des mises en application}  
