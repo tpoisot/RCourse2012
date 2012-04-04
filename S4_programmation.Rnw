@@ -71,6 +71,8 @@ for (val in vect) cat(val)
 
 Pour chaque élément du vecteur \texttt{vect}, que l'on nomme \texttt{val} pour pouvoir y accéder pendant les itérations, R va afficher la valeur que l'élément contient.
 
+\subsection{Boucles de type \texttt{while}}
+
 \section{Tests}
 
 <<>>=
@@ -87,5 +89,21 @@ if (a == 4){
 \subsection{Dérive génétique}
 
 \subsection{Test par permutation}
+
+Lorsque les données devient de la normalité, on peut préférer réaliser un test paramétrique avec des permutations plutôt qu'un test non paramétrique.
+La plupart des programmes de statistique n'offrent pas cette possibilité, qui est pourtant très simple a implémenter dans R.
+Dans cette mise en application, on veut effectuer un test t, pour comparer deux distributions, disponibles dans un fichier \texttt{s4_t.txt}.
+
+Le principe d'un test par permutations est simple. On mélange l'ensemble des valeurs des deux distributions, puis on reconstruit en tirant au hasard deux distributions de taille égale.
+Cette étape peut, par example, prendre la forme d'une fonction \texttt{resample}, qui prendrait une \texttt{data.frame} avec deux colonnes (la valeur, et le groupe d'origine) en argument.
+
+\clearpage
+\section{Solution des mises en application}  
+
+\subsection{Dérive génétique}
+
+\subsection{Test par permutation}
+
+
 
 \end{document}
