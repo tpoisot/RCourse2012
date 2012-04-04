@@ -16,7 +16,10 @@ options(width=60)
 \maketitle
 
 \begin{abstract}
-L'objectif de cette séance est l'initation à la programmation. Les principales structures d'algoritmes et les opérateurs logiques seront abordés.  
+L'objectif de cette séance est l'initation aux graphiques dans R.
+Les possibilités de visualisation des données offertes par la libraire de base sont évoquées.
+Nous verrons comment afficher un graphique à l'écran, ajouter des informations.
+La possiblité d'exporter dans différents formats est illustrée.  
 \end{abstract}
 
 \tableofcontents\onehalfspacing

@@ -104,6 +104,8 @@ if (a == 4){
 
 \section{Fonctions}
 
+\subsection{Généralités}
+
 L'utilisation des fonctions va permettre de gagner du temps dans la programmation.
 Comprendre le principe des fonctions dépasse de beaucoup le cadre de R, et mérite qu'on s'y arrête.
 Qu'est-ce qu'une fonction? Une série d'instructions qui vont, à partir d'arguments, renvoyer un résultat.
@@ -139,13 +141,37 @@ f(2)
 Peut importe le nombre de fois ou on devra effectuer l'opération contenue dans \texttt{f}, si on veut la modifier, elle sera toujours stockée au même endroit.
 Avec cet avantage en tête, quelques généralités sur les fonctions en R.
 
-\subsection{Généralités}
-
 \subsubsection{Tout est fonction}
+
+Dans la pratique, la majorité des instructions utilisées jusau'à présent sont des fonctions.
+Par exemple, \texttt{print}, \texttt{read.table}, et \texttt{apply} sont des fonctions rendues disponibles par R.
+%TODO More
 
 \subsubsection{Le \emph{scope}}
 
-\subsection{La commande \emph{return}}
+Les fonctions existent comme un espace <<à part>> dans R: ce qui se déroule dans une fonction, reste dans une fonction.
+Prennons le cas du code suivant:
+
+<<>>=
+a = 2
+b = 3
+f = function(x){
+	y = x+a
+	z = y
+	return(z)
+}
+f(b)
+@
+
+La fonction \texttt{f} peut aller chercher la valeur de \texttt{a} dans l'environnement global, mais tout ce qui est défini au sein de \texttt{f} est innaccessible.
+D'ailleurs, tout ce qui est créé dans la fonction est détruit -- retiré de la mémoire -- une fois que la dernière instruction est éxécutée.
+Voyez la section sur la fonction \texttt{return} pour plus de détails. Cette notion de quel objet est accessible est extrèmement importante à maîtriser.
+
+\subsection{Déclarer une fonction}
+
+\subsubsection{La commande \emph{return}}
+
+\subsubsection{Arguments}
 
 \section{Mise en application}
 
