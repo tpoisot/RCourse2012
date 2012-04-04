@@ -1,0 +1,89 @@
+% SEANCE 4 : INTROUDCTION A LA PROGRAMMATION
+\documentclass[10pt]{article}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[mathdesign]{charter}
+\usepackage[scaled]{helvet}
+\usepackage[noae]{Sweave}
+
+\begin{document}
+
+<<echo=false>>=
+options(continue="  ")
+options(width=60)
+@
+
+\title{Introduction à la programmation}
+\author{Timothée Poisot}
+
+\maketitle
+
+\begin{abstract}
+L'objectif de cette séance est l'initation à la programmation. Les principales structures d'algoritmes et les opérateurs logiques seront abordés.  
+\end{abstract}
+
+\section{Programmer, pourquoi?}
+
+Dans les séances précédentes, nous avons utilisé des fichiers \texttt{.R} pour sauvegarder des listes d'instructions.
+Nous avons aussi chargé et manipulé des jeux de données.
+Il est souvent nécessaire d'automatiser tout ou partie de ce processus, ce qui implique de faire appel à de la programmation.
+
+L'objectif de cette séance est de
+
+\section{Boucles}
+
+Les boucles permettent parcourir une liste, ou de répéter une série d'instructions, dans des conditions bien définies; c'est une des structures de base de l'algorithmique.
+R propose deux types de boucles, les boucles \texttt{for} et les boucles \texttt{while}.
+En français, on peut les résumer par ``jusqu'à ce que'' et ``tant que''. 
+
+\subsection{Boucles de type \texttt{for}}
+
+Une boucle \texttt{for} permet de répéter un bloc d'instructions un nombre prédéfini de fois, ou d'éxécuter des commandes pour chaque élément d'un tableau de données.
+La syntaxe de base est la suivante:
+
+<<>>=
+for (step in c(1:10)) cat(step)
+@
+
+On peut bien spécifier plusieurs instructions qui doivent être éxécutées à chaque \emph{itération} (étapes de la boucle) en utilisant les accolades:
+
+<<>>=
+for (step in c(1:3))
+{
+	cat(step)
+	print(summary(rnorm(100,mean=step)))
+}
+@
+
+Cette commande affiche le numéro de l'itération en cours (\texttt{cat(step)}), puis affiche les information de base (\texttt{summary}) sur une distribution normale (\texttt{rnorm}) centrée sur \texttt{step}.
+Les boucles \texttt{for} peuvent contenir des instructions aussi longues que souhaité.
+
+Une autre application des boucles \texttt{for} est de parcourir un object.
+Par exemple, on peut souhaiter, pour chaque élément d'un objet, afficher sa valeur.
+R permet de réaliser ce genre d'opérations, avec la syntaxe suivante:
+
+<<>>=
+vect =  c('a','b','c','d')
+for (val in vect) cat(val)
+@ 
+
+\section{Tests}
+
+<<>>=
+a = 4
+if (a == 4){
+	print('yep')
+}
+@
+
+\section{Fonctions}
+
+\section{Mise en application}
+
+\subsection{Dérive génétique}
+
+\subsection{Test par permutation}
+
+\end{document}
