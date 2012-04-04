@@ -4,7 +4,7 @@
 \usepackage{Sweave}
 \begin{document}
 
-\title{S3_tables.Rnw}
+\title{S3tables.Rnw}
 \author{tpoisot}
 
 \maketitle

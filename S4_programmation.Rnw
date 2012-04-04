@@ -1,16 +1,12 @@
 % SEANCE 4 : INTROUDCTION A LA PROGRAMMATION
-\documentclass[10pt]{article}
-\usepackage{geometry}
-\geometry{letterpaper}
-\usepackage{ucs}
-\usepackage[utf8]{inputenx}
-\usepackage[LGR,T2A,T1]{fontenc}
-\usepackage{Sweave}
+\documentclass[11pt]{paper}
+\input{options.tex}
 
 \begin{document}
 
 <<echo=false>>=
 options(continue="  ")
+options(encoding="utf8")
 options(width=60)
 @
 
@@ -22,6 +18,8 @@ options(width=60)
 \begin{abstract}
 L'objectif de cette séance est l'initation à la programmation. Les principales structures d'algoritmes et les opérateurs logiques seront abordés.  
 \end{abstract}
+
+\tableofcontents\onehalfspacing
 
 \section{Programmer, pourquoi?}
 
@@ -37,7 +35,7 @@ Les boucles permettent parcourir une liste, ou de répéter une série d'instruc
 R propose deux types de boucles, les boucles \texttt{for} et les boucles \texttt{while}.
 En français, on peut les résumer par ``jusqu'à ce que'' et ``tant que''. 
 
-\subsection{Boucles de type \texttt{for}}
+\subsection{Boucles de type \emph{for}}
 
 Une boucle \texttt{for} permet de répéter un bloc d'instructions un nombre prédéfini de fois, ou d'éxécuter des commandes pour chaque élément d'un tableau de données.
 La syntaxe de base est la suivante:
@@ -70,9 +68,30 @@ for (val in vect) cat(val)
 
 Pour chaque élément du vecteur \texttt{vect}, que l'on nomme \texttt{val} pour pouvoir y accéder pendant les itérations, R va afficher la valeur que l'élément contient.
 
-\subsection{Boucles de type \texttt{while}}
+\subsection{Boucles de type \emph{while}}
+
+Les boucles de type \texttt{while}, littéralement \emph{pendant}, permettent de répéter une série d'instructions tant qu'une condition n'a pas été atteinte.
+Pour cette raison, il faut bien prendre en compte le fait que mal utilisées, ces boucles peuvent ne jamais stopper.
+Il faut donc faire particulièrement attention à la condition qui est évaluée à chaque itération.
+
+Un exemple simple d'utilisation d'une boucle \texttt{while} est le calcul d'une factorielle.
+On veut calculer $n!$, ce qui se fait simplement en multipliant l'ensemble des $1\leq k \leq n$.
+
+<<>>=
+n = 5
+k = n
+while(k > 1){
+	k = k - 1
+	n = n*k
+}
+print(n)
+@ 
+
+On remarquera que dans la parenthèse après \texttt{while} se trouve un test logique; les tests sont abordés dans la partie suivante.
 
 \section{Tests}
+
+\subsection{Expressions conditionnelles}
 
 <<>>=
 a = 4
@@ -81,7 +100,52 @@ if (a == 4){
 }
 @
 
+\subsection{Manipulation des valeurs booléennes}
+
 \section{Fonctions}
+
+L'utilisation des fonctions va permettre de gagner du temps dans la programmation.
+Comprendre le principe des fonctions dépasse de beaucoup le cadre de R, et mérite qu'on s'y arrête.
+Qu'est-ce qu'une fonction? Une série d'instructions qui vont, à partir d'arguments, renvoyer un résultat.
+En quoi est-ce différent des scripts que nous avons utilisé jusqu'ici?
+Écrire une fonction revient en quelque sorte a `expliquer' le code une fois, et R se charge ensuite de redonner la bonne valeur aux arguments.
+
+Le parallèle le plus évident est celui des fonctions mathématiques: si $f(x) = x^2$, on peut calculer $f(x)$ pour tout $x$, parce qu'on sait quoi faire.
+Ça devient donc très avantageux si on doit calculer $f(x)$ un grand nombre de fois.
+En écrivant uniquement des scripts, pour calculer la valeur de beaucoup de $x^2$, on aurait écrit:
+
+<<eval=FALSE>>=
+1^2
+2^2
+3^2
+4^2
+5^2
+@
+
+ou encore
+
+<<eval=FALSE>>=
+for(i in c(1:5)) i^2
+@
+
+Si il faut revenir sur ce code plus tard, et transformer tous les \texttt{\^{}2} en \texttt{\^{}3}, la première solution implique de tout corriger manuellement.
+En utilisant une fonction, la logique est différente:
+
+<<>>=
+f = function(x) x^2
+f(2)
+@ 
+
+Peut importe le nombre de fois ou on devra effectuer l'opération contenue dans \texttt{f}, si on veut la modifier, elle sera toujours stockée au même endroit.
+Avec cet avantage en tête, quelques généralités sur les fonctions en R.
+
+\subsection{Généralités}
+
+\subsubsection{Tout est fonction}
+
+\subsubsection{Le \emph{scope}}
+
+\subsection{La commande \emph{return}}
 
 \section{Mise en application}
 

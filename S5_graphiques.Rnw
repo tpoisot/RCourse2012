@@ -1,13 +1,26 @@
-% 
-\documentclass[a4paper]{article}
-\usepackage[OT1]{fontenc}
-\usepackage{Sweave}
+% SEANCE 5 : LES GRAPHIQUES
+\documentclass[11pt]{paper}
+\input{options.tex}
+
 \begin{document}
 
-\title{S5_graphiques.Rnw}
-\author{tpoisot}
+<<echo=false>>=
+options(continue="  ")
+options(encoding="utf8")
+options(width=60)
+@
+
+\title{Graphiques}
+\author{Timothée Poisot}
 
 \maketitle
 
+\begin{abstract}
+L'objectif de cette séance est l'initation à la programmation. Les principales structures d'algoritmes et les opérateurs logiques seront abordés.  
+\end{abstract}
+
+\tableofcontents\onehalfspacing
+
+\section{Quelques généralités sur les graphiques}
 
 \end{document}
