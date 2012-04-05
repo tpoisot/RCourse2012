@@ -22,8 +22,13 @@ Nous verrons comment afficher un graphique à l'écran, ajouter des informations
 La possiblité d'exporter dans différents formats est illustrée.  
 \end{abstract}
 
-\tableofcontents\onehalfspacing
+\tableofcontents
 
 \section{Quelques généralités sur les graphiques}
+
+\section{Quelques généralités sur les graphiques}
+
+\section{Quelques généralités sur les graphiques}
+
 
 \end{document}
