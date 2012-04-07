@@ -1,25 +1,4 @@
-% SEANCE 4 : INTROUDCTION A LA PROGRAMMATION
-\documentclass[11pt]{paper}
-\input{options.tex}
-
-\begin{document}
-
-<<echo=false>>=
-options(continue="  ")
-options(encoding="utf8")
-options(width=60)
-@
-
-\title{Introduction à la programmation}
-\author{Timothée Poisot}
-
-\maketitle
-
-\begin{abstract}
-L'objectif de cette séance est l'initation à la programmation. Les principales structures d'algoritmes et les opérateurs logiques seront abordés.  
-\end{abstract}
-
-\tableofcontents
+\chapter{Introduction à la programmation}
 
 \section{Programmer, pourquoi?}
 
@@ -94,18 +73,118 @@ print(n)
 
 On remarquera que dans la parenthèse après \texttt{while} se trouve un test logique; les tests sont abordés dans la partie suivante.
 
-\section{Tests}
+\subsection{Sortir d'une boucle et sauter des étapes}
 
-\subsection{Expressions conditionnelles}
+Lors de l'éxécution d'une boucle, on peut ne pas vouloir éxécuter toutes les instructions.
+R possède des structures de contrôle pour effectuer ce type d'opérations.
+Les principales qu'il faut connaître sont \texttt{break} et \texttt{next}.
+L'instruction \textt{break} permet de stopper l'éxécution de la boucle, c'est-à-dire de sortir de la boucle comme si la condition de sortie était remplie, ou le nombre maximal d'itérations atteint.
+La boucle suivante va afficher les valeurs de \texttt{i} tant qu'elles sont inférieures à 3, et afficher \texttt{bye!} puis stopper la boucle sinon.
 
 <<>>=
-a = 4
-if (a == 4){
-	print('yep')
+for(i in c(1:5)){
+	if(i < 3){
+		cat(i)
+	} else {
+		cat(' bye!')
+		break
+	}
+}
+@  
+
+Une autre structure de contrôle intéréssant est \textt{next}, qui permet de sauter une itération si la valeur de l'itérateur ne nous plaît pas.
+Cette structure est particulièrement utile quand on réalise un nombre important d'opérations à chaque itération, et qu'on ne veut pas perdre de temps a traiter des valeurs qui ne nous intéréssent pas.
+On peut utiliser \texttt{next} pour avoir, par exemple, une liste de tous les nombres pairs entre 1 et 10:
+
+<<>>=
+is.even <- function(x) x %% 2 == 0 
+for(i in c(1:10)){
+	if(is.even(i)){
+		cat(i)
+		cat(' is even\n')
+	} else {
+		next
+	}
 }
 @
 
+\section{Tests}
+
+Cette partie est consacrée à l'utilisation des tests.
+On a vu dans les séances précédentes l'existence de variables de type booléen, qui prennent les valeurs \texttt{TRUE} ou \textt{FALSE}.
+Des variables de ce type sont utilisées dans le cadre d'expressions conditionelles, c'est-à-dire quand on souhaite effectuer différentes instructions en fonction de la valeur d'une condition.
+
+\subsection{Expressions conditionnelles}
+
+La structure de base d'une expression conditionnelle est la suivante:
+
+<<eval=FALSE>>=
+if (condition){
+	instruction(1)
+} else {
+	instruction(2)
+}
+@
+
+Une notation comme
+
+<<eval=FALSE>>=
+if (condition) instruction
+@
+
+est aussi acceptable, de même que
+
+<<eval=FALSE>>=
+val = ifelse(condition,valeur_if,valeur_else)
+@
+
+Cette dernière notation permet de gagner du temps quand on veut que la valeur d'une variable dépende d'une condition.
+Par exemple, $(n \geq 2)\lor(n = 0)$ s'écrit \texttt{(n <= 2) or (n == 0)}, ou encore \texttt{(n <= 2) | (n == 0)}.
+Les différents opérateurs logiques sont regroupés dans le tableau~\ref{t:p:logical}.
+
+\begin{table}[tb]\footnotesize
+   \centering
+   \begin{tabularx}{\textwidth}{lXlr}
+\toprule
+   \textbf{Opérateur} & \textbf{Signification} & \textbf{Version 1} & \textbf{Version 2}\\\midrule
+$\lor$ & ou (au moins une des deux) & \texttt{or} & \texttt{|}, \texttt{||}\\
+$\land$ & et (les deux) & \texttt{and} & \texttt{\&}, \texttt{\&\&}\\
+$\lnot$ & non & \texttt{not} & \texttt{!}\\
+$\oplus$ & ou conditionnel (seulement une des deux) & \texttt{xor(a, b)} & \\\midrule
+$\in$ & est compris dans & \texttt{\%in\%} & \\\midrule
+$=$ & égalité &  & \texttt{==} \\
+$\leq$ & inférieur ou égal &  & \texttt{<=} \\
+$\geq$ & supérieur ou égal &  & \texttt{>=} \\
+$>$ & supérieur &  & \texttt{>} \\
+$<$ & inférieur &  & \texttt{<} \\\bottomrule
+\end{tabularx}
+   \caption{Différents opérateurs logiques disponibbles dans R.}
+   \label{t:p:logical}
+\end{table}
+
+L'argument \texttt{condition} prend la forme d'un test logique, qui peut être d'une complexité aussi grande que l'on veut.
+Pour certains des opérateurs, il existe deux variantes (\texttt{|} et \texttt{||}, \texttt{\&} et \texttt{\&\&}).
+On peut comprendre pourquoi avec les exemples suivants:
+
+<<>>=
+a = c(1,2,3,4,5,6)
+b = c(1,2,3,4,4,6)
+d = c(3,2,3,4,5,4)
+(a == b)
+(a == d)
+(b == d)
+(a == d) & (a == b)
+(a == d) && (a == b)
+(a == d) | (a == b)
+(a == d) || (a == b)
+@
+
+L'opérateur répété une seule fois est \emph{elemt-wise}: les éléments des vecteurs sont comparés deux à deux (et on applique du recyclage).
+L'opérateur répété deux fois 
+
 \subsection{Manipulation des valeurs booléennes}
+
+addition, multiplication, ...
 
 \section{Fonctions}
 
@@ -150,7 +229,6 @@ Avec cet avantage en tête, quelques généralités sur les fonctions en R.
 
 Dans la pratique, la majorité des instructions utilisées jusau'à présent sont des fonctions.
 Par exemple, \texttt{print}, \texttt{read.table}, et \texttt{apply} sont des fonctions rendues disponibles par R.
-%TODO More
 
 \subsubsection{Le \emph{scope}}
 
@@ -308,5 +386,3 @@ t.test.permut = function(df,n=9999)
 
 La différence sur 10000 réplicats est assez minime (3 secondes environ).
 Mais dans un contexte ou il faut analyser plusieurs fois des jeux de données, ces petits écarts finissent par faire une différence importante.   
-
-\end{document}

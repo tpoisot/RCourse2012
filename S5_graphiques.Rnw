@@ -1,34 +1,42 @@
-% SEANCE 5 : LES GRAPHIQUES
-\documentclass[11pt]{paper}
-\input{options.tex}
+\chapter{Graphiques}
 
-\begin{document}
+\section{Quelques généralités sur les graphiques}
 
-<<echo=false>>=
-options(continue="  ")
-options(encoding="utf8")
-options(width=60)
+\section{Principaux types de visualisations}
+
+\subsection{Nuages de points}
+
+La manière la plus simple de représenter un objet dans R est d'utiliser la fonction \texttt{plot}. Par exemple,
+
+<<fig=TRUE>>=
+dat = sort(rnorm(100))
+plot(dat)
 @
 
-\title{Graphiques}
-\author{Timothée Poisot}
+R va prendre en charge le calcul d'une grande partie des paramètres nécéssaires à la visualisation, comme par exemple les limites des différents axes, et l'espacement entre les valeurs sur les axes.
+Il est possible de manuellement spécifier l'ensemble de ces paramètres.
+Par exemple, on peut vouloir changer les étiquettes des axes x et y par quelque chose de plus explicite.
+Un exemple typique est un graphique très utilisé en écologie, la \emph{rank-abundance curve}.
 
-\maketitle
+<<fig=TRUE>>=
+abun = rlnorm(1000)
+plot(sort(abun,decr=TRUE),xlab='Rank',ylab='Abundance',
+		xlim=c(1,1000),ylim=c(0,40),
+		type='l',log='x')
+@
 
-\begin{abstract}
-L'objectif de cette séance est l'initation aux graphiques dans R.
-Les possibilités de visualisation des données offertes par la libraire de base sont évoquées.
-Nous verrons comment afficher un graphique à l'écran, ajouter des informations.
-La possiblité d'exporter dans différents formats est illustrée.  
-\end{abstract}
+\subsection{Histogrammes}
 
-\tableofcontents
+\subsection{\emph{Boxplots}}
 
-\section{Quelques généralités sur les graphiques}
+\section{Ajout d'éléments sur un graphique}
 
-\section{Quelques généralités sur les graphiques}
+\subsection{Autres séries de données}
 
-\section{Quelques généralités sur les graphiques}
+\subsection{Légendes et axes}
 
+\subsection{Annotations}
 
-\end{document}
+\section{Enregistrement des figures}
+
+\section{Mise en application}

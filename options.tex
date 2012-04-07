@@ -1,17 +1,22 @@
 \usepackage{geometry}
 \geometry{letterpaper}
 \usepackage{ucs}
+\usepackage{xcolor}
+\usepackage{microtype}
 \usepackage[utf8]{inputenx}
 \usepackage[french]{babel}
-\usepackage[LGR,T2A,T1]{fontenc}
+\usepackage[T1]{fontenc}
 \usepackage[noae]{Sweave}
 
+\usepackage[light]{kpfonts}
 \usepackage[scaled]{helvet}
 \usepackage[loosequotes,mathlf,textlf]{MinionPro}
 
-\usepackage{sectsty}
-\sectionfont{\bfseries\sffamily}
-\subsectionfont{\bfseries\normalsize}
-\subsubsectionfont{\mdseries\normalsize\itshape}
-
 \usepackage{setspace}
+
+\usepackage{booktabs,tabularx}
+
+\fvset{listparameters={\setlength{\topsep}{0pt}}} 
+\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}} 
+% We want to avoid having examples switch us to an italic font shape. 
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontshape=n} 

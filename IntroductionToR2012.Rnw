@@ -1,0 +1,36 @@
+ \documentclass[10pt]{memoir}
+\input{options.tex}
+\begin{document}
+
+<<echo=false>>=
+options(continue="  ")
+options(encoding="utf8")
+options(width=60)
+options(SweaveHooks=list(fig=function() par(xaxs='i',yaxs='i',pch=20,las=1)))
+@
+
+\title{An Introduction to R}
+\author{Timothée Poisot}
+
+\chapterstyle{wilsondob}
+
+\thispagestyle{empty}
+\vskip 3em
+{\Large Timothée Poisot}
+\vfill
+\vfill
+\begin{raggedleft}
+\huge {\sffamily Introduction}\\[0.1\baselineskip]
+  \HUGE {\color{red} à l'utilisation de R}\par
+\end{raggedleft}
+\vfill
+\Large{UQAR -- Mai 2012}
+\vskip 2em
+\cleardoublepage
+
+\tableofcontents
+
+\SweaveInput{S4_programmation}
+\SweaveInput{S5_graphiques}
+
+\end{document}
