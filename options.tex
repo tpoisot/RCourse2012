@@ -2,6 +2,8 @@
 \geometry{letterpaper}
 %\usepackage{canoniclayout}
 
+\usepackage{hyperref}
+
 \usepackage{ucs}
 \usepackage{xcolor}
 \usepackage{microtype}
@@ -20,5 +22,4 @@
 
 \fvset{listparameters={\setlength{\topsep}{0pt}}} 
 \renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}} 
-% We want to avoid having examples switch us to an italic font shape. 
-\DefineVerbatimEnvironment{Soutput}{Verbatim}{fontshape=n} 
+ \DefineVerbatimEnvironment{Soutput}{Verbatim}{fontshape=n} 

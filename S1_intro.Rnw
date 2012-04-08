@@ -2,6 +2,94 @@
 
 \section{Objectifs du cours}
 
-\section{R Studio}
+\section{Environnement de travail}
+
+\subsection{Installation de R}
+
+\url{http://www.r-project.org/}
+
+\subsection{Installation de RStudio}
+
+RStudio est un environnement de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+La première partie de la séance sera consacrée à l'utilisation de RStudio.  
 
 \section{Types de données}
+
+\subsection{Types de valeurs}
+
+\subsubsection{Numériques}
+
+\subsubsection{Chaînes}
+
+\subsubsection{Booléens}
+
+\subsection{Collections de valeurs}
+
+\subsubsection{Vecteurs et vectorisation}
+
+Le vecteur est, avec la matrice, l'objet le plus important de R.
+R est un langage dit \emph{vectorisé}, c'est-à-dire qui peut traîter plusieurs valeurs regroupées dans un objet unique.
+Si on utilise une commande très simple, comme
+
+<<>>=
+2
+@
+
+\noindent on remarque que la sortie est \texttt{[1] 2}.
+L'indicateur \texttt{[1]} indique que la valeur retournée est le premier élément d'un vecteur.
+La puissance de la notation vectorielle est qu'on peut accéder à une partie du vecteur, avec un \emph{indice}.
+Si on prend l'exemple suivant,
+
+<<>>=
+a = 2
+a[1]
+a[2]
+@
+
+\noindent, accéder à la position \textt{1} \emph{via} l'\emph{indice} \texttt{[1]}, on récupère la première valeur du vecteur \texttt{a}.
+Voilà une des particularités de R: tout objet est un vecteur!
+Accéder à la position \texttt{[2]} retourne \texttt{NA}, parce que le vecteur \texttt{a} ne possède pas de deuxième position.
+
+On peut créer des vecteurs dans R en utilisant la commande \texttt{c}.
+
+<<>>=
+vecteur = c(1,2,3,4,5)
+@
+
+R propose différents raccourcis pour créer rapidement des vecteurs.
+Par exemple, examinez le comportement des commandes suivantes:
+
+<<>>=
+seq(from=0,to=5,by=1)
+seq(from=0,to=10,length=3)
+c(0:5)
+@
+
+L'avantage de la vectorisation est que R va automatiser une grande partie des opérations sur les vecteurs.
+Par exemple, examinez l'effet des commandes suivantes:
+
+<<>>=
+a = c(1:10)
+a/2
+log(a,10)
+a*a
+@
+
+Avec les vecteurs vient le concept important de \emph{recyclage}.
+Le recyclage consiste a répéter un vecteur autant de fois que nécessaire pour le rendre compatible avec un autre vecteur dans le cadre d'une opération.
+Par exemple, les commandes
+
+<<>>=
+c(1,2,3,4,5) + c(1,2)
+@ 
+
+<<>>=
+c(1,2,3,4,5) + c(1,2,1,2,1)
+@ 
+
+\noindent sont équivalentes.
+Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre la longueur du premier vecteur.
+
+\subsubsection{Matrices}
+
+\subsubsection{Listes}
