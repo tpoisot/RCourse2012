@@ -1,0 +1,7 @@
+\chapter{Introduction}
+
+\section{Objectifs du cours}
+
+\section{R Studio}
+
+\section{Types de données}

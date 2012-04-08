@@ -142,7 +142,7 @@ Cette dernière notation permet de gagner du temps quand on veut que la valeur d
 Par exemple, $(n \geq 2)\lor(n = 0)$ s'écrit \texttt{(n <= 2) or (n == 0)}, ou encore \texttt{(n <= 2) | (n == 0)}.
 Les différents opérateurs logiques sont regroupés dans le tableau~\ref{t:p:logical}.
 
-\begin{table}[tb]\footnotesize
+\begin{table}[tb]
    \centering
    \begin{tabularx}{\textwidth}{lXlr}
 \toprule

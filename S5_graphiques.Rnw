@@ -27,6 +27,14 @@ plot(sort(abun,decr=TRUE),xlab='Rank',ylab='Abundance',
 
 \subsection{Histogrammes}
 
+R offre la possibilité de représenter facilement des distributions, \emph{via} des commandes particulières.
+La plus simple d'utilisation est \texttt{hist}, qui permet de représenter un histograme.
+
+<<fig=TRUE>>=
+distrib = rnorm(1000)
+hist(distrib)
+@
+
 \subsection{\emph{Boxplots}}
 
 \section{Ajout d'éléments sur un graphique}

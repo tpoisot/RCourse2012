@@ -1,36 +1,37 @@
- \documentclass[10pt]{memoir}
+ \documentclass[11pt]{memoir}
 \input{options.tex}
-\begin{document}
+\begin{document}\frontmatter
 
 <<echo=false>>=
 options(continue="  ")
 options(encoding="utf8")
 options(width=60)
-options(SweaveHooks=list(fig=function() par(xaxs='i',yaxs='i',pch=20,las=1)))
+options(SweaveHooks=list(fig=function() par(pch=20,las=1)))
 @
 
-\title{An Introduction to R}
-\author{Timothée Poisot}
-
 \chapterstyle{wilsondob}
+\pagestyle{companion}
 
-\thispagestyle{empty}
-\vskip 3em
-{\Large Timothée Poisot}
+{\raggedleft\thispagestyle{empty}
+\vskip 4em
+{\LARGE Timothée Poisot}\\[0.167\textheight]
 \vfill
+{\HUGE\bfseries Introduction à}\\[\baselineskip]
+{\textcolor{red}{\HUGE\bfseries R}}\\[\baselineskip]
+{\huge Par la pratique}\par
 \vfill
-\begin{raggedleft}
-\huge {\sffamily Introduction}\\[0.1\baselineskip]
-  \HUGE {\color{red} à l'utilisation de R}\par
-\end{raggedleft}
-\vfill
-\Large{UQAR -- Mai 2012}
-\vskip 2em
+{\Large UQAR --- Mai 2012}\par
+\vskip 4em}
 \cleardoublepage
 
-\tableofcontents
+\tableofcontents\mainmatter
 
+\SweaveInput{S1_intro}
+\SweaveInput{S2_data}
+\SweaveInput{S3_tables}
 \SweaveInput{S4_programmation}
 \SweaveInput{S5_graphiques}
+
+\backmatter\appendix
 
 \end{document}

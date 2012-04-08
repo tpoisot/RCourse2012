@@ -1,13 +1,16 @@
-% 
-\documentclass[a4paper]{article}
-\usepackage[OT1]{fontenc}
-\usepackage{Sweave}
-\begin{document}
+\chapter{Opérations sur les tables de données}
 
-\title{S3tables.Rnw}
-\author{tpoisot}
+\section{Travail sur les lignes et colonnes}
 
-\maketitle
+Dans une grande variété de situations, il peut être avantageux de répéter une opération sur toutes les lignes, ou toutes les colonnes.
+R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \texttt{apply}. 
 
+<<>>=
+dat = matrix(rnorm(100),nrow=10)
+apply(dat,1,mean)
+apply(dat,2,var)
+@ 
 
-\end{document}
+\section{Traitement des données}
+
+\section{Division et traitement par niveau}
