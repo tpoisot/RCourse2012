@@ -1,0 +1,200 @@
+\chapter{Introduction}
+
+\section{Objectifs du cours}
+
+\section{Environnement de travail}
+
+\subsection{Installation de R}
+
+\url{http://www.r-project.org/}
+
+\subsection{Installation de RStudio}
+
+RStudio est un environnement de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+La première partie de la séance sera consacrée à l'utilisation de RStudio.  
+
+\section{Types de données}
+
+\subsection{Types de valeurs}
+
+\subsubsection{Numériques}
+
+\subsubsection{Chaînes}
+
+\subsubsection{Booléens}
+
+\subsection{Collections de valeurs}
+
+\subsubsection{Vecteurs et vectorisation}
+
+Le vecteur est, avec la matrice, l'objet le plus important de R.
+R est un langage dit \emph{vectorisé}, c'est-à-dire qui peut traîter plusieurs valeurs regroupées dans un objet unique.
+Si on utilise une commande très simple, comme
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlnumber{2}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent on remarque que la sortie est \texttt{[1] 2}.
+L'indicateur \texttt{[1]} indique que la valeur retournée est le premier élément d'un vecteur.
+La puissance de la notation vectorielle est qu'on peut accéder à une partie du vecteur, avec un \emph{indice}.
+Si on prend l'exemple suivant,
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}{\ }\hlassignement{=}{\ }\hlnumber{2}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{a}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}\hlkeyword{[}\hlnumber{2}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent, accéder à la position \texttt{1} \emph{via} l'\emph{indice} \texttt{[1]}, on récupère la première valeur du vecteur \texttt{a}.
+Voilà une des particularités de R: tout objet est un vecteur!
+Accéder à la position \texttt{[2]} retourne \texttt{NA}, parce que le vecteur \texttt{a} ne possède pas de deuxième position.
+
+On peut créer des vecteurs dans R en utilisant la commande \texttt{c}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{vecteur}{\ }\hlassignement{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+R propose différents raccourcis pour créer rapidement des vecteurs.
+Par exemple, examinez le comportement des commandes suivantes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{seq}\hlkeyword{(}\hlargument{from}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}{\ }\hlargument{to}{\ }\hlargument{=}{\ }\hlnumber{5}\hlkeyword{,}{\ }\hlargument{by}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0 1 2 3 4 5
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{seq}\hlkeyword{(}\hlargument{from}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}{\ }\hlargument{to}{\ }\hlargument{=}{\ }\hlnumber{10}\hlkeyword{,}{\ }\hlargument{length}{\ }\hlargument{=}{\ }\hlnumber{3}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1]  0  5 10
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{c}\hlkeyword{(}\hlnumber{0}\hlkeyword{:}\hlnumber{5}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0 1 2 3 4 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+L'avantage de la vectorisation est que R va automatiser une grande partie des opérations sur les vecteurs.
+Par exemple, examinez l'effet des commandes suivantes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}{\ }\hlassignement{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{a}\hlkeyword{/}\hlnumber{2}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] 0.5 1.0 1.5 2.0 2.5 3.0 3.5 4.0 4.5 5.0
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{log}\hlkeyword{(}\hlsymbol{a}\hlkeyword{,}{\ }\hlnumber{10}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] 0.0000 0.3010 0.4771 0.6021 0.6990 0.7782 0.8451 0.9031 0.9542 1.0000
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}{\ }\hlkeyword{*}{\ }\hlsymbol{a}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1]   1   4   9  16  25  36  49  64  81 100
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Avec les vecteurs vient le concept important de \emph{recyclage}.
+Le recyclage consiste a répéter un vecteur autant de fois que nécessaire pour le rendre compatible avec un autre vecteur dans le cadre d'une opération.
+Par exemple, les commandes
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Warning message: la taille d'un objet plus long n'est pas multiple de la taille d'un objet plus court
+## [1] 2 4 4 6 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent et
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2 4 4 6 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent sont équivalentes.
+Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre la longueur du premier vecteur.
+
+\subsubsection{Matrices}
+
+\subsubsection{Listes}

@@ -46,7 +46,7 @@ a[1]
 a[2]
 @
 
-\noindent, accéder à la position \textt{1} \emph{via} l'\emph{indice} \texttt{[1]}, on récupère la première valeur du vecteur \texttt{a}.
+\noindent, accéder à la position \texttt{1} \emph{via} l'\emph{indice} \texttt{[1]}, on récupère la première valeur du vecteur \texttt{a}.
 Voilà une des particularités de R: tout objet est un vecteur!
 Accéder à la position \texttt{[2]} retourne \texttt{NA}, parce que le vecteur \texttt{a} ne possède pas de deuxième position.
 
@@ -82,6 +82,8 @@ Par exemple, les commandes
 <<>>=
 c(1,2,3,4,5) + c(1,2)
 @ 
+
+\noindent et
 
 <<>>=
 c(1,2,3,4,5) + c(1,2,1,2,1)

@@ -10,7 +10,6 @@
 \usepackage[utf8]{inputenx}
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[noae]{Sweave}
 
 \usepackage{inconsolata}
 \usepackage[scaled]{helvet}
@@ -19,7 +18,7 @@
 \usepackage{setspace}
 
 \usepackage{booktabs,tabularx}
-
-\fvset{listparameters={\setlength{\topsep}{0pt}}} 
-\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}} 
- \DefineVerbatimEnvironment{Soutput}{Verbatim}{fontshape=n} 
+ 
+ % The next 10 lines are used if you are beautifying R code and output with SweaveListingUtils
+%\usepackage{listings}
+%\usepackage[nogin,noae]{Sweave}

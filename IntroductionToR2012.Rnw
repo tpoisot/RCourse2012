@@ -1,13 +1,11 @@
  \documentclass[11pt]{memoir}
 \input{options.tex}
-\begin{document}\frontmatter
 
-<<echo=false>>=
-options(continue="  ")
+<<echo=FALSE>>=
 options(encoding="utf8")
-options(width=60)
-options(SweaveHooks=list(fig=function() par(pch=20,las=1)))
 @
+
+\begin{document}\frontmatter
 
 \chapterstyle{wilsondob}
 \pagestyle{companion}
@@ -26,11 +24,20 @@ options(SweaveHooks=list(fig=function() par(pch=20,las=1)))
 
 \tableofcontents\mainmatter
 
-\SweaveInput{S1_intro}
-\SweaveInput{S2_data}
-\SweaveInput{S3_tables}
-\SweaveInput{S4_programmation}
-\SweaveInput{S5_graphiques}
+<<seance1, child='S1_intro.Rnw', eval=TRUE>>=
+@
+
+<<seance2, child='S2_data.Rnw', eval=TRUE>>=
+@
+
+<<seance3, child='S3_tables.Rnw', eval=TRUE>>=
+@
+
+<<seance4, child='S4_programmation.Rnw', eval=TRUE>>=
+@
+
+<<seance5, child='S5_graphiques.Rnw', eval=TRUE>>=
+@
 
 \backmatter\appendix
 

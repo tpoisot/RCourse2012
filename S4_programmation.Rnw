@@ -78,7 +78,7 @@ On remarquera que dans la parenthèse après \texttt{while} se trouve un test lo
 Lors de l'éxécution d'une boucle, on peut ne pas vouloir éxécuter toutes les instructions.
 R possède des structures de contrôle pour effectuer ce type d'opérations.
 Les principales qu'il faut connaître sont \texttt{break} et \texttt{next}.
-L'instruction \textt{break} permet de stopper l'éxécution de la boucle, c'est-à-dire de sortir de la boucle comme si la condition de sortie était remplie, ou le nombre maximal d'itérations atteint.
+L'instruction \texttt{break} permet de stopper l'éxécution de la boucle, c'est-à-dire de sortir de la boucle comme si la condition de sortie était remplie, ou le nombre maximal d'itérations atteint.
 La boucle suivante va afficher les valeurs de \texttt{i} tant qu'elles sont inférieures à 3, et afficher \texttt{bye!} puis stopper la boucle sinon.
 
 <<>>=
@@ -92,7 +92,7 @@ for(i in c(1:5)){
 }
 @  
 
-Une autre structure de contrôle intéréssant est \textt{next}, qui permet de sauter une itération si la valeur de l'itérateur ne nous plaît pas.
+Une autre structure de contrôle intéréssant est \texttt{next}, qui permet de sauter une itération si la valeur de l'itérateur ne nous plaît pas.
 Cette structure est particulièrement utile quand on réalise un nombre important d'opérations à chaque itération, et qu'on ne veut pas perdre de temps a traiter des valeurs qui ne nous intéréssent pas.
 On peut utiliser \texttt{next} pour avoir, par exemple, une liste de tous les nombres pairs entre 1 et 10:
 
@@ -111,7 +111,7 @@ for(i in c(1:10)){
 \section{Tests}
 
 Cette partie est consacrée à l'utilisation des tests.
-On a vu dans les séances précédentes l'existence de variables de type booléen, qui prennent les valeurs \texttt{TRUE} ou \textt{FALSE}.
+On a vu dans les séances précédentes l'existence de variables de type booléen, qui prennent les valeurs \texttt{TRUE} ou \texttt{FALSE}.
 Des variables de ce type sont utilisées dans le cadre d'expressions conditionelles, c'est-à-dire quand on souhaite effectuer différentes instructions en fonction de la valeur d'une condition.
 
 \subsection{Expressions conditionnelles}
@@ -270,7 +270,7 @@ print(f(a))
 print(a)
 @
 
-l'appel à la fonction \texttt{f} devrait modifier \texttt{a}, puisque la seule instruction de cette fonction est \textt{a = a+1}.
+l'appel à la fonction \texttt{f} devrait modifier \texttt{a}, puisque la seule instruction de cette fonction est \texttt{a = a+1}.
 Or, quand on appelle cette fonction, puis qu'on affiche la valeur de \texttt{a}, elle n'a pas changé.
 Ce comportement vient du fait que l'objet \texttt{a} qui existe dans la fonction n'est pas celui qui existe dans l'environnement global.
 Par conséquent, le \texttt{a} de la fonction peut être modifiè, sans que cela n'affecte le \texttt{a} de l'environnement de travail.
