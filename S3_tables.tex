@@ -1,4 +1,4 @@
-\chapter{Opérations sur les tables de données}
+\chapter{Opérations sur les tables de données\label{c:tables}}
 
 \section{Travail sur les lignes et colonnes}
 
@@ -6,16 +6,16 @@ Dans une grande variété de situations, il peut être avantageux de répéter u
 R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \texttt{apply}. 
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
-\hlsymbol{dat}{\ }\hlassignement{=}{\ }\hlfunctioncall{matrix}\hlkeyword{(}\hlfunctioncall{rnorm}\hlkeyword{(}\hlnumber{100}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{nrow}{\ }\hlargument{=}{\ }\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
+\hlsymbol{dat}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{matrix}\hlkeyword{(}\hlfunctioncall{rnorm}\hlkeyword{(}\hlnumber{100}\hlkeyword{)}\hlkeyword{,}{\ }\hlargument{nrow}{\ }\hlargument{=}{\ }\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
 \hlstd{}\hlfunctioncall{apply}\hlkeyword{(}\hlsymbol{dat}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{,}{\ }\hlsymbol{mean}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] -0.274393  0.109191 -0.008739  0.111188  0.243100  0.037100  0.061842
-##  [8] -0.207347 -0.027129  0.550166
+##  [1] -0.026960 -0.015687  0.008188  0.089791 -0.421734  0.118884 -0.101086
+##  [8] -0.169665 -0.052550  0.385399
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -23,7 +23,7 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] 0.9487 1.3005 0.5893 0.7521 1.3198 0.5092 0.5799 2.2701 1.2619 0.3809
+##  [1] 1.2223 1.4511 0.8813 0.7104 1.3745 0.7182 0.5745 0.7073 0.5857 1.3680
 \end{verbatim}
 \end{kframe}
 \end{knitrout}

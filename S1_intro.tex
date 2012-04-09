@@ -10,7 +10,7 @@
 
 \subsection{Installation de RStudio}
 
-RStudio est un environnement de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+RStudio est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
 La première partie de la séance sera consacrée à l'utilisation de RStudio.  
 
 \section{Types de données}
@@ -32,7 +32,7 @@ R est un langage dit \emph{vectorisé}, c'est-à-dire qui peut traîter plusieur
 Si on utilise une commande très simple, comme
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
 \hlnumber{2}\mbox{}
@@ -51,10 +51,10 @@ La puissance de la notation vectorielle est qu'on peut accéder à une partie du
 Si on prend l'exemple suivant,
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
-\hlsymbol{a}{\ }\hlassignement{=}{\ }\hlnumber{2}\hspace*{\fill}\\
+\hlsymbol{a}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlnumber{2}\hspace*{\fill}\\
 \hlstd{}\hlsymbol{a}\hlkeyword{[}\hlnumber{1}\hlkeyword{]}\mbox{}
 \normalfont
 \end{flushleft}
@@ -80,10 +80,10 @@ Accéder à la position \texttt{[2]} retourne \texttt{NA}, parce que le vecteur 
 On peut créer des vecteurs dans R en utilisant la commande \texttt{c}.
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
-\hlsymbol{vecteur}{\ }\hlassignement{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}\mbox{}
+\hlsymbol{vecteur}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \end{kframe}
@@ -94,7 +94,7 @@ R propose différents raccourcis pour créer rapidement des vecteurs.
 Par exemple, examinez le comportement des commandes suivantes:
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
 \hlfunctioncall{seq}\hlkeyword{(}\hlargument{from}{\ }\hlargument{=}{\ }\hlnumber{0}\hlkeyword{,}{\ }\hlargument{to}{\ }\hlargument{=}{\ }\hlnumber{5}\hlkeyword{,}{\ }\hlargument{by}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{)}\mbox{}
@@ -127,10 +127,10 @@ L'avantage de la vectorisation est que R va automatiser une grande partie des op
 Par exemple, examinez l'effet des commandes suivantes:
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
-\hlsymbol{a}{\ }\hlassignement{=}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
+\hlsymbol{a}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
 \hlstd{}\hlsymbol{a}\hlkeyword{/}\hlnumber{2}\mbox{}
 \normalfont
 \end{flushleft}
@@ -162,14 +162,13 @@ Le recyclage consiste a répéter un vecteur autant de fois que nécessaire pour
 Par exemple, les commandes
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
 \hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-## Warning message: la taille d'un objet plus long n'est pas multiple de la taille d'un objet plus court
 ## [1] 2 4 4 6 6
 \end{verbatim}
 \end{kframe}
@@ -179,7 +178,7 @@ Par exemple, les commandes
 \noindent et
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
 \hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{)}{\ }\hlkeyword{+}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{)}\mbox{}
@@ -195,6 +194,281 @@ Par exemple, les commandes
 \noindent sont équivalentes.
 Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre la longueur du premier vecteur.
 
+\textbf{todo} Créer des vecteurs null
+
+\textbf{todo} Length
+
 \subsubsection{Matrices}
 
+Le type matrice est central dans le fonctionnement de R.
+Une fois le principe des vecteurs compris, le fonctionnement des matrices est assez intuitif.
+Une matrice est en fait un vecteur a deux dimensions.
+Si un vecteur est une ligne, une matrice est une série de lignes et de colonnes.
+Dans R, on peut créer une matrice avec la commande \texttt{matrix}, de sorte que
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{matrix}\hlkeyword{(}\hlnumber{0}\hlkeyword{,}{\ }\hlargument{ncol}{\ }\hlargument{=}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlargument{nrow}{\ }\hlargument{=}{\ }\hlnumber{4}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent renvoie une matrice pleine de 0, avec 2 colonnes (\texttt{ncol}) et 4 lignes (\texttt{nrow}).
+
+On peut connaître les dimensions d'une matrice de différentes manières:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{dim}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 4 2
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{now}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Error: impossible de trouver la fonction "now"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{ncol}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Accéder à une position particulière d'une matrice se fait en deux temps.
+D'abord, par le numéro de la ligne, ensuite par le numéro de la colonne.
+Par exemple, on peut fixer l'élément sur la première ligne, deuxième colonne de \texttt{test\_mat} à 2, avec
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{[}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlnumber{2}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    0    2
+## [2,]    0    0
+## [3,]    0    0
+## [4,]    0    0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Dans certaines situations, on peut souhaiter avoir accès à une ligne ou une colonne en particulier.
+R permet donc de ne spécifier qu'un numéro de ligne, ou un numéro de colonne:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{[}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2 0 0 0
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{[}\hlnumber{1}\hlkeyword{,}{\ }\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Une matrice peut aussi posséder des noms de lignes et de colonnes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{colnames}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}a"{}}\hlkeyword{,}{\ }\hlstring{"{}b"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{rownames}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}A"{}}\hlkeyword{,}{\ }\hlstring{"{}B"{}}\hlkeyword{,}{\ }\hlstring{"{}C"{}}\hlkeyword{,}{\ }\hlstring{"{}D"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   a b
+## A 0 2
+## B 0 0
+## C 0 0
+## D 0 0
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{colnames}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "a" "b"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Cela permet aussi d'accéder plus facilement a certaines positions de la matrice:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{[}\hlstring{"{}A"{}}\hlkeyword{,}{\ }\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## a b 
+## 0 2 
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{[}\hlstring{"{}A"{}}\hlkeyword{,}{\ }\hlstring{"{}b"{}}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
 \subsubsection{Listes}
+
+Un des derniers types d'objets qu'il faut connaître est les listes.
+Une liste, dans R, est une manière de stocker de l'information venant de source diverses, pour y accéder facilement.
+On verra dans la séance~\ref{c:tables} que les listes permettent aussi de traiter très rapidement plusieurs jeux de données à la suite.
+
+Pour créer une liste, on peut utiliser différentes méthodes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{list}\hlkeyword{(}\hlargument{a}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{,}{\ }\hlargument{b}{\ }\hlargument{=}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlargument{c}{\ }\hlargument{=}{\ }\hlnumber{3}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## $a
+## [1] 1
+## 
+## $b
+## [1] 2
+## 
+## $c
+## [1] 3
+## 
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{u\usebox{\hlnormalsizeboxunderscore}list}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{list}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{u\usebox{\hlnormalsizeboxunderscore}list}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3
+## 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Les listes, comme \texttt{n\_list}, peuvent être nommées:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{names}\hlkeyword{(}\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "a" "b" "c"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+On peut accéder aux éléments des listes de différentes manières.
+Si la liste est nommée, la notation \texttt{liste\$nom} est possible; dans tous les autres cas, \texttt{liste[[indice]]} fonctionne.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{a}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{[[}\hlnumber{1}\hlkeyword{]}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Les listes peuvent être utilisées dans le contexte de la structure \texttt{with}, qui permet d'accéder facilement aux différents éléments.
+Pour simplifier, \texttt{with} permet d'éviter d'écrire \texttt{liste\$nom} pour n'écrire que \texttt{nom}; les deux commandes ci-dessous sont donc équivalentes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{a}{\ }\hlkeyword{+}{\ }\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{b}{\ }\hlkeyword{-}{\ }\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{c}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{with}\hlkeyword{(}\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{,}{\ }\hlkeyword{\usebox{\hlnormalsizeboxopenbrace}}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{a}{\ }\hlkeyword{+}{\ }\hlsymbol{b}{\ }\hlkeyword{-}{\ }\hlsymbol{c}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{\usebox{\hlnormalsizeboxclosebrace}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsubsection{Data frames}
+
+Vu plus en détail dans les autres séances.

@@ -1,8 +1,23 @@
  \documentclass[11pt]{memoir}
 \input{options.tex}
 
+% \SweaveOpts{fig.align='center', dev='tikz', fig.width=6, fig.height=4, fig.show='hold', cache=TRUE, par=TRUE}
+
+%%%%%\graphicspath{{figure/}}
+
+<<setup, include=FALSE, cache=FALSE>>=
+options(replace.assign=TRUE,width=60)
+knit_hooks$set(par=function(before, options, envir){
+if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+})
+@
+
 <<echo=FALSE>>=
-options(encoding="utf8")
+opts_chunk$set(warning = FALSE)
+thm = knit_theme$get("edit-jedit") 
+knit_theme$set(thm)
+library(RColorBrewer)
+palette(brewer.pal(9,'Set1'))
 @
 
 \begin{document}\frontmatter
@@ -40,5 +55,8 @@ options(encoding="utf8")
 @
 
 \backmatter\appendix
+
+<<seance5, child='SS1_parallel.Rnw', eval=TRUE>>=
+@
 
 \end{document}

@@ -10,7 +10,7 @@
 
 \subsection{Installation de RStudio}
 
-RStudio est un environnement de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+RStudio est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
 La première partie de la séance sera consacrée à l'utilisation de RStudio.  
 
 \section{Types de données}
@@ -92,6 +92,103 @@ c(1,2,3,4,5) + c(1,2,1,2,1)
 \noindent sont équivalentes.
 Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre la longueur du premier vecteur.
 
+\textbf{todo} Créer des vecteurs null
+
+\textbf{todo} Length
+
 \subsubsection{Matrices}
 
+Le type matrice est central dans le fonctionnement de R.
+Une fois le principe des vecteurs compris, le fonctionnement des matrices est assez intuitif.
+Une matrice est en fait un vecteur a deux dimensions.
+Si un vecteur est une ligne, une matrice est une série de lignes et de colonnes.
+Dans R, on peut créer une matrice avec la commande \texttt{matrix}, de sorte que
+
+<<>>=
+test_mat = matrix(0,ncol=2,nrow=4)
+@
+
+\noindent renvoie une matrice pleine de 0, avec 2 colonnes (\texttt{ncol}) et 4 lignes (\texttt{nrow}).
+
+On peut connaître les dimensions d'une matrice de différentes manières:
+<<>>=
+dim(test_mat)
+now(test_mat)
+ncol(test_mat)
+@  
+
+Accéder à une position particulière d'une matrice se fait en deux temps.
+D'abord, par le numéro de la ligne, ensuite par le numéro de la colonne.
+Par exemple, on peut fixer l'élément sur la première ligne, deuxième colonne de \texttt{test\_mat} à 2, avec
+
+<<>>=
+test_mat[1,2] = 2
+test_mat
+@
+
+Dans certaines situations, on peut souhaiter avoir accès à une ligne ou une colonne en particulier.
+R permet donc de ne spécifier qu'un numéro de ligne, ou un numéro de colonne:
+
+<<>>=
+test_mat[,2]
+test_mat[1,]
+@
+
+Une matrice peut aussi posséder des noms de lignes et de colonnes:
+
+<<>>=
+colnames(test_mat) = c('a','b')
+rownames(test_mat) = c('A','B','C','D')
+test_mat
+colnames(test_mat)
+@
+
+Cela permet aussi d'accéder plus facilement a certaines positions de la matrice:
+
+<<>>=
+test_mat['A',]
+test_mat['A','b']
+@
+
 \subsubsection{Listes}
+
+Un des derniers types d'objets qu'il faut connaître est les listes.
+Une liste, dans R, est une manière de stocker de l'information venant de source diverses, pour y accéder facilement.
+On verra dans la séance~\ref{c:tables} que les listes permettent aussi de traiter très rapidement plusieurs jeux de données à la suite.
+
+Pour créer une liste, on peut utiliser différentes méthodes:
+
+<<>>=
+n_list = list(a = 1, b = 2, c = 3)
+n_list
+u_list = list(1, 2, 3)
+u_list
+@ 
+
+Les listes, comme \texttt{n\_list}, peuvent être nommées:
+
+<<>>=
+names(n_list)
+@
+
+On peut accéder aux éléments des listes de différentes manières.
+Si la liste est nommée, la notation \texttt{liste\$nom} est possible; dans tous les autres cas, \texttt{liste[[indice]]} fonctionne.
+
+<<>>=
+n_list$a
+n_list[[1]]
+@
+
+Les listes peuvent être utilisées dans le contexte de la structure \texttt{with}, qui permet d'accéder facilement aux différents éléments.
+Pour simplifier, \texttt{with} permet d'éviter d'écrire \texttt{liste\$nom} pour n'écrire que \texttt{nom}; les deux commandes ci-dessous sont donc équivalentes:
+
+<<>>=
+n_list$a + n_list$b - n_list$c 
+with(n_list,{
+			a + b - c
+		})
+@
+
+\subsubsection{Data frames}
+
+Vu plus en détail dans les autres séances.

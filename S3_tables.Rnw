@@ -1,4 +1,4 @@
-\chapter{Opérations sur les tables de données}
+\chapter{Opérations sur les tables de données\label{c:tables}}
 
 \section{Travail sur les lignes et colonnes}
 

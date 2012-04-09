@@ -8,7 +8,7 @@
 
 La manière la plus simple de représenter un objet dans R est d'utiliser la fonction \texttt{plot}. Par exemple,
 
-<<fig=TRUE>>=
+<<firstplot,fig=TRUE>>=
 dat = sort(rnorm(100))
 plot(dat)
 @
@@ -16,23 +16,31 @@ plot(dat)
 R va prendre en charge le calcul d'une grande partie des paramètres nécéssaires à la visualisation, comme par exemple les limites des différents axes, et l'espacement entre les valeurs sur les axes.
 Il est possible de manuellement spécifier l'ensemble de ces paramètres.
 Par exemple, on peut vouloir changer les étiquettes des axes x et y par quelque chose de plus explicite.
-Un exemple typique est un graphique très utilisé en écologie, la \emph{rank-abundance curve}.
 
-<<fig=TRUE>>=
-abun = rlnorm(1000)
-plot(sort(abun,decr=TRUE),xlab='Rank',ylab='Abundance',
-		xlim=c(1,1000),ylim=c(0,40),
-		type='l',log='x')
-@
+%TODO Figure
 
 \subsection{Histogrammes}
 
 R offre la possibilité de représenter facilement des distributions, \emph{via} des commandes particulières.
 La plus simple d'utilisation est \texttt{hist}, qui permet de représenter un histograme.
 
-<<fig=TRUE>>=
+<<firsthist,fig=TRUE>>=
 distrib = rnorm(1000)
 hist(distrib)
+@
+
+Par défaut, R attribue un titre à ces graphiques; on peut supprimer ce titre en mettant l'argument \texttt{main} à une valeur nulle.
+
+<<histnotitle,fig=TRUE>>=
+hist(distrib,main='')
+@
+
+On peut choisir la couleur des barres, \emph{via} l'argument \texttt{col}.
+Comme dans un grand nombre de situations dans lesquelles on fait appel a des vecteurs, R utilise le recyclage:
+si le nombre de barres de l'histogramme est plus grand que le nombre de couleurs fournies, les couleurs des barres sont alternées.
+
+<<histcolor,fig=TRUE>>=
+hist(distrib,main='',col=c(1,2,3))
 @
 
 \subsection{\emph{Boxplots}}
