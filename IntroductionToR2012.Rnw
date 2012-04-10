@@ -3,6 +3,14 @@
 
 %%%% FORMER CONTENT OF OPTIONS.TEX
 %%%% Waiting for reported knitr bug to be fixed
+\usepackage{microtype}
+\usepackage[utf8]{inputenx}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{bera}
+\usepackage[loosequotes,mathlf,textlf]{MinionPro}
+
 \usepackage[style=numeric-comp,url=false,doi=false,isbn=false,maxnames=2,maxbibnames=2,firstinits,sorting=none]{biblatex}
 \bibliography{/Users/tpoisot/Dropbox/library.bib}
 
@@ -12,19 +20,43 @@
 
 \usepackage{hyperref}
 
-\usepackage{xcolor}
-\usepackage{microtype}
-\usepackage[utf8]{inputenx}
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-
-\usepackage{inconsolata}
-\usepackage[scaled]{helvet}
-\usepackage[loosequotes,mathlf,textlf]{MinionPro}
-
 \usepackage{setspace}
-
 \usepackage{booktabs,tabularx}
+
+\addto\captionsfrench{\renewcommand*\chaptername{S\'eance}}
+
+\usepackage{xcolor,graphicx}
+
+\definecolor{ChapGrey}{rgb}{0.6,0.6,0.6}
+\newcommand{\LargeFont}{% Needs a ’stretchable’ font
+      \usefont{\encodingdefault}{\rmdefault}{b}{n}%
+      \fontsize{60}{80}\selectfont\color{ChapGrey}}
+\makeatletter
+\makechapterstyle{GreyNum}{%
+  \renewcommand{\chapnamefont}{\large\sffamily\bfseries\itshape}
+  \renewcommand{\chapnumfont}{\LargeFont}
+  \renewcommand{\chaptitlefont}{\Huge\sffamily\bfseries\itshape}
+  \setlength{\beforechapskip}{0pt}
+  \setlength{\midchapskip}{40pt}
+  \setlength{\afterchapskip}{60pt}
+  \renewcommand\chapterheadstart{\vspace*{\beforechapskip}}
+  \renewcommand\printchaptername{%
+    \begin{tabular}{@{}c@{}}
+      \chapnamefont \@chapapp\\}
+\renewcommand\chapternamenum{\noalign{\vskip 2ex}}
+    \renewcommand\printchapternum{\chapnumfont\thechapter\par}
+    \renewcommand\afterchapternum{%
+    \end{tabular}
+    \par\nobreak\vskip\midchapskip}
+  \renewcommand\printchapternonum{}
+  \renewcommand\printchaptertitle[1]{%
+    {\chaptitlefont{##1}\par}}
+  \renewcommand\afterchaptertitle{\par\nobreak\vskip \afterchapskip}
+}
+\makeatother
+\chapterstyle{GreyNum}
+
+\pagestyle{companion}
 %%%% OPTIONS"TEX ENDS
 
 
@@ -44,23 +76,20 @@ opts_chunk$set(warning = FALSE)
 thm = knit_theme$get("edit-jedit") 
 knit_theme$set(thm)
 library(RColorBrewer)
-palette(brewer.pal(9,'Set1'))
+palette(brewer.pal(8,'Set1'))
 @
 
 \begin{document}\frontmatter
 
-\chapterstyle{wilsondob}
-\pagestyle{companion}
-
 {\raggedleft\thispagestyle{empty}
 \vskip 4em
-{\LARGE Timothée Poisot}\\[0.167\textheight]
+{\LARGE\sffamily Timothée Poisot}\\[0.167\textheight]
 \vfill
 {\HUGE\bfseries Introduction à}\\[\baselineskip]
-{\textcolor{red}{\HUGE\bfseries R}}\\[\baselineskip]
+{\HUGE\bfseries\color{red} R}\\[\baselineskip]
 {\huge Par la pratique}\par
 \vfill
-{\Large UQAR --- Mai 2012}\par
+{\Large\sffamily UQAR --- Mai 2012}\par
 \vskip 4em}
 \cleardoublepage
 

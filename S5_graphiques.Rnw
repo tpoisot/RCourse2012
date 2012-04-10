@@ -1,6 +1,9 @@
 \chapter{Graphiques}
 
-\section{Quelques généralités sur les graphiques}
+R propose un moteur grahique d'une très grande puissance, qui possède en plus une flexibilité importante.
+Il est possible, avec un effort minimal, de produire à peu près tous les types de visualisations possibles directement dans R.
+L'objectif de cette séance est de vous familiariser avec les commandes de base disponibles dans R par défaut.
+Les personnes à la recherche de solutions toutes faites pour visualiser des données complexes peuvent aller voir la documentation des \emph{packages} \texttt{ggplot2} (intuitif à utiliser, assez lent) ou \texttt{lattice} (utilisation complexe, assez rapide).
 
 \section{Principaux types de visualisations}
 
@@ -9,8 +12,8 @@
 La manière la plus simple de représenter un objet dans R est d'utiliser la fonction \texttt{plot}. Par exemple,
 
 <<firstplot,fig=TRUE>>=
-dat = sort(rnorm(100))
-plot(dat)
+distrib = sort(rnorm(10))
+plot(distrib)
 @
 
 R va prendre en charge le calcul d'une grande partie des paramètres nécéssaires à la visualisation, comme par exemple les limites des différents axes, et l'espacement entre les valeurs sur les axes.
@@ -18,6 +21,16 @@ Il est possible de manuellement spécifier l'ensemble de ces paramètres.
 Par exemple, on peut vouloir changer les étiquettes des axes x et y par quelque chose de plus explicite.
 
 %TODO Figure
+
+R permet aussi de choisir comment visualiser ces données, en changeant la valeur de l'argument \texttt{type}:  
+
+<<plottype,fig=TRUE>>=
+par(mfcol=c(2,2))
+plot(distrib,type='l',xlab='type l')
+plot(distrib,type='b',xlab='type b')
+plot(distrib,type='h',xlab='type h')
+plot(distrib,type='o',pch=19,xlab='type o')
+@
 
 \subsection{Histogrammes}
 
@@ -40,10 +53,12 @@ Comme dans un grand nombre de situations dans lesquelles on fait appel a des vec
 si le nombre de barres de l'histogramme est plus grand que le nombre de couleurs fournies, les couleurs des barres sont alternées.
 
 <<histcolor,fig=TRUE>>=
-hist(distrib,main='',col=c(1,2,3))
+hist(distrib,main='',col=c(1:8))
 @
 
 \subsection{\emph{Boxplots}}
+
+\subsection{Diagrammes en barre}
 
 \section{Ajout d'éléments sur un graphique}
 
@@ -55,11 +70,30 @@ hist(distrib,main='',col=c(1,2,3))
 
 \section{Enregistrement des figures}
 
+R permet non seulement d'afficher les graphiques dans une fenêtre à part, mais aussi de les enregistrer dans différents formats.
+La structure générale du code permettant d'enregistrer une figure est toujours la même:
+
+<<pseudocodeDevice,eval=FALSE>>=
+open_device(file="file.extension")
+plot(my_data)
+dev.off()
+@
+
+La commande \texttt{open\_device} peut prendre plusieurs formes selon le type de fichier désiré en sortie.
+Les plus communes sont sans doute \texttt{pdf}, \texttt{png}, et \texttt{tiff}.
+Reportez vous à l'aide de chacune de ces fonctions pour comprendre les arguments.
+
+La commande \texttt{dev.off()} est extrèmement importante: elle permet de fermer le périphérique graphique actif.
+Sans cette commande, le fichier n'est pas fini d'écrire, et il ne pourra pas être lu à la fermeture de R.
+Dans RStudio, quel est l'effet de la commande \texttt{dev.off()} après qu'un graphique ait été affiché?
+
 \section{Mise en application}
 
 \subsection{Diagramme en barres}
 
-Colorer les barres au dessus et au dessous d'une certaine valeur.
+Dans cette mise en application, on veut créer une visualisation qui met en avant les valeurs extrèmes d'une distribution, en utilisant un diagramme en barre.
+Spécifiquement, on souhaite que les barres correspondant à des valeurs plus petites, ou plus grandes, que des valeurs fixées, soient colorées différement.
+En vous aidant de ce qui a été vu jusqu'ici, et de l'aide de la fonction \texttt{barplot}, produisez cette visualisation.
 
 \clearpage
 \section{Solution des mises en application}
@@ -69,14 +103,14 @@ Colorer les barres au dessus et au dessous d'une certaine valeur.
 On souhaite représenter une diagramme en barres, et colorer les barres qui sont au dessous ou au dessus de valeurs données.
 On commence par choisir la série de données qui nous intéresse -- on peut la trier en ordre croissantm, pour faciliter la lecture du graphique:
 
-<<>>=
+<<ma5createData>>=
 test_data = c(1,4,3,12,-2,-6,-1,1)
 test_data = sort(test_data)
 @
 
 Pour colorer chaque barre de manière indépendante, on va créer un vecteur \texttt{colors}, qui contiendra une valeur par barre:
 
-<<>>=
+<<ma5createCols>>=
 colors = rep(2,length(test_data))
 @
 
@@ -84,7 +118,7 @@ Chaque barre sera donc de la couleur \texttt{2}, qui dépend de la \texttt{palet
 Pour changer la couleur de chaque barre, il y a deux approches.
 La première consiste a écrire une boucle:
 
-<<eval=FALSE>>=
+<<ma5wrong,eval=FALSE>>=
 for(co_idx in c(1:length(test_data)))
 {
 	if(test_data[co_idx] > 10) colors[co_idx] = 3
@@ -95,7 +129,7 @@ for(co_idx in c(1:length(test_data)))
 Une méthode plus élégante tire parti de la vectorisation:
 
 
-<<>>=
+<<ma5colors>>=
 colors[test_data > 10] = 3
 colors[test_data < -5] = 1
 colors
@@ -103,7 +137,7 @@ colors
 
 On peut ensuite afficher le graphique avec les barres de chaque couleur:
 
-<<meaGraphbar,fig=TRUE>>=
+<<ma5graphbarfinal,fig=TRUE>>=
 barplot(test_data,col=colors,ylim=range(test_data)+c(-2,2), space = 0)
 abline(h=0,lwd=2)
 box()

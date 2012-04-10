@@ -14,8 +14,8 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1]  0.3636 -0.1601 -0.1409  0.2279  0.7192  0.2508  0.3597  0.4507
-##  [9] -0.2436  0.4394
+##  [1] -0.01217 -0.18201  0.23044  0.18467  0.22523  0.55003  0.24744
+##  [8] -0.23401  0.10894 -0.17638
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -23,7 +23,7 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] 0.6659 1.6678 0.7538 1.0510 0.4947 0.6434 1.2381 1.8382 1.2181 2.1166
+##  [1] 0.2502 1.2307 0.3229 1.5699 1.0013 0.4071 1.3755 0.8582 1.2821 0.4935
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -43,6 +43,235 @@ En rechargeant les données \emph{Lamellodiscus}, on peut par exemple chercher �
 \hlsymbol{morpho}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/lamellodiscus.txt"{}}\hlkeyword{,}{\ }\hlargument{h}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}\usebox{\hlnormalsizeboxbackslash}t"{}}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent L'étape suivante est de diviser les données, en utilisant la fonction \texttt{split}.
+Cette fonction prend une \texttt{data.frame}, la divise selon les valeurs de la colonne (ou combinaison de colonnes) choisie, et renvoie les sous-tableaux sous forme de liste.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{split}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sppar}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{names}\hlkeyword{(}\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] "conf" "dipl" "eleg" "erge" "falc" "frat" "furc" "igno" "kech" "morm"
+## [11] "neif" "ther" "tome"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{conf}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##     sphote sppar       para     a     b      c      d      f      g     aa
+## 153   Sasa  conf Sasa1conf1 1.300 1.250 0.5500 0.3000 0.3500 0.2000 1.2000
+## 188   Disa  conf Disa9conf1 1.204 1.244 0.7498 0.7443 0.6972 0.3702 0.9759
+##         bb     cc    lm    li
+## 153 1.1000 0.6500 1.300 1.300
+## 188 0.9007 0.6713 1.173 1.144
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent On obtient 13 tableaux de données, un pour chaque espèce de parasites.
+On souhaite éliminer ceux qui ont été observés moins de trois fois au total.
+Ceci implique de parcourir chaque élément de la liste, et de déterminer sa taille.
+R propose une fonction \texttt{lapply}, littéralement \texttt{apply} sur une \texttt{l}iste, pour effectuer cette tâche:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}obs}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{unlist}\hlkeyword{(}\hlfunctioncall{lapply}\hlkeyword{(}\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{,}{\ }\hlsymbol{nrow}\hlkeyword{)}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}obs}{\ }\hlkeyword{\usebox{\hlnormalsizeboxgreaterthan}=}{\ }\hlnumber{3}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  conf  dipl  eleg  erge  falc  frat  furc  igno  kech  morm  neif  ther 
+## FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE FALSE 
+##  tome 
+##  TRUE 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent Notons que \texttt{lapply} retourne une liste.
+On peut ensuite utiliser les infomations sur le nombre d'observations, \texttt{n\_obs}, pour choisir quels sous-tableaux garder: 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{[}\hlsymbol{n\usebox{\hlnormalsizeboxunderscore}obs}{\ }\hlkeyword{\usebox{\hlnormalsizeboxgreaterthan}=}{\ }\hlnumber{3}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent la encore, on remarquera que pour exclure certains éléments d'une liste, on utilise les crochets simples, comme pour un vecteur, et non les crochets doubles.
+On vérifie maintenant qu'il ne reste plus que des espèces avec plus de 3 observations:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{unlist}\hlkeyword{(}\hlfunctioncall{lapply}\hlkeyword{(}\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{,}{\ }\hlsymbol{nrow}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## eleg erge falc frat furc igno kech neif tome 
+##   59   19    9    6    7   43   30    6    3 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+On veut maintenant calculer la moyenne des éléments de chaque sous-tableau, en ne sélectionnant que les colonnes correspondant aux mesures morphométriques.
+Ces colonnes sont les 4 et suivantes, soit \texttt{c(4:ncol(x))} dans le langage de R, si on travaille sur un objet \texttt{x}.
+Une fois ces colonnes extraites, on peut vérifier qu'on obtient bien une matrice,
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{furc}\hlkeyword{[}\hlkeyword{,}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{4}\hlkeyword{:}\hlfunctioncall{ncol}\hlkeyword{(}\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{furc}\hlkeyword{)}\hlkeyword{)}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##         a     b     c      d      f      g    aa    bb     cc    lm    li
+## 23  2.030 1.930 1.250 0.5200 0.7300 0.3100 1.880 1.770 1.2000 2.350 2.760
+## 140 2.100 1.850 1.500 0.6000 0.7000 0.4000 1.800 1.700 1.2000 1.900 2.700
+## 141 2.000 1.900 1.300 0.6000 0.7000 0.3000 1.700 1.600 1.2000 1.800 2.800
+## 142 1.900 1.850 1.450 0.6000 0.7500 0.4000 1.850 1.700 1.1000 1.950 2.600
+## 175 1.905 1.843 1.305 0.6972 0.7975 0.4873 1.745 1.682 1.1482 2.212 2.621
+## 176 1.813 1.691 1.240 0.6617 0.7786 0.5374 1.579 1.477 0.9888 1.693 2.187
+## 187 2.031 1.939 1.420 0.7219 0.8022 0.4668 1.832 1.762 1.2685 2.007 2.680
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent, dont on peut calculer la moyenne sur chaque colonne par la fonction \texttt{apply}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{moy}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlkeyword{function}\hlkeyword{(}\hlformalargs{x}\hlkeyword{)}{\ }\hlfunctioncall{apply}\hlkeyword{(}\hlsymbol{x}\hlkeyword{[}\hlkeyword{,}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{4}\hlkeyword{:}\hlfunctioncall{ncol}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\hlkeyword{)}\hlkeyword{]}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlsymbol{mean}\hlkeyword{,}{\ }\hlargument{na.rm}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+On peut maintenant appliquer cette fonction à nos données divisées en groupes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{lapply}\hlkeyword{(}\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{,}{\ }\hlsymbol{moy}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## $eleg
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.7070 1.6101 1.1589 0.5191 0.5957 0.3475 1.5249 1.4336 0.9794 1.9543 
+##     li 
+## 2.2411 
+## 
+## $erge
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 2.0589 1.9603 1.3527 0.7425 0.9609 0.5216 1.7363 1.6743 0.9852 2.6796 
+##     li 
+## 2.5110 
+## 
+## $falc
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.4151 1.2760 0.6742 0.5014 0.4512 0.2660 1.1984 1.1344 0.7695 1.4033 
+##     li 
+## 1.3521 
+## 
+## $frat
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.6333 1.4667 1.0333 0.4833 0.6083 0.2917 1.3333 1.1583 0.9333 1.2000 
+##     li 
+## 1.5000 
+## 
+## $furc
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.9684 1.8575 1.3522 0.6287 0.7512 0.4145 1.7694 1.6700 1.1579 1.9873 
+##     li 
+## 2.6212 
+## 
+## $igno
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.1418 1.0682 0.6863 0.4650 0.5244 0.2613 1.0015 0.9159 0.5487 1.6268 
+##     li 
+## 1.4836 
+## 
+## $kech
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.8057 1.7346 1.1192 0.5808 0.8611 0.4013 1.5480 1.4304 0.7800 1.8590 
+##     li 
+## 1.8269 
+## 
+## $neif
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 1.0529 0.9435 0.6178 0.4035 0.4394 0.2495 0.8778 0.8019 0.4958 0.7910 
+##     li 
+## 1.0076 
+## 
+## $tome
+##      a      b      c      d      f      g     aa     bb     cc     lm 
+## 2.2833 2.1833 1.2833 0.8000 1.1500 0.3833 1.8167 1.8333 0.9167 2.8167 
+##     li 
+## 3.0833 
+## 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+On peut aussi convertir facilement cette information en une \texttt{data.frame}, que l'on pivote pour avoir les noms des espèces en lignes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{t}\hlkeyword{(}\hlfunctioncall{as.data.frame}\hlkeyword{(}\hlfunctioncall{lapply}\hlkeyword{(}\hlsymbol{morpho\usebox{\hlnormalsizeboxunderscore}split}\hlkeyword{,}{\ }\hlsymbol{moy}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##          a      b      c      d      f      g     aa     bb     cc    lm
+## eleg 1.707 1.6101 1.1589 0.5191 0.5957 0.3475 1.5249 1.4336 0.9794 1.954
+## erge 2.059 1.9603 1.3527 0.7425 0.9609 0.5216 1.7363 1.6743 0.9852 2.680
+## falc 1.415 1.2760 0.6742 0.5014 0.4512 0.2660 1.1984 1.1344 0.7695 1.403
+## frat 1.633 1.4667 1.0333 0.4833 0.6083 0.2917 1.3333 1.1583 0.9333 1.200
+## furc 1.968 1.8575 1.3522 0.6287 0.7512 0.4145 1.7694 1.6700 1.1579 1.987
+## igno 1.142 1.0682 0.6863 0.4650 0.5244 0.2613 1.0015 0.9159 0.5487 1.627
+## kech 1.806 1.7346 1.1192 0.5808 0.8611 0.4013 1.5480 1.4304 0.7800 1.859
+## neif 1.053 0.9435 0.6178 0.4035 0.4394 0.2495 0.8778 0.8019 0.4958 0.791
+## tome 2.283 2.1833 1.2833 0.8000 1.1500 0.3833 1.8167 1.8333 0.9167 2.817
+##         li
+## eleg 2.241
+## erge 2.511
+## falc 1.352
+## frat 1.500
+## furc 2.621
+## igno 1.484
+## kech 1.827
+## neif 1.008
+## tome 3.083
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
 

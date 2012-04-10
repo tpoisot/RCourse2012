@@ -5,7 +5,7 @@
 Dans une grande variété de situations, il peut être avantageux de répéter une opération sur toutes les lignes, ou toutes les colonnes.
 R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \texttt{apply}. 
 
-<<>>=
+<<applyExample>>=
 dat = matrix(rnorm(100),nrow=10)
 apply(dat,1,mean)
 apply(dat,2,var)
@@ -18,6 +18,65 @@ apply(dat,2,var)
 En utilisant différentes fonctions, on peut traiter facilement un jeu de données par «niveaux» d'un facteur (p.ex. traitement expérimental).
 En rechargeant les données \emph{Lamellodiscus}, on peut par exemple chercher à connaître la moyenne et la variance de la taille de chaque pièce sclérifiée.
 
-<<>>=
+<<readMorpho>>=
 morpho = read.table("data/lamellodiscus.txt",h=TRUE,sep='\t')
+@
+
+\noindent L'étape suivante est de diviser les données, en utilisant la fonction \texttt{split}.
+Cette fonction prend une \texttt{data.frame}, la divise selon les valeurs de la colonne (ou combinaison de colonnes) choisie, et renvoie les sous-tableaux sous forme de liste.
+
+<<splitMorpho>>=
+morpho_split = split(morpho,morpho$sppar)
+names(morpho_split)
+morpho_split$conf
+@
+
+\noindent On obtient 13 tableaux de données, un pour chaque espèce de parasites.
+On souhaite éliminer ceux qui ont été observés moins de trois fois au total.
+Ceci implique de parcourir chaque élément de la liste, et de déterminer sa taille.
+R propose une fonction \texttt{lapply}, littéralement \texttt{apply} sur une \texttt{l}iste, pour effectuer cette tâche:
+
+<<lapplyIntro>>=
+n_obs = unlist(lapply(morpho_split,nrow))
+n_obs >= 3
+@
+
+\noindent Notons que \texttt{lapply} retourne une liste.
+On peut ensuite utiliser les infomations sur le nombre d'observations, \texttt{n\_obs}, pour choisir quels sous-tableaux garder: 
+
+<<subsetListe>>=
+morpho_split = morpho_split[n_obs>=3]
+@
+
+\noindent la encore, on remarquera que pour exclure certains éléments d'une liste, on utilise les crochets simples, comme pour un vecteur, et non les crochets doubles.
+On vérifie maintenant qu'il ne reste plus que des espèces avec plus de 3 observations:
+
+<<checkObs>>=
+unlist(lapply(morpho_split,nrow))
+@
+
+On veut maintenant calculer la moyenne des éléments de chaque sous-tableau, en ne sélectionnant que les colonnes correspondant aux mesures morphométriques.
+Ces colonnes sont les 4 et suivantes, soit \texttt{c(4:ncol(x))} dans le langage de R, si on travaille sur un objet \texttt{x}.
+Une fois ces colonnes extraites, on peut vérifier qu'on obtient bien une matrice,
+
+<<checkMatrix>>=
+morpho_split$furc[,c(4:ncol(morpho_split$furc))]
+@
+
+\noindent, dont on peut calculer la moyenne sur chaque colonne par la fonction \texttt{apply}.
+
+<<>>=
+moy = function(x) apply(x[,c(4:ncol(x))],2,mean,na.rm=TRUE)
+@
+
+On peut maintenant appliquer cette fonction à nos données divisées en groupes:
+
+<<>>=
+lapply(morpho_split,moy)
+@
+
+On peut aussi convertir facilement cette information en une \texttt{data.frame}, que l'on pivote pour avoir les noms des espèces en lignes:
+
+<<>>=
+t(as.data.frame(lapply(morpho_split,moy)))
 @
