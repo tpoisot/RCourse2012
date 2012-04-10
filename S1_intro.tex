@@ -1,14 +1,15 @@
 \chapter{Introduction}
 
-\section{Objectifs du cours}
+L'objectif de ce cours est de fournier une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et calcul scientifique.
+R est souvent présenté dans l'optique d'une utilisation pour les statistiques.
+Si c'est effectivement une des capacités les plus souvent utilisées de ce langage, ce cours n'abordera pas ce domaine.
+L'objectif des 6 séances est de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste de R pour le rendre utilisable dans la plus grande majorité des situations:
+nous aborderons donc les bases du langage, en commençant par les types d'objets utilisés par R, puis consacrerons une partie importante du temps a lire, écrire, et manipuler des jeux de données.
+Les dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite. 
 
 \section{Environnement de travail}
 
-\subsection{Installation de R}
-
-\url{http://www.r-project.org/}
-
-\subsection{Installation de RStudio}
+La première étape est de mettre en place notre environnement de travail. Si ce n'est pas déjà fait, commencez par installer R, disponible à \url{http://www.r-project.org/}.
 
 RStudio est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
 La première partie de la séance sera consacrée à l'utilisation de RStudio.  
@@ -194,9 +195,31 @@ Par exemple, les commandes
 \noindent sont équivalentes.
 Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre la longueur du premier vecteur.
 
-\textbf{todo} Créer des vecteurs null
+La taille d'un vecteur est obtenue en utilisant la fonction \texttt{length}:
 
-\textbf{todo} Length
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{length}\hlkeyword{(}\hlnumber{1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{length}\hlkeyword{(}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{5}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\textbf{todo} Créer des vecteurs null
 
 \subsubsection{Matrices}
 
@@ -232,11 +255,11 @@ On peut connaître les dimensions d'une matrice de différentes manières:
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
-\hlfunctioncall{now}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}\mbox{}
+\hlfunctioncall{nrow}\hlkeyword{(}\hlsymbol{test\usebox{\hlnormalsizeboxunderscore}mat}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-## Error: impossible de trouver la fonction "now"
+## [1] 4
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -469,6 +492,49 @@ Pour simplifier, \texttt{with} permet d'éviter d'écrire \texttt{liste\$nom} po
 \end{knitrout}
 
 
-\subsubsection{Data frames}
+Dans certains cas, il peut être intéréssant d'applatir une liste en un vecteur.
+R propose la fonction \texttt{unlist} pour effectuer cette opération:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{t\usebox{\hlnormalsizeboxunderscore}list}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{list}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{5}\hlkeyword{,}{\ }\hlnumber{6}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{t\usebox{\hlnormalsizeboxunderscore}list}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] 2
+## 
+## [[3]]
+## [1] 3
+## 
+## [[4]]
+## [1] 4
+## 
+## [[5]]
+## [1] 5
+## 
+## [[6]]
+## [1] 6
+## 
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{unlist}\hlkeyword{(}\hlsymbol{t\usebox{\hlnormalsizeboxunderscore}list}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1 2 3 4 5 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsubsection{\emph{Data frames}}
 
 Vu plus en détail dans les autres séances.

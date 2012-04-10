@@ -1,9 +1,36 @@
  \documentclass[11pt]{memoir}
-\input{options.tex}
+%\input{options.tex}
 
-% \SweaveOpts{fig.align='center', dev='tikz', fig.width=6, fig.height=4, fig.show='hold', cache=TRUE, par=TRUE}
+%%%% FORMER CONTENT OF OPTIONS.TEX
+%%%% Waiting for reported knitr bug to be fixed
+\usepackage[style=numeric-comp,url=false,doi=false,isbn=false,maxnames=2,maxbibnames=2,firstinits,sorting=none]{biblatex}
+\bibliography{/Users/tpoisot/Dropbox/library.bib}
 
-%%%%%\graphicspath{{figure/}}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{canoniclayout}
+
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage[utf8]{inputenx}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{inconsolata}
+\usepackage[scaled]{helvet}
+\usepackage[loosequotes,mathlf,textlf]{MinionPro}
+
+\usepackage{setspace}
+
+\usepackage{booktabs,tabularx}
+%%%% OPTIONS"TEX ENDS
+
+
+% \SweaveOpts{fig.path='figure/graphics-', fig.align='center', dev='tikz', fig.width=4, fig.height=3, fig.show='hold', cache=TRUE, par=TRUE}
+
+\graphicspath{{figure/}}
 
 <<setup, include=FALSE, cache=FALSE>>=
 options(replace.assign=TRUE,width=60)
@@ -58,5 +85,7 @@ palette(brewer.pal(9,'Set1'))
 
 <<seance5, child='SS1_parallel.Rnw', eval=TRUE>>=
 @
+
+\printbibliography
 
 \end{document}

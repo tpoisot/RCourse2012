@@ -14,3 +14,10 @@ apply(dat,2,var)
 \section{Traitement des données}
 
 \section{Division et traitement par niveau}
+
+En utilisant différentes fonctions, on peut traiter facilement un jeu de données par «niveaux» d'un facteur (p.ex. traitement expérimental).
+En rechargeant les données \emph{Lamellodiscus}, on peut par exemple chercher à connaître la moyenne et la variance de la taille de chaque pièce sclérifiée.
+
+<<>>=
+morpho = read.table("data/lamellodiscus.txt",h=TRUE,sep='\t')
+@

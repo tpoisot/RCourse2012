@@ -1,14 +1,15 @@
 \chapter{Introduction}
 
-\section{Objectifs du cours}
+L'objectif de ce cours est de fournier une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et calcul scientifique.
+R est souvent présenté dans l'optique d'une utilisation pour les statistiques.
+Si c'est effectivement une des capacités les plus souvent utilisées de ce langage, ce cours n'abordera pas ce domaine.
+L'objectif des 6 séances est de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste de R pour le rendre utilisable dans la plus grande majorité des situations:
+nous aborderons donc les bases du langage, en commençant par les types d'objets utilisés par R, puis consacrerons une partie importante du temps a lire, écrire, et manipuler des jeux de données.
+Les dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite. 
 
 \section{Environnement de travail}
 
-\subsection{Installation de R}
-
-\url{http://www.r-project.org/}
-
-\subsection{Installation de RStudio}
+La première étape est de mettre en place notre environnement de travail. Si ce n'est pas déjà fait, commencez par installer R, disponible à \url{http://www.r-project.org/}.
 
 RStudio est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
 La première partie de la séance sera consacrée à l'utilisation de RStudio.  
@@ -92,9 +93,14 @@ c(1,2,3,4,5) + c(1,2,1,2,1)
 \noindent sont équivalentes.
 Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre la longueur du premier vecteur.
 
-\textbf{todo} Créer des vecteurs null
+La taille d'un vecteur est obtenue en utilisant la fonction \texttt{length}:
 
-\textbf{todo} Length
+<<>>=
+length(1)
+length(c(1:5))
+@ 
+
+\textbf{todo} Créer des vecteurs null
 
 \subsubsection{Matrices}
 
@@ -113,7 +119,7 @@ test_mat = matrix(0,ncol=2,nrow=4)
 On peut connaître les dimensions d'une matrice de différentes manières:
 <<>>=
 dim(test_mat)
-now(test_mat)
+nrow(test_mat)
 ncol(test_mat)
 @  
 
@@ -189,6 +195,15 @@ with(n_list,{
 		})
 @
 
-\subsubsection{Data frames}
+Dans certains cas, il peut être intéréssant d'applatir une liste en un vecteur.
+R propose la fonction \texttt{unlist} pour effectuer cette opération:
+
+<<unlist>>=
+t_list = list(1,2,3,4,5,6)
+t_list
+unlist(t_list)
+@
+
+\subsubsection{\emph{Data frames}}
 
 Vu plus en détail dans les autres séances.

@@ -14,8 +14,8 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] -0.026960 -0.015687  0.008188  0.089791 -0.421734  0.118884 -0.101086
-##  [8] -0.169665 -0.052550  0.385399
+##  [1]  0.3636 -0.1601 -0.1409  0.2279  0.7192  0.2508  0.3597  0.4507
+##  [9] -0.2436  0.4394
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -23,7 +23,7 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] 1.2223 1.4511 0.8813 0.7104 1.3745 0.7182 0.5745 0.7073 0.5857 1.3680
+##  [1] 0.6659 1.6678 0.7538 1.0510 0.4947 0.6434 1.2381 1.8382 1.2181 2.1166
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -32,3 +32,17 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \section{Traitement des données}
 
 \section{Division et traitement par niveau}
+
+En utilisant différentes fonctions, on peut traiter facilement un jeu de données par «niveaux» d'un facteur (p.ex. traitement expérimental).
+En rechargeant les données \emph{Lamellodiscus}, on peut par exemple chercher à connaître la moyenne et la variance de la taille de chaque pièce sclérifiée.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/lamellodiscus.txt"{}}\hlkeyword{,}{\ }\hlargument{h}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}\usebox{\hlnormalsizeboxbackslash}t"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+

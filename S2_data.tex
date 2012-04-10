@@ -1,1 +1,42 @@
 \chapter{Lecture et écriture des données}
+
+R propose plusieurs manières de lire des données, depuis des fichiers textes ou des tableaux Excel.
+L'objectif de cette séance est de lire, et mettre en forme des données.
+Nous aborderons aussi les moyens de sauvegarder ces données sur le disque.
+Pour la durée de la séance, on suppose que l'ensemble des données qu'on veut lire sont stockées dans le répertoire \texttt{./data/}.
+
+\section{Lecture depuis des fichiers textes}
+
+La méthode la plus simple de stocker des fichiers texte, et la seule recommandée si on veut s'assurer de pouvoir lire les données partout, en tout temps, est d'utiliser des fichiers texte.
+
+Dans cet exemple, on utilisera les données prises par \textcite{PoisotBJLS2010} sur 147 parasites du genre \emph{Lamellodiscus}, parasites de poissons communs en Méditerranée.
+Ces données correspondent aux relevés morphométriques effectuées sur les parties solides de l'appareil d'attachement. Les données sont classées selon l'espèce du parasite (\texttt{sppar}),
+ et l'espéce de l'hôte sur lequel le parasite a été isolé (\texttt{sphote}).
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/lamellodiscus.txt"{}}\hlkeyword{,}{\ }\hlargument{h}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}\usebox{\hlnormalsizeboxbackslash}t"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   sphote sppar      para    a    b    c    d    f    g   aa   bb   cc   lm
+## 1   Divu  eleg elegDivu1 2.06 1.93   NA   NA   NA   NA 1.93 1.81 1.16 5.43
+## 2   Divu  eleg elegDivu2 1.93 1.82 1.51 0.41 0.57 0.20 1.77 1.67 1.20 2.35
+## 3   Divu  eleg elegDivu2 1.67 1.56 1.20 0.31 0.36 0.26 1.56 1.51 0.94 1.88
+## 4   Disa  eleg elegDisa1 1.46 1.41 1.04 0.47 0.67 0.31 1.25 1.20 0.83 1.46
+## 5   Disa  eleg elegDisa1 1.30 1.25 0.94 0.36 0.52 0.31 1.14 1.09 0.78   NA
+## 6   Disa  eleg elegDisa1 1.41 1.35 0.99 0.36 0.57 0.36 1.25 1.20 0.83 2.08
+##     li
+## 1 2.66
+## 2 2.66
+## 3 1.77
+## 4 2.19
+## 5 2.03
+## 6 2.55
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
