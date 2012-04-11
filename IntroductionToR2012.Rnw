@@ -2,14 +2,14 @@
 %\input{options.tex}
 
 %%%% FORMER CONTENT OF OPTIONS.TEX
-%%%% Waiting for reported knitr bug to be fixed
-\usepackage{microtype}
 \usepackage[utf8]{inputenx}
 \usepackage[french]{babel}
 \usepackage[T1]{fontenc}
-\usepackage{inconsolata}
+\usepackage[scaled=.95]{inconsolata}
 \usepackage{bera}
-\usepackage[loosequotes,mathlf,textlf]{MinionPro}
+
+\usepackage[loosequotes,mathlf,textlf,frenchmath]{MinionPro}
+\usepackage{microtype}
 
 \usepackage[style=numeric-comp,url=false,doi=false,isbn=false,maxnames=2,maxbibnames=2,firstinits,sorting=none]{biblatex}
 \bibliography{/Users/tpoisot/Dropbox/library.bib}

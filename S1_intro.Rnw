@@ -1,11 +1,12 @@
 \chapter{Introduction}
 
-L'objectif de ce cours est de fournier une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et calcul scientifique.
+L'objectif de ce cours est de fournir une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et calcul scientifique.
 R est souvent présenté dans l'optique d'une utilisation pour les statistiques.
 Si c'est effectivement une des capacités les plus souvent utilisées de ce langage, ce cours n'abordera pas ce domaine.
+
 L'objectif des 6 séances est de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste de R pour le rendre utilisable dans la plus grande majorité des situations:
 nous aborderons donc les bases du langage, en commençant par les types d'objets utilisés par R, puis consacrerons une partie importante du temps a lire, écrire, et manipuler des jeux de données.
-Les dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite. 
+Les dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite.
 
 \section{Environnement de travail}
 
@@ -16,13 +17,46 @@ La première partie de la séance sera consacrée à l'utilisation de RStudio.
 
 \section{Types de données}
 
+Cette section présente les types de données comprises par R.
+Les langages de programmation stockent en général des variables de différents types d'une manière différente.
+Dans les langages de bas niveau, comme C, ces différences peuvent être relativement restrictives, pour, par exemple, convertir un entier en flottant.
+R est un langage dit faiblement typé (dans la réalité, R est surtout \emph{très mal} typé, mais c'est un autre problème...), en ce que les valeurs peuvent facilement changer de type.
+
+
+Il existe deux niveaux d'organisation pour représenter des valeurs dans un format compris par R: les types de données, et les collections de données.
+Ce vocabulaire n'est certainement pas le plus précis, mais établit au moins une différence entre les valeurs qu'on veut regrouper dans des structures plus vastes, et ces structures en elles-même.
+
 \subsection{Types de valeurs}
 
+Dans R, stocker n'importe quelle valeur, ou collection de valeur, dans un objet, se fait de la manière suivante:
+
+<<eval=FALSE>>=
+objet = valeur
+@ 
+
+On peut aussi utiliser indifférement les opérateurs \texttt{<-} ou \texttt{=}.
+Ma préférence va au dernier, puisque dans une lecture rapide \texttt{a <- 2} ($a = 2$) ressemble beaucoup (trop) à \texttt{a < -2} ($a < -2$).
+Cependant, les recommandations sur la présentation de la syntaxe de R vont dans le sens de l'utilisation de \texttt{<-} (entouré de deux espaces). 
+
 \subsubsection{Numériques}
+
+R est extrèmement performant dans le stockage de nombres, ce qui ne devrait pas surprendre de la part d'un langage dévellopé pour traiter des problèmes statistiques.
+Les exemples suivants montrent les difféerentes manières de déclarer un object contenant un nombre:
+
+<<>>=
+a = 0.1
+b = 1
+c = 1e-6
+a
+b
+c
+@
 
 \subsubsection{Chaînes}
 
 \subsubsection{Booléens}
+
+\subsubsection{Conversions}
 
 \subsection{Collections de valeurs}
 

@@ -177,14 +177,33 @@ d = c(3,2,3,4,5,4)
 (a == d) && (a == b)
 (a == d) | (a == b)
 (a == d) || (a == b)
+all.equal(a,b)
 @
 
-L'opérateur répété une seule fois est \emph{elemt-wise}: les éléments des vecteurs sont comparés deux à deux (et on applique du recyclage).
-L'opérateur répété deux fois 
+L'opérateur répété une seule fois travaille par élément: les éléments des vecteurs sont comparés deux à deux (et on applique du recyclage).
+L'opérateur répété deux fois ne prend en compte que les premières valeurs des vecteurs (un message d'avis sera émis si le vecteur a une taille supérieure à 1).
 
 \subsection{Manipulation des valeurs booléennes}
 
-addition, multiplication, ...
+Comme tous les autres types de données de R, les valeurs booléennes peuvent être manipulées dans des additions.
+
+<<manipbool>>=
+TRUE + TRUE
+FALSE + TRUE
+TRUE * TRUE
+@
+
+Cette possibilité de travailler sur les valeurs booléennes comme si \texttt{TRUE = 1} et \texttt{FALSE = 0} permet des raccourcis intéréssants.
+Par exemple, on peut facilement connaître le nombre d'éléments d'un vecteur qui répondent à une condition particulière, ici $ x\in \left(-0.5; 1\right]$:
+
+<<utilManipBool>>=
+a = rnorm(100)
+sum(a[(a<1)&(a>=0.5)])
+sum((a<1)&(a>=0.5))
+@
+
+Dans l'exemple précédemt, la première ligne fait la somme de \texttt{a} aux indices satisfaisant la condition fixée.
+La deuxième ligne fait la somme de ces indices, c.-à-d. d'un vecteur de booléens.
 
 \section{Fonctions}
 
@@ -379,8 +398,7 @@ t.test.permut = function(df,n=9999)
 {
 	baseStat = t.test(value~group,df)$statistic
 	return(sum(replicate(n,
-		t.test(value~group,resample(df))$statistic<=baseStat)
-	)/(n+1))
+		t.test(value~group,resample(df))$statistic<=baseStat))/(n+1))
 }
 @
 
