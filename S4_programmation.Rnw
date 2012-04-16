@@ -242,14 +242,10 @@ f(2)
 @ 
 
 Peut importe le nombre de fois ou on devra effectuer l'opération contenue dans \texttt{f}, si on veut la modifier, elle sera toujours stockée au même endroit.
-Avec cet avantage en tête, quelques généralités sur les fonctions en R.
-
-\subsubsection{Tout est fonction}
-
 Dans la pratique, la majorité des instructions utilisées jusau'à présent sont des fonctions.
 Par exemple, \texttt{print}, \texttt{read.table}, et \texttt{apply} sont des fonctions rendues disponibles par R.
-
-\subsubsection{Le \emph{scope}}
+Écrire une instruction comme \texttt{read.table('file.txt', h=TRUE)}, c'est faire appel à une fonction, en lui spécificiant certains \emph{arguments}.
+L'objectif des parties suivantes est de comprendre comment les fonctions fonctionnent (!), afin de pouvoir en écrire de nouvelles. 
 
 Les fonctions existent comme un espace <<à part>> dans R: ce qui se déroule dans une fonction, reste dans une fonction.
 Prennons le cas du code suivant:
@@ -315,9 +311,70 @@ Les éléments les plus importants sont les arguments et l'instruction \texttt{r
 
 \subsubsection{La commande \emph{return}}
 
+La commande \texttt{return} est en général la dernière ligne d'une fonction: ce qui se passe après est ignoré.
+Cette commande va renvoyer ce qui se trouve entre ses parenthèse dans l'environnement global de R: c'est un des points de communication entre l'environnement global et l'environnement de la fonction.
+La commande \texttt{return} ne peut prendre qu'un seul argument, il faut donc regrouper les variables sous forme de liste ou autres si vous en avez plusieurs.
+
+Prennons un exemple simple:
+
+<<explFuncReturn>>=
+somme_1 = function(a,b){
+	S = a + b
+}
+somme_2 = function(a,b){
+	S = a + b
+	return(S)
+}
+
+a = somme_1(2,3)
+a
+b = somme_2(2,3)
+b
+@   
+
+Quelques précisions.
+On peut tout a fait nommer des variables \texttt{a} et \texttt{b} dans l'environnement global, même si les fonctions \texttt{somme\_1} et \texttt{somme\_2} utilisent des variables avec ces noms,
+grâce au fait que le \emph{scope} de ces variables n'est pas le même.
+Il est toutefois déconseillé de le faire.
+Dans l'exemple précédent, la variable \texttt{S} n'existe pas, à aucun moment, dans l'environnement global de R.
+Le seul moyen de récupérer ce qui a été renvoyé par les fonctions est de les assigner à une variable de l'environnement global.
+
+Lorsque que la fonction ne se compose que d'une seule ligne, le résultat de cette dernière ligne est renvoyé et il n'y a pas besoin de spécifier \texttt{return}:
+
+<<returnImplicit>>=
+multipl = function(a,b) a*b
+multipl(2,3)
+@  
+
 \subsubsection{Arguments}
 
-Les arguments sont des variables
+Les arguments sont des variables que l'on peut échanger entre R et l'intérieur d'une fonction.
+Dans l'exemple précédent, pour faire une somme, il faut additionner deux nombres: $f(a,b) = a + b$ s'écrit \texttt{f = function(a,b) a + b}.
+Les éléments entre parenthèse sont les arguments de la fonction.
+Typiquement, un argument est noté par \texttt{nom = valeur}, où \texttt{nom} est l'identifiant de cet argument \emph{dans la fonction}, et \texttt{valeur} est la valeur par défaut.
+
+Les exemples suivants permettent de comprendre le fonctionnement des arguments et des valeurs par défaut.
+
+<<argDefault>>=
+somme = function(a=1,b=1) a + b
+somme()
+somme(a = 2)
+somme(b = 3)
+somme(1,2)
+@ 
+
+
+Il existe un argument particulièrement intéressant dans R: \texttt{...}.
+Cet argument contient tout objet passé à une fonction, pour lequel il n'y pas pas de nom d'argument correspondant.
+Par exemple:
+
+<<ellipsisArg>>=
+print_message = function(msg='Hello',...){
+	print(msg)
+	print(...)
+}
+print_message(msg='Hello','world!')
+@ 
 
 \section{Mise en application}
 

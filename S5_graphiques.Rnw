@@ -58,7 +58,24 @@ hist(distrib,main='',col=c(1:8))
 
 \subsection{\emph{Boxplots}}
 
-\subsection{Diagrammes en barre}
+R permet de créer facilement des \emph{boxplots}, qui permettent de visualiser certains propriétés d'une distribution statistique.
+Il existe deux manières de créer des \emph{boxplots}, dans R, \emph{via} une formule et \emph{via} une liste.
+\emph{Via} une formule, on spécifie les éléments a visualiser selon la syntaxe \texttt{reponse\~traitement, data}:
+
+<<bplotFORM,fig=TRUE>>=
+boxplot(a~sppar,morpho_split,las=2)
+@
+
+\noindent On notera que l'argument \texttt{las} (\texttt{?par}) permet de choisir comment les étiquettes des axes sont affichées.
+Dans le cas des \emph{boxplots}, avoir les étiquettes perpendiculaires permet qu'elles soient toutes affichées.
+La deuxième façon de spécifier les données est de les passer sous forme de liste.
+Dans ce cas, on peut aboutir au même résultat que la figure précédente avec:
+
+<<bplotLIST,fig=TRUE>>=
+boxplot(split(morpho_split$a,morpho_split$sppar),las=2)
+@ 
+
+\subsection{Diagrammes en barres}
 
 \section{Ajout d'éléments sur un graphique}
 
