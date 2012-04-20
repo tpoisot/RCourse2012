@@ -5,9 +5,13 @@ L'objectif de cette séance est de lire, et mettre en forme des données.
 Nous aborderons aussi les moyens de sauvegarder ces données sur le disque.
 Pour la durée de la séance, on suppose que l'ensemble des données qu'on veut lire sont stockées dans le répertoire \texttt{./data/}.
 
-\section{Lecture depuis des fichiers textes}
+\section{Lecture de données}
 
-La méthode la plus simple de stocker des fichiers texte, et la seule recommandée si on veut s'assurer de pouvoir lire les données partout, en tout temps, est d'utiliser des fichiers texte.
+La méthode la plus simple de stocker des données, et la seule que l'on devrait recommander si on veut s'assurer de pouvoir lire les données partout, en tout temps, est d'utiliser des fichiers texte.
+À la différence d'un fichier produit par \emph{Excel} ou \emph{OpenOffice Calc}, un fichier en texte brut ne contient pas d'autre informations que ce qu'on y a entré.
+Il est possible de lire dans n'importe quel programme, et son format ne changera \emph{jamais} -- sans mentionner que sa lecture ne coûte rien... 
+
+\subsection{Depuis des fichiers textes}
 
 Dans cet exemple, on utilisera les données prises par \textcite{PoisotBJLS2010} sur 147 parasites du genre \emph{Lamellodiscus}, parasites de poissons communs en Méditerranée.
 Ces données correspondent aux relevés morphométriques effectuées sur les parties solides de l'appareil d'attachement. Les données sont classées selon l'espèce du parasite (\texttt{sppar}),
@@ -17,3 +21,9 @@ Ces données correspondent aux relevés morphométriques effectuées sur les par
 morpho = read.table("data/lamellodiscus.txt",h=TRUE,sep='\t')
 head(morpho)
 @
+
+\section{Écriture de données}
+
+
+
+\section{Bases de données}

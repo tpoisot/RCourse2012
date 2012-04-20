@@ -4,13 +4,12 @@
 %%%% FORMER CONTENT OF OPTIONS.TEX
 \usepackage[utf8]{inputenx}
 \usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[scaled=.92]{inconsolata}
 
-%\usepackage[loosequotes,mathlf,textlf,frenchmath]{MinionPro}
-\usepackage{libertine}
-\usepackage[greek=n]{libgreek}
-\usepackage[noasterisk,defaultmathsizes]{mathastext}
+\usepackage[T1]{fontenc}
+\usepackage{kpfonts}
+\usepackage[scaled=.9]{inconsolata}
+\usepackage{berasans}
+
 \usepackage{microtype}
 
 \usepackage[style=numeric-comp,url=false,doi=false,isbn=false,maxnames=2,maxbibnames=2,firstinits,sorting=none]{biblatex}
@@ -67,7 +66,7 @@
 \graphicspath{{figure/}}
 
 <<setup, include=FALSE, cache=FALSE>>=
-options(replace.assign=TRUE,width=60)
+options(replace.assign=TRUE,width=75)
 knit_hooks$set(par=function(before, options, envir){
 if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
 })

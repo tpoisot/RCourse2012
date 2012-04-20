@@ -1,12 +1,14 @@
 \chapter{Introduction à la programmation}
 
-\section{Programmer, pourquoi?}
-
 Dans les séances précédentes, nous avons utilisé des fichiers \texttt{.R} pour sauvegarder des listes d'instructions.
 Nous avons aussi chargé et manipulé des jeux de données.
 Il est souvent nécessaire d'automatiser tout ou partie de ce processus, ce qui implique de faire appel à de la programmation.
 
-L'objectif de cette séance est de
+L'objectif de cette séance est de se familiariser avec les principaux concepts qu'on utilise pour concevoir un programme.
+La première partie couvre les bases en algorithmie, c,-à-d. les boucles et les tests.
+La deuxième partie concerne les fonctions, leur définition dans R, et leur utilisation.
+\`A l'issue de cette séance, vous serez en mesure de vous attaquer a pratiquement tous les problèmes nécéssitant de manipuler des données.
+Tout programme que vous aurez a écrire ne sera qu'une combinaison plus ou moins complexe des éléments abordés dans les séances précédentes. 
 
 \section{Boucles}
 
@@ -375,6 +377,9 @@ print_message = function(msg='Hello',...){
 }
 print_message(msg='Hello','world!')
 @ 
+
+L'utilisation de cet argument \emph{catch all} demande un peu de réflexion et beaucoup de pratique,
+mais s'avère particulièrement utile quand le format exact des arguments qui seront donnés a une fonction n'est pas connu d'avance.
 
 \section{Mise en application}
 

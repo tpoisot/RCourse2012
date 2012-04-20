@@ -1,19 +1,53 @@
 \chapter{Introduction}
 
-L'objectif de ce cours est de fournir une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et calcul scientifique.
+L'objectif de ce cours est de fournir une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et en calcul scientifique.
 R est souvent présenté dans l'optique d'une utilisation pour les statistiques.
 Si c'est effectivement une des capacités les plus souvent utilisées de ce langage, ce cours n'abordera pas ce domaine.
-
-L'objectif des 6 séances est de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste de R pour le rendre utilisable dans la plus grande majorité des situations:
+L'objectif des 6 séances est plutôt de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste de R pour le rendre utilisable dans la plus grande majorité des situations:
 nous aborderons donc les bases du langage, en commençant par les types d'objets utilisés par R, puis consacrerons une partie importante du temps a lire, écrire, et manipuler des jeux de données.
 Les dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite.
 
+Si R a acquis une très grande popularité dans le milieu de la recherche, c'est parce qu'il permet très facilement de rajouter des fonctionnalités. \emph{via} le système de \emph{packages}.
+En écologie et biologie évolutive, les principaux sont \emph{vegan} (analyse de structure des communautés), \emph{simecol} (simulation de systèmes dynamiques), \emph{ape} (analyses phylogénétiques), \emph{bipartite} (analyse des réseaux de pollinisation), et \emph{emdbook} (modèles statistiques).
+Chacun de ces \emph{packages} est accompagné d'un livre ou d'une série de publications, et couvrent une variété énrome d'analyses.
+Depius plus récemment, le projet \emph{ROpenSci}\footnote{\url{http://ropensci.org/}} propose des \emph{packages} permettant d'interagir avec les principales bases de données en écologie et évolution, et notamment de réaliser des analyses bibliométriques.
+Il est aussi de plus en plus fréquent de voir des articles dans lesquels les auteurs ont écrit un \emph{package} R qui permet de reproduire leurs analyses, ou au moins mis en \emph{supplementary material} des nouvelles fonctions utilisées dans leur travail.  
+
+Le cours s'étend sur 3 jours, et se compose de 6 séances couvrant chacune une demie journée.
+L'objectif est qu'à l'issue des 6 séances, vous soyez capables de comprendre le fonctionnement de R (séance 1), de lire, et écrire des données (séance 2), et de les manipuler (séance 3).
+La séance 4 comporte une introduction à la programmation, qui vous permettra de réaliser des choses plus poussées.
+La séance 5 est consacrée aux graphiques dans R, et couvre les outils de base.
+La séance 6 est prévue pour répondre a des questions plus générales.
+Chaque séance se déroule en deux temps.
+Premièrement, une introduction assez générale des concepts qui seront utilisés, avec des exemples de commandes et leurs résultats.
+Deuxièmement, une série de mises en application, qui consistent en un ou plusieurs petits problèmes généraux, mettant en application les notions acquises jusque la. 
+
 \section{Environnement de travail}
 
-La première étape est de mettre en place notre environnement de travail. Si ce n'est pas déjà fait, commencez par installer R, disponible à \url{http://www.r-project.org/}.
+La première étape est de mettre en place notre environnement de travail.
+Si ce n'est pas déjà fait, commencez par installer R, disponible à \url{http://www.r-project.org/}.
+Au lancement de R s'affiche la fenêtre suivante:  
 
-RStudio est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
-La première partie de la séance sera consacrée à l'utilisation de RStudio.  
+\begin{center}
+\includegraphics[width=.7\textwidth]{RConsole}
+\end{center}
+
+R n'est donc pas un logiciel comme \emph{JMP}, \emph{Statistica} ou \emph{Excel}.
+Sa philosophie est entièrement différente: plutôt que d'utiliser des boutons et des menus, on communique avec R via des commandes, qu'on entre soit directement dans la console, soit dans des fichiers \texttt{.r}.
+R est accessible depuis de nombreux autres programmes, incluant \emph{Komodo Edit}\footnote{\url{http://www.sciviews.org/SciViews-K/}}, \emph{Eclipse}\footnote{\url{http://www.walware.de/goto/statet}}, et \emph{NotePad ++}\footnote{\url{http://sourceforge.net/projects/npptor/}}. 
+
+Dans le cadre de ce cours, nous utiliserons \emph{RStudio}. 
+\emph{RStudio} est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+Ce programme permet de réaliser, dans le même environnement, la majorité des tâches qu'on peut vouloir effectuer dans R.
+
+Au lacenemt de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'affice:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{RStudio}
+\end{center}
+
+Les difféerentes sections permettent d'avoir accès simultanément à la console R (en bas à gauche), à la fenêtre des scripts (en haut à gauche), à l'historique des dernières commandes, et aux graphiques.
+Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}. 
 
 \section{Types de données}
 
