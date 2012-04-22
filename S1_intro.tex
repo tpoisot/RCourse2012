@@ -9,8 +9,8 @@ Les dernières séances sont consacrées à la programmation et aux graphiques, 
 
 Si R a acquis une très grande popularité dans le milieu de la recherche, c'est parce qu'il permet très facilement de rajouter des fonctionnalités. \emph{via} le système de \emph{packages}.
 En écologie et biologie évolutive, les principaux sont \emph{vegan} (analyse de structure des communautés), \emph{simecol} (simulation de systèmes dynamiques), \emph{ape} (analyses phylogénétiques), \emph{bipartite} (analyse des réseaux de pollinisation), et \emph{emdbook} (modèles statistiques).
-Chacun de ces \emph{packages} est accompagné d'un livre ou d'une série de publications, et couvrent une variété énrome d'analyses.
-Depius plus récemment, le projet \emph{ROpenSci}\footnote{\url{http://ropensci.org/}} propose des \emph{packages} permettant d'interagir avec les principales bases de données en écologie et évolution, et notamment de réaliser des analyses bibliométriques.
+Chacun de ces \emph{packages} est accompagné d'un livre ou d'une série de publications, et couvrent une variété énorme d'analyses.
+Depuis plus récemment, le projet \emph{ROpenSci}\footnote{\url{http://ropensci.org/}} propose des \emph{packages} permettant d'interagir avec les principales bases de données en écologie et évolution, et notamment de réaliser des analyses bibliométriques.
 Il est aussi de plus en plus fréquent de voir des articles dans lesquels les auteurs ont écrit un \emph{package} R qui permet de reproduire leurs analyses, ou au moins mis en \emph{supplementary material} des nouvelles fonctions utilisées dans leur travail.  
 
 Le cours s'étend sur 3 jours, et se compose de 6 séances couvrant chacune une demie journée.
@@ -58,11 +58,11 @@ R est un langage dit faiblement typé (dans la réalité, R est surtout \emph{tr
 
 
 Il existe deux niveaux d'organisation pour représenter des valeurs dans un format compris par R: les types de données, et les collections de données.
-Ce vocabulaire n'est certainement pas le plus précis, mais établit au moins une différence entre les valeurs qu'on veut regrouper dans des structures plus vastes, et ces structures en elles-même.
+Ce vocabulaire n'est certainement pas le plus précis, mais établit au moins une différence entre les valeurs (les données) qu'on veut regrouper dans des structures plus vastes, et ces structures en elles-même (les collections).
 
 \subsection{Types de valeurs}
 
-Dans R, stocker n'importe quelle valeur, ou collection de valeur, dans un objet, se fait de la manière suivante:
+Dans R, stocker n'importe quelle valeur, ou collection de valeurs, dans un objet, se fait de la manière suivante:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
@@ -77,7 +77,7 @@ Dans R, stocker n'importe quelle valeur, ou collection de valeur, dans un objet,
 
 On peut aussi utiliser indifférement les opérateurs \texttt{<-} ou \texttt{=}.
 Ma préférence va au dernier, puisque dans une lecture rapide \texttt{a <- 2} ($a = 2$) ressemble beaucoup (trop) à \texttt{a < -2} ($a < -2$).
-Cependant, les recommandations sur la présentation de la syntaxe de R vont dans le sens de l'utilisation de \texttt{<-} (entouré de deux espaces). 
+Cependant, les recommandations sur la présentation de la syntaxe de R vont dans le sens de l'utilisation de \texttt{<-} (entouré de deux espaces), et c'est cette notation qui sera utilisée ici.
 
 \subsubsection{Numériques}
 
@@ -117,7 +117,104 @@ Les exemples suivants montrent les difféerentes manières de déclarer un objec
 \end{knitrout}
 
 
+Pour forcer R a afficher une valeur, on peut utiliser la commande \texttt{print}. Par exemple,
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{print}\hlkeyword{(}\hlsymbol{a}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0.1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent affichera toujours la valeur contenue dans \texttt{a}.
+Cette commande est importante si vous utilisez des fichiers R \emph{via} la commande \texttt{source} (\emph{cf.} séance suivante);
+dans ce cas, \texttt{print} est le seul moyen de forcer l'affichage d'une valeur.
+
 \subsubsection{Chaînes}
+
+Les chaînes permettent de stocker des expressions textuelles.
+Par exemple,
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{texte}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlstring{"{}Hello,{\ }world!"{}}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{texte}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "Hello, world!"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+R permet de manipuler les chaînes, même s'il n'est pas le choix le plus recommandé dans ce domaine (PERL ou Python font un bien meilleur travail).
+On peut mentionner quelques commandes simples:
+
+Pour coller plusieurs chaînes entre elles,
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{paste}\hlkeyword{(}\hlstring{"{}Hello"{}}\hlkeyword{,}{\ }\hlstring{"{}World!"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "Hello World!"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{paste}\hlkeyword{(}\hlstring{"{}Hello"{}}\hlkeyword{,}{\ }\hlstring{"{}World!"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{},{\ }"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "Hello, World!"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent On peut aussi couper des chaînes sur un motif donnée, par exemple, pour connaître l'extension d'un fichier:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{filename}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlstring{"{}mon\usebox{\hlnormalsizeboxunderscore}fichier.dat"{}}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{strsplit}\hlkeyword{(}\hlsymbol{filename}\hlkeyword{,}{\ }\hlstring{"{}\usebox{\hlnormalsizeboxbackslash}\usebox{\hlnormalsizeboxbackslash}."{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [[1]]
+## [1] "mon_fichier" "dat"        
+## 
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{strsplit}\hlkeyword{(}\hlsymbol{filename}\hlkeyword{,}{\ }\hlstring{"{}\usebox{\hlnormalsizeboxunderscore}"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [[1]]
+## [1] "mon"         "fichier.dat"
+## 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noident Le fait d'écrire \texttt{\\.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
+par exemple couper au premier chiffre, et que \texttt{.} a dans ce contexte un sens différent du caractètre \texttt{.}.
 
 \subsubsection{Booléens}
 

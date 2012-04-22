@@ -9,8 +9,8 @@ Les dernières séances sont consacrées à la programmation et aux graphiques, 
 
 Si R a acquis une très grande popularité dans le milieu de la recherche, c'est parce qu'il permet très facilement de rajouter des fonctionnalités. \emph{via} le système de \emph{packages}.
 En écologie et biologie évolutive, les principaux sont \emph{vegan} (analyse de structure des communautés), \emph{simecol} (simulation de systèmes dynamiques), \emph{ape} (analyses phylogénétiques), \emph{bipartite} (analyse des réseaux de pollinisation), et \emph{emdbook} (modèles statistiques).
-Chacun de ces \emph{packages} est accompagné d'un livre ou d'une série de publications, et couvrent une variété énrome d'analyses.
-Depius plus récemment, le projet \emph{ROpenSci}\footnote{\url{http://ropensci.org/}} propose des \emph{packages} permettant d'interagir avec les principales bases de données en écologie et évolution, et notamment de réaliser des analyses bibliométriques.
+Chacun de ces \emph{packages} est accompagné d'un livre ou d'une série de publications, et couvrent une variété énorme d'analyses.
+Depuis plus récemment, le projet \emph{ROpenSci}\footnote{\url{http://ropensci.org/}} propose des \emph{packages} permettant d'interagir avec les principales bases de données en écologie et évolution, et notamment de réaliser des analyses bibliométriques.
 Il est aussi de plus en plus fréquent de voir des articles dans lesquels les auteurs ont écrit un \emph{package} R qui permet de reproduire leurs analyses, ou au moins mis en \emph{supplementary material} des nouvelles fonctions utilisées dans leur travail.  
 
 Le cours s'étend sur 3 jours, et se compose de 6 séances couvrant chacune une demie journée.
@@ -58,11 +58,11 @@ R est un langage dit faiblement typé (dans la réalité, R est surtout \emph{tr
 
 
 Il existe deux niveaux d'organisation pour représenter des valeurs dans un format compris par R: les types de données, et les collections de données.
-Ce vocabulaire n'est certainement pas le plus précis, mais établit au moins une différence entre les valeurs qu'on veut regrouper dans des structures plus vastes, et ces structures en elles-même.
+Ce vocabulaire n'est certainement pas le plus précis, mais établit au moins une différence entre les valeurs (les données) qu'on veut regrouper dans des structures plus vastes, et ces structures en elles-même (les collections).
 
 \subsection{Types de valeurs}
 
-Dans R, stocker n'importe quelle valeur, ou collection de valeur, dans un objet, se fait de la manière suivante:
+Dans R, stocker n'importe quelle valeur, ou collection de valeurs, dans un objet, se fait de la manière suivante:
 
 <<eval=FALSE>>=
 objet = valeur
@@ -70,7 +70,7 @@ objet = valeur
 
 On peut aussi utiliser indifférement les opérateurs \texttt{<-} ou \texttt{=}.
 Ma préférence va au dernier, puisque dans une lecture rapide \texttt{a <- 2} ($a = 2$) ressemble beaucoup (trop) à \texttt{a < -2} ($a < -2$).
-Cependant, les recommandations sur la présentation de la syntaxe de R vont dans le sens de l'utilisation de \texttt{<-} (entouré de deux espaces). 
+Cependant, les recommandations sur la présentation de la syntaxe de R vont dans le sens de l'utilisation de \texttt{<-} (entouré de deux espaces), et c'est cette notation qui sera utilisée ici.
 
 \subsubsection{Numériques}
 
@@ -86,11 +86,59 @@ b
 c
 @
 
+Pour forcer R a afficher une valeur, on peut utiliser la commande \texttt{print}. Par exemple,
+
+<<demoPrint>>=
+print(a)
+@
+
+\noindent affichera toujours la valeur contenue dans \texttt{a}.
+Cette commande est importante si vous utilisez des fichiers R \emph{via} la commande \texttt{source} (\emph{cf.} séance suivante);
+dans ce cas, \texttt{print} est le seul moyen de forcer l'affichage d'une valeur.
+
 \subsubsection{Chaînes}
+
+Les chaînes permettent de stocker des expressions textuelles.
+Par exemple,
+
+<<demoString>>=
+texte = 'Hello, world!'
+texte
+@
+
+R permet de manipuler les chaînes, même s'il n'est pas le choix le plus recommandé dans ce domaine (PERL ou Python font un bien meilleur travail).
+On peut mentionner quelques commandes simples:
+
+Pour coller plusieurs chaînes entre elles,
+
+<<explPaste>>=
+paste('Hello','World!')
+paste('Hello','World!',sep=', ')
+@
+
+\noindent On peut aussi couper des chaînes sur un motif donné, par exemple, pour connaître l'extension d'un fichier en coupant sur un point:
+
+<<demoStrSplit>>=
+filename = 'mon_fichier.dat'
+strsplit(filename,'\\.')
+strsplit(filename,'_')
+@
+
+\noident Le fait d'écrire \texttt{\ \.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
+par exemple couper au premier chiffre, et que \texttt{.} a dans ce contexte un sens différent du caractètre \texttt{.}.
 
 \subsubsection{Booléens}
 
 \subsubsection{Conversions}
+
+R est un langage faiblement typé, dans la mesure ou une commande comme
+
+<<>>=
+paste(99, 'luftballons', sep='' )
+@
+
+\noindent est parfaitement valide.
+Pourtant, elle mélange un type numérique avec un type chaîne.
 
 \subsection{Collections de valeurs}
 
