@@ -184,7 +184,7 @@ Pour coller plusieurs chaînes entre elles,
 \end{knitrout}
 
 
-\noindent On peut aussi couper des chaînes sur un motif donnée, par exemple, pour connaître l'extension d'un fichier:
+\noindent On peut aussi couper des chaînes sur un motif donné, par exemple, pour connaître l'extension d'un fichier en coupant sur un point:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
@@ -213,12 +213,31 @@ Pour coller plusieurs chaînes entre elles,
 \end{knitrout}
 
 
-\noident Le fait d'écrire \texttt{\\.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
+\noident Le fait d'écrire \texttt{\ \.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
 par exemple couper au premier chiffre, et que \texttt{.} a dans ce contexte un sens différent du caractètre \texttt{.}.
 
 \subsubsection{Booléens}
 
 \subsubsection{Conversions}
+
+R est un langage faiblement typé, dans la mesure ou une commande comme
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{paste}\hlkeyword{(}\hlnumber{99}\hlkeyword{,}{\ }\hlstring{"{}luftballons"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "99luftballons"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent est parfaitement valide.
+Pourtant, elle mélange un type numérique avec un type chaîne.
 
 \subsection{Collections de valeurs}
 

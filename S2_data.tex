@@ -45,8 +45,74 @@ Ces données correspondent aux relevés morphométriques effectuées sur les par
 \end{knitrout}
 
 
+La première ligne comporte deux éléments importants: \texttt{h = TRUE}, et \texttt{sep = '\ t'}.
+L'argument \texttt{h} est l'abbréviation de \emph{header}, à savoir, est-ce que la première ligne donne le nom de la colonne de données.
+L'argument \texttt{sep} indique quel caractère est utilisé pour séparer les colonnes, ici une tabulation.
+Si les champs avaient été séparés par une espace, il aurait fallu utiliser \texttt{sep = ' '}.
+On peut aussi spécifier le séparateur décimal (\texttt{dec=','}), ainsi que d'autres options, \emph{cf.} \texttt{?read.table}.
+
+R donne aussi accès directement à la lecture des fichiers \emph{comma separated value}, \texttt{csv}, \emph{via} la commande \texttt{read.csv}.
+
+EXPL
+
+Une fois les données lues, elles sont en général importées sous forme de \texttt{data.frame}.
+On peut voir les noms des colonnes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{colnames}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] "sphote" "sppar"  "para"   "a"      "b"      "c"      "d"     
+##  [8] "f"      "g"      "aa"     "bb"     "cc"     "lm"     "li"    
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent et afficher le contenu d'une des colonnes avec
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{a}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   [1] 2.060 1.930 1.670 1.460 1.300 1.410 1.980 2.080 2.450 2.240 2.030
+##  [12] 2.080 1.980 2.140 2.290 2.190 2.350 2.240 2.030 2.840 1.090 1.820
+##  [23] 2.030 1.090 1.040 1.140 1.040 1.670 1.560 1.300 1.460 1.610 1.040
+##  [34] 0.990    NA 1.930 1.980 2.030 1.980 1.880 1.930 1.930 2.030 1.980
+##  [45] 1.930 2.030 2.080 2.080 2.140 2.140 1.250 0.900 0.900 1.700 1.800
+##  [56] 0.800 1.800 1.400 1.550 2.400 2.300 1.650 2.150 1.750 1.800 1.300
+##  [67] 1.700 1.700 1.700 1.500 1.400 1.650 1.700 2.240 1.700 1.100    NA
+##  [78] 1.150 1.250 1.000 1.050 1.700 1.600 1.850 1.850 1.900 1.850 1.900
+##  [89] 1.200 1.000 1.100 1.800 1.500 1.000 0.950 1.100 1.800 2.100 1.400
+## [100] 1.400 1.300 1.350 1.400 1.450 1.000 1.200 1.100 1.100 0.900 1.000
+## [111] 1.050 0.900 1.550 1.450 0.850 1.750 1.600 1.600 1.600 1.100 0.800
+## [122] 1.400 1.500 1.400 0.850 1.450 0.900 1.450 1.550 0.900 1.700 1.750
+## [133] 1.550 1.600 1.800 1.000 1.800 1.600 1.600 2.100 2.000 1.900 1.700
+## [144]    NA 1.400 1.700 1.800 0.700 1.400 1.500 1.400 1.400 1.300 1.200
+## [155] 1.300 0.800 1.450 0.900 1.000 2.334 2.420 2.463 1.256 2.340 2.396
+## [166] 2.323 1.815 1.300 1.826 1.850 1.832 1.772 1.869 1.932 1.905 1.813
+## [177] 1.467 1.250 2.028 2.161 2.091 2.046 2.043    NA 2.025 1.555 2.031
+## [188] 1.204 1.086
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\subsection{Depuis des fichiers Excel}
+
+Il est fortement déconseillé de stocker des données importantes dans Excel ou Open Office (ou équivalent).
+Si vous avez a manipuler des données dans ce format, ma recommandation est de les exporter au format texte et de travailler avec sous cette forme.
+Dans tous les cas, R permet de \emph{lire} ces données.
+
 \section{Écriture de données}
-
-
 
 \section{Bases de données}

@@ -112,6 +112,18 @@ Dans cette mise en application, on veut créer une visualisation qui met en avan
 Spécifiquement, on souhaite que les barres correspondant à des valeurs plus petites, ou plus grandes, que des valeurs fixées, soient colorées différement.
 En vous aidant de ce qui a été vu jusqu'ici, et de l'aide de la fonction \texttt{barplot}, produisez cette visualisation.
 
+\subsection{Dynamique de populations}
+
+\textcite{Veilleux1979} a mesuré, deux fois par jour, la dynamique de population du prédateur \emph{Didinum nasutum} et de sa proie \emph{Paramecium aurelia}.
+Les données sont disponibles dans le fichier \texttt{data/predprey.txt}.
+Lisez le contenu de ce fichier de données, et représentez la dynamique des populations en respectant les contraintes suivantes, qui sont plus où moins celles imposées pour la préparation des figures dans une publication:
+
+\begin{enumerate}
+\item Les deux populations doivent être représentées sur le même axe. Si la taille de l'axe par défaut, la commande \texttt{ylim=c(min,max)} devrait vous aider.
+\item Pour difféerentes raisons, vous ne pouvez pas imprimer en couleur. Utilisez soit différents types de points, soit différentes lignes.
+\item Légendez votre figure, incluant les titres des axes.
+\end{enumerate}  
+
 \clearpage
 \section{Solution des mises en application}
 
@@ -158,4 +170,53 @@ On peut ensuite afficher le graphique avec les barres de chaque couleur:
 barplot(test_data,col=colors,ylim=range(test_data)+c(-2,2), space = 0)
 abline(h=0,lwd=2)
 box()
+@
+
+\subsection{Dynamique de populations}
+
+On commence par lire les données:
+
+<<readPredPrey>>=
+pp = read.table('data/predprey.txt',h=TRUE,sep=' ',dec='.')
+head(pp)
+@
+
+On commencer par faire une première visualisation:
+
+<<firstPP,fig=TRUE>>=
+with(pp,{
+	plot(time,pred)
+	lines(time,prey)
+	})
+@
+
+
+\noindent On va maintenant changer le type de lignes:
+
+<<linetypePP,fig=TRUE>>=
+with(pp,{
+	plot(time,pred,type='l',lty=1)
+	lines(time,prey,lty=2)
+	})
+@
+
+\noindent On peut obtenir le \emph{range} directement:
+
+<<linetypePPrange,fig=TRUE>>=
+with(pp,{
+	RangeY = range(c(pred,prey))
+	plot(time,pred,type='l',lty=1,ylim=RangeY)
+	lines(time,prey,lty=2)
+	})
+@
+
+\noindent On ajoute maintenant la légende
+
+<<linetypePPrangeLegend,fig=TRUE>>=
+with(pp,{
+	RangeY = range(c(pred,prey))
+	plot(time,pred,type='l',lty=1,ylim=RangeY)
+	lines(time,prey,lty=2)
+	legend('topleft',lty=c(1,2),legend=c('Predator','Prey'),bty='n',ncol=2)
+	})
 @

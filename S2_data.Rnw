@@ -22,8 +22,36 @@ morpho = read.table("data/lamellodiscus.txt",h=TRUE,sep='\t')
 head(morpho)
 @
 
+La première ligne comporte deux éléments importants: \texttt{h = TRUE}, et \texttt{sep = '\ t'}.
+L'argument \texttt{h} est l'abbréviation de \emph{header}, à savoir, est-ce que la première ligne donne le nom de la colonne de données.
+L'argument \texttt{sep} indique quel caractère est utilisé pour séparer les colonnes, ici une tabulation.
+Si les champs avaient été séparés par une espace, il aurait fallu utiliser \texttt{sep = ' '}.
+On peut aussi spécifier le séparateur décimal (\texttt{dec=','}), ainsi que d'autres options, \emph{cf.} \texttt{?read.table}.
+
+R donne aussi accès directement à la lecture des fichiers \emph{comma separated value}, \texttt{csv}, \emph{via} la commande \texttt{read.csv}.
+
+EXPL
+
+Une fois les données lues, elles sont en général importées sous forme de \texttt{data.frame}.
+On peut voir les noms des colonnes:
+
+<<>>=
+colnames(morpho)
+@ 
+
+\noindent et afficher le contenu d'une des colonnes avec
+
+<<>>=
+morpho$a
+@ 
+
+
+\subsection{Depuis des fichiers Excel}
+
+Il est fortement déconseillé de stocker des données importantes dans Excel ou Open Office (ou équivalent).
+Si vous avez a manipuler des données dans ce format, ma recommandation est de les exporter au format texte et de travailler avec sous cette forme.
+Dans tous les cas, R permet de \emph{lire} ces données.
+
 \section{Écriture de données}
-
-
 
 \section{Bases de données}

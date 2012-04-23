@@ -61,7 +61,7 @@
 %%%% OPTIONS"TEX ENDS
 
 
-% \SweaveOpts{fig.path='figure/graphics-', fig.align='center', dev='tikz', fig.width=4, fig.height=3, fig.show='hold', cache=TRUE, par=TRUE}
+% \SweaveOpts{fig.path='figure/graphics-', fig.align='center', dev='tikz', fig.width=4, fig.height=3, fig.show='hold', cache=FALSE, par=TRUE}
 
 \graphicspath{{figure/}}
 
