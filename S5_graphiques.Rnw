@@ -77,9 +77,13 @@ boxplot(split(morpho_split$a,morpho_split$sppar),las=2)
 
 \subsection{Diagrammes en barres}
 
+\subsection{Images et trois dimensions}
+
 \section{Ajout d'éléments sur un graphique}
 
 \subsection{Autres séries de données}
+
+Une fois un graphique affiché à l'écran, on peut ajouter d'autres séries de données assez simplement.
 
 \subsection{Légendes et axes}
 
@@ -190,7 +194,6 @@ with(pp,{
 	})
 @
 
-
 \noindent On va maintenant changer le type de lignes:
 
 <<linetypePP,fig=TRUE>>=
@@ -217,6 +220,17 @@ with(pp,{
 	RangeY = range(c(pred,prey))
 	plot(time,pred,type='l',lty=1,ylim=RangeY)
 	lines(time,prey,lty=2)
-	legend('topleft',lty=c(1,2),legend=c('Predator','Prey'),bty='n',ncol=2)
+	legend('topleft',lty=c(1,2),legend=c('Predator','Prey'),bty='n')
+	})
+@
+
+\noindent Enfin, on ajoute les titres des axes: 
+
+<<PPfinal,fig=TRUE>>=
+with(pp,{
+	RangeY = range(c(pred,prey))
+	plot(time,pred,type='l',lty=1,ylim=RangeY,xlab='Time',ylab='Population size')
+	lines(time,prey,lty=2)
+	legend('topleft',lty=c(1,2),legend=c('Predator','Prey'),bty='n')
 	})
 @

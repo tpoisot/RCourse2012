@@ -6,14 +6,14 @@
 \usepackage[french]{babel}
 
 \usepackage[T1]{fontenc}
-\usepackage{kpfonts}
-\usepackage[scaled=.9]{inconsolata}
+\usepackage{mathpazo}
+\usepackage[scaled]{inconsolata}
 \usepackage{berasans}
 
 \usepackage{microtype}
 
 \usepackage[style=numeric-comp,url=false,doi=false,isbn=false,maxnames=2,maxbibnames=2,firstinits,sorting=none]{biblatex}
-\bibliography{/Users/tpoisot/Dropbox/library.bib}
+\bibliography{library}
 
 \usepackage{geometry}
 \geometry{letterpaper}

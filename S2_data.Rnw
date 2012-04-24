@@ -29,8 +29,7 @@ Si les champs avaient été séparés par une espace, il aurait fallu utiliser \
 On peut aussi spécifier le séparateur décimal (\texttt{dec=','}), ainsi que d'autres options, \emph{cf.} \texttt{?read.table}.
 
 R donne aussi accès directement à la lecture des fichiers \emph{comma separated value}, \texttt{csv}, \emph{via} la commande \texttt{read.csv}.
-
-EXPL
+Cette fonction est en réalité un appel a \texttt{read.table} avec une partie des arguments par défaut pré-remplis pour lire le format \texttt{csv}.
 
 Une fois les données lues, elles sont en général importées sous forme de \texttt{data.frame}.
 On peut voir les noms des colonnes:
@@ -45,12 +44,91 @@ colnames(morpho)
 morpho$a
 @ 
 
+Dans \emph{RStudio}, et la plupart des autres plugins permettant d'utiliser R, après avoir entré le nom de la \emph{data frame}, vous aurez accès en appuyant sur tabulation à un menu déroulant,
+lequel contient les noms des colonnes: 
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{dopdownRStudio}
+\end{center}
+
+Cette fonctionalité s'avère très utile quand on a tendance à oublier comment on a nommé ses variables.
+
+La syntaxe \texttt{dataframe\$nom} peut sembler lourde, et c'est pourquoi R propose une commande nommée \texttt{attach}.
+Avec la syntaxe suivante,
+
+<<attachDemo>>=
+attach(morpho)
+a
+detach(morpho)
+@
+
+\noindent on peut accèder directement aux noms des colonnes.
+C'est une des pires pratiques d'écriture de code possible, et il est très fortement déconseillé d'utiliser \texttt{attach}:
+
+<<attachEpicFail>>=
+attach(morpho)
+a[c(1:10)]
+a[2] = 33333
+a[c(1:10)]
+detach(morpho)
+morpho$a[c(1:10)]
+@
+
+\noindent Alors qu'on modifie \texttt{a}, les modifications ne sont pas rapportées à \texttt{morpho\$a}.
+Notez aussi que les noms de certaines colonnes de \texttt{a} vont venir remplacer des variables déjà existantes dans l'environnement de travail.
+Ce n'est pas problèmatique dans le cas de \texttt{a} ou \texttt{b}, mais ça l'est nettement plus dans le cas de \texttt{c}, une fonction nécessaire au bon fonctionnement de R.  
+
+Si vous souhaitez vraiment vous abstenir de l'appel complet au nom de la \emph{data frame}, la construction \texttt{with} fonctionnera aussi bien:
+
+<<withEpicWin>>=
+with(morpho,{
+	mean(a, na.rm=TRUE)
+})
+@
+
+\noindent Notez que \texttt{with} ne permet pas non plus de modifier \texttt{morpho\$a} directement, mais permet au moins de ne pas ``contaminer'' votre environnement de travail avec différentes variables portant le même nom.
 
 \subsection{Depuis des fichiers Excel}
 
 Il est fortement déconseillé de stocker des données importantes dans Excel ou Open Office (ou équivalent).
 Si vous avez a manipuler des données dans ce format, ma recommandation est de les exporter au format texte et de travailler avec sous cette forme.
 Dans tous les cas, R permet de \emph{lire} ces données.
+
+Pour avoir la possibilité de lires des fichiers \emph{Excel}, il faut installer le \emph{package} \texttt{gdata}.
+
+<<installGdata,eval=FALSE>>=
+install.packages('gdata')
+@
+
+\noindent Les \emph{packages} sont des collections de code R écrites par la communauté, et rendues disponbiles sur le \emph{Comprehensive R Archive Network}\footnote{\url{http://cran.r-project.org/}}.
+Il existe des \emph{packages} pour à peu près toutes les utilisations possibles.
+
+Pour charger un \emph{package}, il faut utiliser la commande \texttt{library}:
+
+<<>>=
+library(gdata)
+@
+
+Notez bien que l'utilisation de \texttt{gdata} demande que \texttt{perl}\footnote{\url{http://www.perl.org/}} soit installé sur votre machine.
+Sur une distribution de Linux ou Mac OS, ce sera le cas par défaut -- il vous faudra l'installer vous même sur Windows.
+
+Si vous utilisez des fichiers issus de Excel 2007, il faut avant tout chose lancer une fonction de \texttt{gdata} qui permet de lire ces fichiers:
+
+<<XLSXsupport,eval=FALSE>>=
+installXLSXsupport(perl = "perl", verbose = FALSE)
+@
+
+Le dossier \texttt{data/} contient une feuille Excel au format \texttt{xls}, \texttt{data/netlists.xls}. Ce fichier comporte, pour une série de réseaux trophiques, leur nom, type, et le nombre d'espèces présentes à chaque niveau.
+On peut lire ce fichier avec la commande \textt{read.xls}:
+
+<<readXLS>>=
+webs = read.xls('data/netlists.xls', sheet = 1, h = TRUE)
+head(webs)
+@
+
+\noindent La commande \texttt{read.xls} prend les mêmes arguments que \textt{read.table}, et rajoute un argument \texttt{sheet}, qui permet de déterminer quelle feuille sera importée.
+Le fonctionnement de cette fonction quand la feuille Excel contient des macros, de la mise en forme, \empg{etc}, n'est pas prévisible.
+La meilleure solution reste toujours de convertir les données au format texte, ou au format \texttt{csv}, et de les importer dans R par \texttt{read.table}. 
 
 \section{Écriture de données}
 

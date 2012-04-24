@@ -32,13 +32,23 @@ Au lancement de R s'affiche la fenêtre suivante:
 \includegraphics[width=.7\textwidth]{RConsole}
 \end{center}
 
+\noindent On peut aussi lancer R depuis un terminalm, en écrivant simplement \texttt{R}:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{RTerminal}
+\end{center}
+
 R n'est donc pas un logiciel comme \emph{JMP}, \emph{Statistica} ou \emph{Excel}.
 Sa philosophie est entièrement différente: plutôt que d'utiliser des boutons et des menus, on communique avec R via des commandes, qu'on entre soit directement dans la console, soit dans des fichiers \texttt{.r}.
-R est accessible depuis de nombreux autres programmes, incluant \emph{Komodo Edit}\footnote{\url{http://www.sciviews.org/SciViews-K/}}, \emph{Eclipse}\footnote{\url{http://www.walware.de/goto/statet}}, et \emph{NotePad ++}\footnote{\url{http://sourceforge.net/projects/npptor/}}. 
+R est accessible depuis de nombreux autres programmes, incluant \emph{Komodo Edit}\footnote{\url{http://www.sciviews.org/SciViews-K/}}, \emph{Eclipse}\footnote{\url{http://www.walware.de/goto/statet}}, et \emph{NotePad ++}\footnote{\url{http://sourceforge.net/projects/npptor/}}.
+De tous, \emph{Eclispe/StatET} est sans doute le plus avancé et le plus complet, mais aussi celui qui possède la courbe d'apprentissage la plus difficile. 
 
-Dans le cadre de ce cours, nous utiliserons \emph{RStudio}. 
-\emph{RStudio} est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+Dans le cadre de ce cours, nous utiliserons \emph{RStudio}, un programme relativement récent qui possède l'ensemble des fonctions qui nous intéressent au jour le jour.
+\emph{RStudio} est un environnement intégré de travail pour R gratuit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
 Ce programme permet de réaliser, dans le même environnement, la majorité des tâches qu'on peut vouloir effectuer dans R.
+\emph{RStudio} possède aussi la propriété vraiment intéressante de pouvoir tourner sur un serveur web:
+une fois un serveur de ce type mis en place, vous pouvez accéder à \emph{RStudio} de n'importe où, à condition d'avoir un navigateur relativement respectueux des standards.
+\emph{Chrome}, \emph{Firefox} et \emph{Safari} devraient n'avoir aucun problème. 
 
 Au lacenemt de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'affice:
 
@@ -215,8 +225,98 @@ Pour coller plusieurs chaînes entre elles,
 
 \noident Le fait d'écrire \texttt{\ \.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
 par exemple couper au premier chiffre, et que \texttt{.} a dans ce contexte un sens différent du caractètre \texttt{.}.
+On oeut séparer une chaîne de caractères par lettres, de la manière suivante:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{strsplit}\hlkeyword{(}\hlstring{"{}abcdefgh"{}}\hlkeyword{,}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [[1]]
+## [1] "a" "b" "c" "d" "e" "f" "g" "h"
+## 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+R possède aussi deux vecteurs nommés \texttt{letters} et \texttt{LETTERS}, qui contiennent les 26 lettres en haut et bas de casse:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{letters}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q"
+## [18] "r" "s" "t" "u" "v" "w" "x" "y" "z"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{LETTERS}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "Q"
+## [18] "R" "S" "T" "U" "V" "W" "X" "Y" "Z"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
 
 \subsubsection{Booléens}
+
+Le type booléen (\texttt{logical}) permet de représenter les états \emph{vrai} (\texttt{TRUE}) et \emph{faux} (\texttt{FALSE}).
+Il est possible d'utiliser des raccourcis, à savoir \texttt{T} et \texttt{F}.
+Par exemple:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{vrai}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlnumber{TRUE}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{faux}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlnumber{FALSE}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{vrai}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{faux}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{vrai}{\ }\hlkeyword{+}{\ }\hlsymbol{faux}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{vrai}{\ }\hlkeyword{*}{\ }\hlsymbol{faux}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+La manière d'utiliser les booléens est vue plus en détail dans la séance~\ref{s:progra}.
+
+\subsubsection{Facteurs}
 
 \subsubsection{Conversions}
 
@@ -226,11 +326,11 @@ R est un langage faiblement typé, dans la mesure ou une commande comme
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
-\hlfunctioncall{paste}\hlkeyword{(}\hlnumber{99}\hlkeyword{,}{\ }\hlstring{"{}luftballons"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}"{}}\hlkeyword{)}\mbox{}
+\hlfunctioncall{paste}\hlkeyword{(}\hlnumber{99}\hlkeyword{,}{\ }\hlstring{"{}luftballons"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}{\ }"{}}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-## [1] "99luftballons"
+## [1] "99 luftballons"
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -238,6 +338,107 @@ R est un langage faiblement typé, dans la mesure ou une commande comme
 
 \noindent est parfaitement valide.
 Pourtant, elle mélange un type numérique avec un type chaîne.
+R permet en effet de convertir les données d'un type à l'autre assez facilement:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.numeric}\hlkeyword{(}\hlstring{"{}4"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.character}\hlkeyword{(}\hlnumber{2}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "2"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.integer}\hlkeyword{(}\hlnumber{2.4}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.logical}\hlkeyword{(}\hlnumber{1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.logical}\hlkeyword{(}\hlnumber{0}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.logical}\hlkeyword{(}\hlnumber{2}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.numeric}\hlkeyword{(}\hlnumber{TRUE}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.factor}\hlkeyword{(}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1 2 3 4 3
+## Levels: 1 2 3 4
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.character}\hlkeyword{(}\hlfunctioncall{as.factor}\hlkeyword{(}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "1" "2" "3" "4" "3"
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{as.vector}\hlkeyword{(}\hlfunctioncall{as.factor}\hlkeyword{(}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{,}{\ }\hlnumber{2}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{,}{\ }\hlnumber{4}\hlkeyword{,}{\ }\hlnumber{3}\hlkeyword{)}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] "1" "2" "3" "4" "3"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Cette possibilité de convertir les variables d'un type à l'autre est importante si, par exemple, R importe des colonnes d'un tableau de données comme étant des facteurs:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{mydata}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{x}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{as.numeric}\hlkeyword{(}\hlfunctioncall{as.vector}\hlkeyword{(}\hlsymbol{mydata}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{x}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
 
 \subsection{Collections de valeurs}
 

@@ -52,8 +52,7 @@ Si les champs avaient été séparés par une espace, il aurait fallu utiliser \
 On peut aussi spécifier le séparateur décimal (\texttt{dec=','}), ainsi que d'autres options, \emph{cf.} \texttt{?read.table}.
 
 R donne aussi accès directement à la lecture des fichiers \emph{comma separated value}, \texttt{csv}, \emph{via} la commande \texttt{read.csv}.
-
-EXPL
+Cette fonction est en réalité un appel a \texttt{read.table} avec une partie des arguments par défaut pré-remplis pour lire le format \texttt{csv}.
 
 Une fois les données lues, elles sont en général importées sous forme de \texttt{data.frame}.
 On peut voir les noms des colonnes:
@@ -106,12 +105,200 @@ On peut voir les noms des colonnes:
 \end{knitrout}
 
 
+Dans \emph{RStudio}, et la plupart des autres plugins permettant d'utiliser R, après avoir entré le nom de la \emph{data frame}, vous aurez accès en appuyant sur tabulation à un menu déroulant,
+lequel contient les noms des colonnes: 
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{dopdownRStudio}
+\end{center}
+
+Cette fonctionalité s'avère très utile quand on a tendance à oublier comment on a nommé ses variables.
+
+La syntaxe \texttt{dataframe\$nom} peut sembler lourde, et c'est pourquoi R propose une commande nommée \texttt{attach}.
+Avec la syntaxe suivante,
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{attach}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## The following object(s) are masked _by_ '.GlobalEnv':
+## 
+##     a, b, c, d
+## The following object(s) are masked from 'morpho (position 3)':
+## 
+##     a, aa, b, bb, c, cc, d, f, g, li, lm, para, sphote, sppar
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{detach}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent on peut accèder directement aux noms des colonnes.
+C'est une des pires pratiques d'écriture de code possible, et il est très fortement déconseillé d'utiliser \texttt{attach}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{attach}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## The following object(s) are masked _by_ '.GlobalEnv':
+## 
+##     a, b, c, d
+## The following object(s) are masked from 'morpho (position 3)':
+## 
+##     a, aa, b, bb, c, cc, d, f, g, li, lm, para, sphote, sppar
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}\hlkeyword{[}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1]  1  2  3  4  5  6  7  8  9 10
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}\hlkeyword{[}\hlnumber{2}\hlkeyword{]}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlnumber{33333}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{a}\hlkeyword{[}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1]     1 33333     3     4     5     6     7     8     9    10
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{detach}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{a}\hlkeyword{[}\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hlkeyword{]}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] 2.06 1.93 1.67 1.46 1.30 1.41 1.98 2.08 2.45 2.24
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent Alors qu'on modifie \texttt{a}, les modifications ne sont pas rapportées à \texttt{morpho\$a}.
+Notez aussi que les noms de certaines colonnes de \texttt{a} vont venir remplacer des variables déjà existantes dans l'environnement de travail.
+Ce n'est pas problèmatique dans le cas de \texttt{a} ou \texttt{b}, mais ça l'est nettement plus dans le cas de \texttt{c}, une fonction nécessaire au bon fonctionnement de R.  
+
+Si vous souhaitez vraiment vous abstenir de l'appel complet au nom de la \emph{data frame}, la construction \texttt{with} fonctionnera aussi bien:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{with}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlkeyword{\usebox{\hlnormalsizeboxopenbrace}}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlfunctioncall{mean}\hlkeyword{(}\hlsymbol{a}\hlkeyword{,}{\ }\hlargument{na.rm}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlkeyword{\usebox{\hlnormalsizeboxclosebrace}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1.612
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent Notez que \texttt{with} ne permet pas non plus de modifier \texttt{morpho\$a} directement, mais permet au moins de ne pas ``contaminer'' votre environnement de travail avec différentes variables portant le même nom.
 
 \subsection{Depuis des fichiers Excel}
 
 Il est fortement déconseillé de stocker des données importantes dans Excel ou Open Office (ou équivalent).
 Si vous avez a manipuler des données dans ce format, ma recommandation est de les exporter au format texte et de travailler avec sous cette forme.
 Dans tous les cas, R permet de \emph{lire} ces données.
+
+Pour avoir la possibilité de lires des fichiers \emph{Excel}, il faut installer le \emph{package} \texttt{gdata}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{install.packages}\hlkeyword{(}\hlstring{"{}gdata"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent Les \emph{packages} sont des collections de code R écrites par la communauté, et rendues disponbiles sur le \emph{Comprehensive R Archive Network}\footnote{\url{http://cran.r-project.org/}}.
+Il existe des \emph{packages} pour à peu près toutes les utilisations possibles.
+
+Pour charger un \emph{package}, il faut utiliser la commande \texttt{library}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{library}\hlkeyword{(}\hlsymbol{gdata}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Notez bien que l'utilisation de \texttt{gdata} demande que \texttt{perl}\footnote{\url{http://www.perl.org/}} soit installé sur votre machine.
+Sur une distribution de Linux ou Mac OS, ce sera le cas par défaut -- il vous faudra l'installer vous même sur Windows.
+
+Si vous utilisez des fichiers issus de Excel 2007, il faut avant tout chose lancer une fonction de \texttt{gdata} qui permet de lire ces fichiers:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{installXLSXsupport}\hlkeyword{(}\hlargument{perl}{\ }\hlargument{=}{\ }\hlstring{"{}perl"{}}\hlkeyword{,}{\ }\hlargument{verbose}{\ }\hlargument{=}{\ }\hlnumber{FALSE}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Le dossier \texttt{data/} contient une feuille Excel au format \texttt{xls}, \texttt{data/netlists.xls}. Ce fichier comporte, pour une série de réseaux trophiques, leur nom, type, et le nombre d'espèces présentes à chaque niveau.
+On peut lire ce fichier avec la commande \textt{read.xls}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{webs}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.xls}\hlkeyword{(}\hlstring{"{}data/netlists.xls"{}}\hlkeyword{,}{\ }\hlargument{sheet}{\ }\hlargument{=}{\ }\hlnumber{1}\hlkeyword{,}{\ }\hlargument{h}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{webs}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##          name      type ltl utl
+## 1  aishihik_p  hostpara   7  29
+## 2 AkatoreAtxt   trophic  85  85
+## 3 AkatoreBtxt   trophic  58  58
+## 4  arr_1_matr plantpoll  87  98
+## 5  arr_2_matr plantpoll  42  61
+## 6  arr_3_matr plantpoll  41  28
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent La commande \texttt{read.xls} prend les mêmes arguments que \textt{read.table}, et rajoute un argument \texttt{sheet}, qui permet de déterminer quelle feuille sera importée.
+Le fonctionnement de cette fonction quand la feuille Excel contient des macros, de la mise en forme, \empg{etc}, n'est pas prévisible.
+La meilleure solution reste toujours de convertir les données au format texte, ou au format \texttt{csv}, et de les importer dans R par \texttt{read.table}. 
 
 \section{Écriture de données}
 

@@ -32,13 +32,23 @@ Au lancement de R s'affiche la fenêtre suivante:
 \includegraphics[width=.7\textwidth]{RConsole}
 \end{center}
 
+\noindent On peut aussi lancer R depuis un terminalm, en écrivant simplement \texttt{R}:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{RTerminal}
+\end{center}
+
 R n'est donc pas un logiciel comme \emph{JMP}, \emph{Statistica} ou \emph{Excel}.
 Sa philosophie est entièrement différente: plutôt que d'utiliser des boutons et des menus, on communique avec R via des commandes, qu'on entre soit directement dans la console, soit dans des fichiers \texttt{.r}.
-R est accessible depuis de nombreux autres programmes, incluant \emph{Komodo Edit}\footnote{\url{http://www.sciviews.org/SciViews-K/}}, \emph{Eclipse}\footnote{\url{http://www.walware.de/goto/statet}}, et \emph{NotePad ++}\footnote{\url{http://sourceforge.net/projects/npptor/}}. 
+R est accessible depuis de nombreux autres programmes, incluant \emph{Komodo Edit}\footnote{\url{http://www.sciviews.org/SciViews-K/}}, \emph{Eclipse}\footnote{\url{http://www.walware.de/goto/statet}}, et \emph{NotePad ++}\footnote{\url{http://sourceforge.net/projects/npptor/}}.
+De tous, \emph{Eclispe/StatET} est sans doute le plus avancé et le plus complet, mais aussi celui qui possède la courbe d'apprentissage la plus difficile. 
 
-Dans le cadre de ce cours, nous utiliserons \emph{RStudio}. 
-\emph{RStudio} est un environnement intégré de travail pour R grauit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
+Dans le cadre de ce cours, nous utiliserons \emph{RStudio}, un programme relativement récent qui possède l'ensemble des fonctions qui nous intéressent au jour le jour.
+\emph{RStudio} est un environnement intégré de travail pour R gratuit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
 Ce programme permet de réaliser, dans le même environnement, la majorité des tâches qu'on peut vouloir effectuer dans R.
+\emph{RStudio} possède aussi la propriété vraiment intéressante de pouvoir tourner sur un serveur web:
+une fois un serveur de ce type mis en place, vous pouvez accéder à \emph{RStudio} de n'importe où, à condition d'avoir un navigateur relativement respectueux des standards.
+\emph{Chrome}, \emph{Firefox} et \emph{Safari} devraient n'avoir aucun problème. 
 
 Au lacenemt de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'affice:
 
@@ -126,19 +136,67 @@ strsplit(filename,'_')
 
 \noident Le fait d'écrire \texttt{\ \.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
 par exemple couper au premier chiffre, et que \texttt{.} a dans ce contexte un sens différent du caractètre \texttt{.}.
+On oeut séparer une chaîne de caractères par lettres, de la manière suivante:
+
+<<splitletters>>=
+strsplit('abcdefgh','')
+@
+
+R possède aussi deux vecteurs nommés \texttt{letters} et \texttt{LETTERS}, qui contiennent les 26 lettres en haut et bas de casse:
+
+<<lettersLETTER>>=
+letters
+LETTERS
+@ 
 
 \subsubsection{Booléens}
+
+Le type booléen (\texttt{logical}) permet de représenter les états \emph{vrai} (\texttt{TRUE}) et \emph{faux} (\texttt{FALSE}).
+Il est possible d'utiliser des raccourcis, à savoir \texttt{T} et \texttt{F}.
+Par exemple:
+<<>>=
+vrai = TRUE
+faux = FALSE
+vrai
+faux
+vrai + faux
+vrai * faux
+@
+
+La manière d'utiliser les booléens est vue plus en détail dans la séance~\ref{s:progra}.
+
+\subsubsection{Facteurs}
 
 \subsubsection{Conversions}
 
 R est un langage faiblement typé, dans la mesure ou une commande comme
 
 <<>>=
-paste(99, 'luftballons', sep='' )
+paste(99, 'luftballons', sep=' ')
 @
 
 \noindent est parfaitement valide.
 Pourtant, elle mélange un type numérique avec un type chaîne.
+R permet en effet de convertir les données d'un type à l'autre assez facilement:
+
+<<convert>>=
+as.numeric('4')
+as.character(2)
+as.integer(2.4)
+as.logical(1)
+as.logical(0)
+as.logical(2)
+as.numeric(TRUE)
+as.factor(c(1,2,3,4,3))
+as.character(as.factor(c(1,2,3,4,3)))
+as.vector(as.factor(c(1,2,3,4,3)))
+@
+
+Cette possibilité de convertir les variables d'un type à l'autre est importante si, par exemple, R importe des colonnes d'un tableau de données comme étant des facteurs:
+
+<<eval=FALSE>>=
+mydata$x = as.numeric(as.vector(mydata$x))
+@
 
 \subsection{Collections de valeurs}
 

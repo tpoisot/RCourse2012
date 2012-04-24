@@ -1,4 +1,4 @@
-\chapter{Introduction à la programmation}
+\chapter{Introduction à la programmation\label{s:progra}}
 
 Dans les séances précédentes, nous avons utilisé des fichiers \texttt{.R} pour sauvegarder des listes d'instructions.
 Nous avons aussi chargé et manipulé des jeux de données.
