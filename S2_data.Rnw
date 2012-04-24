@@ -132,4 +132,55 @@ La meilleure solution reste toujours de convertir les données au format texte, 
 
 \section{Écriture de données}
 
-\section{Bases de données}
+R propose deux manières distinctes de sauvegarder les données.
+Soit en utilisant un fichier au format de R, soit dans un fichier en texte brut.
+
+Pour sauvergarder un fichier de données au format R, on utilise la fonction \texttt{save}:
+
+<<demoSave>>=
+save(morpho,file="data/morpho_data.Rdata")
+@
+
+\noindent L'extension \texttt{Rdata} vous permet, en double cliquant sur ce fichier, de le charger directement dans R.
+Vous pouvez aussi charger un fichier de ce type en utilisant la commande \texttt{load}:
+
+<<>>=
+rm(morpho)
+ls()
+load('data/morpho_data.Rdata')
+ls()
+head(morpho)
+@
+
+\noindent La commande \texttt{rm} permet de supprmer un objet de la mémoire de R -- ce qui permet de ne plus se soucier de la version de \texttt{morpho} déjà chargée depuis le fichier texte,
+et la commande \texttt{ls} fait une liste de tous les objets présents dans l'environnement de travail.
+On voit que la commande \texttt{load} va remettre une copie de morpho dans l'environnement de travail.
+
+L'avantage d'utiliser des fichiers \texttt{Rdata} est qu'ils sont compressés, donc prennent moins de place que les mêmes données en format texte brut.
+Si, par contre, vous voulez utiliser ces données dans un autre programme que R, il est important de pouvoir les exporter de manière lisible pour tous.
+
+En parallèle à la lecture avec \texttt{read.table}, R propose la fonction \texttt{write.table}.
+Cette fonction permet d'écrire les données au format texte:
+
+<<>>=
+write.table(morpho, file='data/morpho_txt.txt', sep = ' ', dec='.', col.names=TRUE, row.names=FALSE)
+@ 
+
+\noindent Cette ligne va écrire le contenu de \texttt{morpho} dans \texttt{data/morpho\_txt.txt}, en séparant les colonnes avec une espace, en utilisant le point comme
+séparateur décimal, et avec uniquement les noms des colonnes.
+La fonction \texttt{write.table} admet un argument \texttt{append}, qui permet d'ajouter le contenu de l'objet au fichier choisi.
+
+\section{Export formatté}
+
+
+\section{Mises en application}
+
+\subsection{Lecture et écriture dans une table}
+
+<<eval=FALSE>>=
+write.table(morpho, file='data/morpho_txt.txt', sep = ' ', dec='.', col.names=TRUE, row.names=FALSE)
+@
+
+\subsection{Ajout de deux tables à la suite}
+
+Lire dans deux fichiers, deux manières d'écrire dans un seul

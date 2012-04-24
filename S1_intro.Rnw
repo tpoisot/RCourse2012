@@ -57,7 +57,7 @@ Au lacenemt de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'af
 \end{center}
 
 Les difféerentes sections permettent d'avoir accès simultanément à la console R (en bas à gauche), à la fenêtre des scripts (en haut à gauche), à l'historique des dernières commandes, et aux graphiques.
-Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}. 
+Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}.
 
 \section{Types de données}
 
@@ -92,6 +92,7 @@ a = 0.1
 b = 1
 c = 1e-6
 a
+a + b
 b
 c
 @
@@ -247,6 +248,7 @@ Par exemple, examinez l'effet des commandes suivantes:
 a = c(1:10)
 a/2
 log(a,10)
+sum(a)
 a*a
 @
 
@@ -381,3 +383,5 @@ unlist(t_list)
 \subsubsection{\emph{Data frames}}
 
 Vu plus en détail dans les autres séances.
+
+rbind, cbind

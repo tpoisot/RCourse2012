@@ -86,7 +86,7 @@ Par exemple, la fonction \texttt{aggregate} permet d'aggréger les données en f
 On peut, en une ligne, connaître la moyenne de chacune des mesures, par hôte et par parasite, avec
 
 <<aggregateExpl>>=
-aggregate(morpho,by=list(hote=morpho$sphot,parasite=morpho$sppar),mean)
+aggregate(morpho,by=list(hote=morpho$sphot,parasite=morpho$sppar),mean,na.rm=TRUE)
 @ 
 
 \noindent Cette ligne signifie, en clair, pour chaque niveau de \texttt{sphot} et pour chaque niveau de \texttt{sppar}, calculer la moyenne de toutes les colonnes de \texttt{morpho}. 
@@ -95,3 +95,11 @@ On peut récupérer la moyenne de \texttt{aa} uniquement, avec
 <<aggregateExplSingleFac>>=
 aggregate(morpho$aa,by=list(hote=morpho$sphot,parasite=morpho$sppar),mean)
 @
+
+\section{Jonctions de tables de données}
+
+merge
+
+join
+
+\section{Tables de contingence}

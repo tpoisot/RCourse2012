@@ -57,7 +57,7 @@ Au lacenemt de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'af
 \end{center}
 
 Les difféerentes sections permettent d'avoir accès simultanément à la console R (en bas à gauche), à la fenêtre des scripts (en haut à gauche), à l'historique des dernières commandes, et aux graphiques.
-Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}. 
+Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}.
 
 \section{Types de données}
 
@@ -106,6 +106,14 @@ Les exemples suivants montrent les difféerentes manières de déclarer un objec
 \end{flushleft}
 \begin{verbatim}
 ## [1] 0.1
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{a}{\ }\hlkeyword{+}{\ }\hlsymbol{b}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1.1
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -564,6 +572,14 @@ Par exemple, examinez l'effet des commandes suivantes:
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
+\hlfunctioncall{sum}\hlkeyword{(}\hlsymbol{a}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 55
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
 \hlsymbol{a}{\ }\hlkeyword{*}{\ }\hlsymbol{a}\mbox{}
 \normalfont
 \end{flushleft}
@@ -954,3 +970,5 @@ R propose la fonction \texttt{unlist} pour effectuer cette opération:
 \subsubsection{\emph{Data frames}}
 
 Vu plus en détail dans les autres séances.
+
+rbind, cbind

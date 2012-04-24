@@ -128,9 +128,6 @@ Avec la syntaxe suivante,
 ## The following object(s) are masked _by_ '.GlobalEnv':
 ## 
 ##     a, b, c, d
-## The following object(s) are masked from 'morpho (position 3)':
-## 
-##     a, aa, b, bb, c, cc, d, f, g, li, lm, para, sphote, sppar
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -163,9 +160,6 @@ C'est une des pires pratiques d'écriture de code possible, et il est très fort
 ## The following object(s) are masked _by_ '.GlobalEnv':
 ## 
 ##     a, b, c, d
-## The following object(s) are masked from 'morpho (position 3)':
-## 
-##     a, aa, b, bb, c, cc, d, f, g, li, lm, para, sphote, sppar
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -302,4 +296,135 @@ La meilleure solution reste toujours de convertir les données au format texte, 
 
 \section{Écriture de données}
 
-\section{Bases de données}
+R propose deux manières distinctes de sauvegarder les données.
+Soit en utilisant un fichier au format de R, soit dans un fichier en texte brut.
+
+Pour sauvergarder un fichier de données au format R, on utilise la fonction \texttt{save}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{save}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/morpho\usebox{\hlnormalsizeboxunderscore}data.Rdata"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent L'extension \texttt{Rdata} vous permet, en double cliquant sur ce fichier, de le charger directement dans R.
+Vous pouvez aussi charger un fichier de ce type en utilisant la commande \texttt{load}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{rm}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{ls}\hlkeyword{(}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] "a"             "b"             "c"             "colors"       
+##  [5] "d"             "dat"           "distrib"       "f"            
+##  [9] "faux"          "filename"      "group"         "i"            
+## [13] "is.even"       "k"             "morpho_split"  "moy"          
+## [17] "multipl"       "n"             "n_list"        "n_obs"        
+## [21] "pp"            "print_message" "resample"      "somme"        
+## [25] "somme_1"       "somme_2"       "step"          "t_list"       
+## [29] "t.test.permut" "test_data"     "test_df"       "test_mat"     
+## [33] "texte"         "thm"           "txt"           "u_list"       
+## [37] "val"           "value"         "vect"          "vecteur"      
+## [41] "vrai"          "webs"         
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{load}\hlkeyword{(}\hlstring{"{}data/morpho\usebox{\hlnormalsizeboxunderscore}data.Rdata"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{ls}\hlkeyword{(}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##  [1] "a"             "b"             "c"             "colors"       
+##  [5] "d"             "dat"           "distrib"       "f"            
+##  [9] "faux"          "filename"      "group"         "i"            
+## [13] "is.even"       "k"             "morpho"        "morpho_split" 
+## [17] "moy"           "multipl"       "n"             "n_list"       
+## [21] "n_obs"         "pp"            "print_message" "resample"     
+## [25] "somme"         "somme_1"       "somme_2"       "step"         
+## [29] "t_list"        "t.test.permut" "test_data"     "test_df"      
+## [33] "test_mat"      "texte"         "thm"           "txt"          
+## [37] "u_list"        "val"           "value"         "vect"         
+## [41] "vecteur"       "vrai"          "webs"         
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   sphote sppar      para    a    b    c    d    f    g   aa   bb   cc   lm
+## 1   Divu  eleg elegDivu1 2.06 1.93   NA   NA   NA   NA 1.93 1.81 1.16 5.43
+## 2   Divu  eleg elegDivu2 1.93 1.82 1.51 0.41 0.57 0.20 1.77 1.67 1.20 2.35
+## 3   Divu  eleg elegDivu2 1.67 1.56 1.20 0.31 0.36 0.26 1.56 1.51 0.94 1.88
+## 4   Disa  eleg elegDisa1 1.46 1.41 1.04 0.47 0.67 0.31 1.25 1.20 0.83 1.46
+## 5   Disa  eleg elegDisa1 1.30 1.25 0.94 0.36 0.52 0.31 1.14 1.09 0.78   NA
+## 6   Disa  eleg elegDisa1 1.41 1.35 0.99 0.36 0.57 0.36 1.25 1.20 0.83 2.08
+##     li
+## 1 2.66
+## 2 2.66
+## 3 1.77
+## 4 2.19
+## 5 2.03
+## 6 2.55
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent La commande \texttt{rm} permet de supprmer un objet de la mémoire de R -- ce qui permet de ne plus se soucier de la version de \texttt{morpho} déjà chargée depuis le fichier texte,
+et la commande \texttt{ls} fait une liste de tous les objets présents dans l'environnement de travail.
+On voit que la commande \texttt{load} va remettre une copie de morpho dans l'environnement de travail.
+
+L'avantage d'utiliser des fichiers \texttt{Rdata} est qu'ils sont compressés, donc prennent moins de place que les mêmes données en format texte brut.
+Si, par contre, vous voulez utiliser ces données dans un autre programme que R, il est important de pouvoir les exporter de manière lisible pour tous.
+
+En parallèle à la lecture avec \texttt{read.table}, R propose la fonction \texttt{write.table}.
+Cette fonction permet d'écrire les données au format texte:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{write.table}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/morpho\usebox{\hlnormalsizeboxunderscore}txt.txt"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}{\ }"{}}\hlkeyword{,}{\ }\hlargument{dec}{\ }\hlargument{=}{\ }\hlstring{"{}."{}}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlargument{col.names}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{row.names}{\ }\hlargument{=}{\ }\hlnumber{FALSE}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent Cette ligne va écrire le contenu de \texttt{morpho} dans \texttt{data/morpho\_txt.txt}, en séparant les colonnes avec une espace, en utilisant le point comme
+séparateur décimal, et avec uniquement les noms des colonnes.
+La fonction \texttt{write.table} admet un argument \texttt{append}, qui permet d'ajouter le contenu de l'objet au fichier choisi.
+
+\section{Export formatté}
+
+
+\section{Mises en application}
+
+\subsection{Lecture et écriture dans une table}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{write.table}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/morpho\usebox{\hlnormalsizeboxunderscore}txt.txt"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}{\ }"{}}\hlkeyword{,}{\ }\hlargument{dec}{\ }\hlargument{=}{\ }\hlstring{"{}."{}}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlargument{col.names}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{row.names}{\ }\hlargument{=}{\ }\hlnumber{FALSE}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+\subsection{Ajout de deux tables à la suite}
+
+Lire dans deux fichiers, deux manières d'écrire dans un seul
