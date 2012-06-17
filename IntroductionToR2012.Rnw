@@ -8,7 +8,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{mathpazo}
 \usepackage[scaled]{inconsolata}
-\usepackage{berasans}
+\usepackage[scaled]{helvet}
 
 \usepackage{microtype}
 
@@ -61,18 +61,18 @@
 %%%% OPTIONS"TEX ENDS
 
 
-% \SweaveOpts{fig.path='figure/graphics-', fig.align='center', dev='tikz', fig.width=4, fig.height=3, fig.show='hold', cache=FALSE, par=TRUE}
+% \SweaveOpts{fig.path='figure/graphics-', fig.align='center', dev='tikz', fig.width=6, fig.height=5, fig.show='hold', cache=FALSE, par=TRUE}
 
 \graphicspath{{figure/}}
 
 <<setup, include=FALSE, cache=FALSE>>=
 options(replace.assign=TRUE,width=75)
 knit_hooks$set(par=function(before, options, envir){
-if (before && options$fig.show!='none') par(mar=c(4,4,.1,.1),cex.lab=.95,cex.axis=.9,mgp=c(2,.7,0),tcl=-.3)
+if (before && options$fig.show!='none') par(cex.lab=.95,cex.axis=.9,tcl=-.3)
 })
 @
 
-<<echo=FALSE>>=
+<<setOpts,echo=FALSE>>=
 opts_chunk$set(warning = FALSE)
 thm = knit_theme$get("edit-jedit") 
 knit_theme$set(thm)
@@ -81,6 +81,7 @@ palette(brewer.pal(8,'Set1'))
 @
 
 \begin{document}\frontmatter
+\SweaveOpts{concordance=TRUE}
 
 {\raggedleft\thispagestyle{empty}
 \vskip 4em
@@ -90,7 +91,7 @@ palette(brewer.pal(8,'Set1'))
 {\HUGE\bfseries\color{red} R}\\[\baselineskip]
 {\huge Par la pratique}\par
 \vfill
-{\Large\sffamily UQAR --- Mai 2012}\par
+{\Large\sffamily UQAR --- Juin 2012}\par
 \vskip 4em}
 \cleardoublepage
 
@@ -109,11 +110,6 @@ palette(brewer.pal(8,'Set1'))
 @
 
 <<seance5, child='S5_graphiques.Rnw', eval=TRUE>>=
-@
-
-\backmatter\appendix
-
-<<seance5, child='SS1_parallel.Rnw', eval=TRUE>>=
 @
 
 \printbibliography

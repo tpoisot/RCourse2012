@@ -14,8 +14,8 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] -0.04671  0.21687 -0.10310  0.14475  0.38749  0.48147  0.27958
-##  [8]  0.40469  0.17702  0.32142
+##  [1] -0.03347 -0.36329  0.03966  0.49536 -0.06241 -0.49213  0.34352
+##  [8]  0.06440 -0.19710  0.25857
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -23,7 +23,7 @@ R propose une fonction pour automatiser ce traitement, \emph{via} la fonction \t
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] 0.5783 0.6052 0.4388 0.7788 0.6688 0.5509 0.4534 0.6804 1.3385 0.7229
+##  [1] 0.7486 1.5183 0.4915 0.6506 1.0685 1.0710 1.4058 0.6280 0.4975 0.2700
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -392,6 +392,225 @@ On peut récupérer la moyenne de \texttt{aa} uniquement, avec
 \end{knitrout}
 
 
-\section{Jonctions de tables de données}
+
+\section{Sélection d'un sous-ensemble}
+
+R permet de facilement sélectionner un sous-ensemble des données sur lequel travailler, avec la fonction \texttt{subset}. Cette fonction sélectionne une partie des lignes d'une \emph{data frame} selon une série de conditions. Par exemple, dans les données morpho, on veut uniquement travailler sur les mesures de \emph{L. elegans} (\texttt{sppar == 'eleg'}) trouvés sur \emph{D. vulgaris} (\texttt{sppar == 'divu'}), pour lesquelles la valeur \emph{cc} est inférieure où égale à 1 (\texttt{cc <= 1}).
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{ElDvSmall}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{subset}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sppar}{\ }=={\ }\hlstring{"{}eleg"{}}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxand}}{\ }\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sphote}{\ }==\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlstring{"{}Divu"{}}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxand}}{\ }\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{cc}{\ }\usebox{\hlnormalsizeboxlessthan}={\ }\hlnumber{1}\hlkeyword{)}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{ElDvSmall}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##     sphote sppar       para    a    b    c    d    f    g   aa   bb   cc
+## 3     Divu  eleg  elegDivu2 1.67 1.56 1.20 0.31 0.36 0.26 1.56 1.51 0.94
+## 59    Divu  eleg Divu1eleg1 1.55 1.40 1.20 0.50 0.50 0.30 1.60 1.60 0.90
+## 69    Divu  eleg Divu1eleg3 1.70 1.60 1.20 0.50 0.60 0.35 1.60 1.45 1.00
+## 72    Divu  eleg Divu1eleg5 1.65 1.30 1.10 0.55 0.55 0.35 1.50 1.40 0.90
+## 73    Divu  eleg Divu1eleg6 1.70 1.80 1.10 0.65 0.65 0.25 1.55 1.40 1.00
+## 85    Divu  eleg Divu2eleg3 1.85 1.50 1.25 0.50 0.55 0.40 1.65 1.55 1.00
+## 97    Divu  eleg Divu7eleg1 1.80 1.65 1.20 0.55 0.55 0.40 1.60 1.50 1.00
+## 132   Divu  eleg Divu9eleg1 1.75 1.70 1.25 0.50 0.65 0.35 1.65 1.50 1.00
+##       lm   li
+## 3   1.88 1.77
+## 59    NA   NA
+## 69  2.10 2.40
+## 72  2.10 2.40
+## 73  1.50 2.10
+## 85    NA   NA
+## 97  1.90 2.30
+## 132 1.90 2.10
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Pour récupérer uniquement les valuers de \emph{a}, on dispose des eux options suivantes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{ElDvSmall}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{a}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1.67 1.55 1.70 1.65 1.70 1.85 1.80 1.75
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{subset}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{a}\hlkeyword{,}{\ }\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sppar}{\ }=={\ }\hlstring{"{}eleg"{}}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxand}}{\ }\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sphote}{\ }=={\ }\hlstring{"{}Divu"{}}\hlkeyword{)}{\ }\hlkeyword{\usebox{\hlnormalsizeboxand}}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{cc}{\ }\usebox{\hlnormalsizeboxlessthan}={\ }\hlnumber{1}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 1.67 1.55 1.70 1.65 1.70 1.85 1.80 1.75
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
 
 \section{Tables de contingence}
+
+R permet très facilement de regrouper les données sous forme de table. Par exemple, on veut représenter la moyenne des mesures de la dimension \emph{a}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{moyA}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{aggregate}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlargument{by}{\ }\hlargument{=}{\ }\hlfunctioncall{list}\hlkeyword{(}\hlargument{hote}{\ }\hlargument{=}{\ }\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sphot}\hlkeyword{,}{\ }\hlargument{parasite}{\ }\hlargument{=}{\ }\hlsymbol{morpho}\hlkeyword{\usebox{\hlnormalsizeboxdollar}}\hlsymbol{sppar}\hlkeyword{)}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlsymbol{mean}\hlkeyword{,}{\ }\hlargument{na.rm}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{round}\hlkeyword{(}\hlfunctioncall{xtabs}\hlkeyword{(}\hlsymbol{a}{\ }\hlkeyword{\urltilda{}}{\ }\hlsymbol{hote}{\ }\hlkeyword{+}{\ }\hlsymbol{parasite}\hlkeyword{,}{\ }\hlsymbol{moyA}\hlkeyword{)}\hlkeyword{,}{\ }\hlnumber{1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##       parasite
+## hote   conf dipl eleg erge falc frat furc igno kech morm neif ther tome
+##   Dian  0.0  0.0  1.6  0.0  0.0  1.6  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+##   Dipu  0.0  0.0  0.0  2.4  0.0  0.0  0.0  1.3  0.0  0.0  0.0  2.4  0.0
+##   Disa  1.2  0.0  1.7  1.9  1.4  0.0  2.0  1.2  1.8  1.6  0.9  0.0  0.0
+##   Divu  0.0  1.1  1.8  2.2  1.4  0.0  0.0  1.2  1.8  0.0  1.8  0.0  2.3
+##   Limo  0.0  0.0  0.0  0.0  0.0  0.0  0.0  1.0  0.0  0.0  0.0  0.0  0.0
+##   Obme  0.0  0.0  1.4  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+##   Sasa  1.3  0.0  0.0  0.0  0.0  0.0  0.0  1.1  0.0  0.0  0.0  0.0  0.0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+La fonction \texttt{xtabs} permet de prendre une colonne du \emph{data frame}, et de créer un tableau à double entrées avec l'ensemble de ses valeurs. On peut s'en servir pour créer une table de contingence, en omettant de dire quelle valeur doit se trouver dans le tableau:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{Conting}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{xtabs}\hlkeyword{(}\hlkeyword{\urltilda{}}\hlsymbol{sphote}{\ }\hlkeyword{+}{\ }\hlsymbol{sppar}\hlkeyword{,}{\ }\hlsymbol{morpho}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{Conting}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##       sppar
+## sphote conf dipl eleg erge falc frat furc igno kech morm neif ther tome
+##   Dian    0    0    2    0    0    6    0    0    0    0    0    0    0
+##   Dipu    0    0    0    4    0    0    0    2    0    0    0    2    0
+##   Disa    1    0   35   13    2    0    7   18    7    1    5    0    0
+##   Divu    0    2   16    2    7    0    0    8   23    0    1    0    3
+##   Limo    0    0    0    0    0    0    0   10    0    0    0    0    0
+##   Obme    0    0    6    0    0    0    0    0    0    0    0    0    0
+##   Sasa    1    0    0    0    0    0    0    5    0    0    0    0    0
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{sum}\hlkeyword{(}\hlsymbol{Conting}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 189
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Si aucune colonne n'est spécifiée, R fournit le nombre d'observatins. On peut vérifier que le total est de 189, on dispose donc, en une commande, du nombre d'échantillons pris pour chaque condition. Notez aussi que les objets retournés par \texttt{xtabs} peuvent aller directement dans un certain nombre de tests statistiques, notamment
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{chisq.test}\hlkeyword{(}\hlsymbol{Conting}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  Conting 
+## X-squared = 335.7, df = 72, p-value < 2.2e-16
+## 
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\section{Jonctions de tables de données}
+
+On souhaite regrouper dans un \texttt{data.frame} unique deux séries de données disponibles dans \textcite{Andrews1985}: le nombre de peaux de Lynx enregistrées par la compagnie de la Baie d'Hudson de 1857 à 1911 (\texttt{data/lynxunits.dat}), et le prix de ces peaux (\texttt{data/lynxprices.dat}). Il y a plusieurs problèmes avec ces données. D'une part, les années ne sont pas entrées dans le même ordre, et il n'est donc pas possible de faire un \texttt{cbind}. D'autre part, la colonne correspondant aux années est nommée \texttt{year} dans un cas, et \texttt{Year} dans l'autre.
+
+R propose une fonction nommée \texttt{merge}, qui permet d'aggéreger très facilement des données. On commence par les charger:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{units}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/lynxunits.dat"{}}\hlkeyword{,}{\ }\hlargument{h}{\ }\hlargument{=}{\ }\hlsymbol{T}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{prices}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/lynxprices.dat"{}}\hlkeyword{,}{\ }\hlargument{h}{\ }\hlargument{=}{\ }\hlsymbol{T}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{units}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   year units
+## 1 1871 15686
+## 2 1881 15386
+## 3 1865  5437
+## 4 1909  9704
+## 5 1870 37447
+## 6 1910  3410
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{prices}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   Year prices
+## 1 1890  13.75
+## 2 1863  12.25
+## 3 1906  26.83
+## 4 1859   9.50
+## 5 1894  11.50
+## 6 1878   7.42
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+La commande \texttt{merge} demande les deux tables de données, et deux arguments \texttt{by.x} et \texttt{by.y}, qui indique quelles colonnes doivent être utilisées pour le regroupement. Notez au passage que si les deux tables de données ont des colonnes avec le même nom, par défaut, R réunira les données selon ces colonnes.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{dataset}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{merge}\hlkeyword{(}\hlsymbol{units}\hlkeyword{,}{\ }\hlsymbol{prices}\hlkeyword{,}{\ }\hlargument{by.x}{\ }\hlargument{=}{\ }\hlstring{"{}year"{}}\hlkeyword{,}{\ }\hlargument{by.y}{\ }\hlargument{=}{\ }\hlstring{"{}Year"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{dataset}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+##   year units prices
+## 1 1857 23362  12.75
+## 2 1858 31642   8.08
+## 3 1859 33757   9.50
+## 4 1860 23226  10.00
+## 5 1861 15178   8.08
+## 6 1862  7272   8.50
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+Notez au passage que la fonction \texttt{merge} va trier automatiquement les colonnes sur lequelles elle opère le regroupement: les années sont maintenant en ordre. Avec ce qui a été vu dans la séance précédente, on peut écrire les données dans un fichier texte:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{write.table}\hlkeyword{(}\hlsymbol{dataset}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/lynxdata.txt"{}}\hlkeyword{,}{\ }\hlargument{row.names}{\ }\hlargument{=}{\ }\hlnumber{FALSE}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+

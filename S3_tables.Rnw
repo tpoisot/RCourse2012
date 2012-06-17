@@ -96,10 +96,68 @@ On peut récupérer la moyenne de \texttt{aa} uniquement, avec
 aggregate(morpho$aa,by=list(hote=morpho$sphot,parasite=morpho$sppar),mean)
 @
 
-\section{Jonctions de tables de données}
 
-merge
+\section{Sélection d'un sous-ensemble}
 
-join
+R permet de facilement sélectionner un sous-ensemble des données sur lequel travailler, avec la fonction \texttt{subset}. Cette fonction sélectionne une partie des lignes d'une \emph{data frame} selon une série de conditions. Par exemple, dans les données morpho, on veut uniquement travailler sur les mesures de \emph{L. elegans} (\texttt{sppar == 'eleg'}) trouvés sur \emph{D. vulgaris} (\texttt{sppar == 'divu'}), pour lesquelles la valeur \emph{cc} est inférieure où égale à 1 (\texttt{cc <= 1}).
+
+<<introSubset>>=
+ElDvSmall = subset(morpho,(morpho$sppar=='eleg')&(morpho$sphote=='Divu')&(morpho$cc<=1))
+ElDvSmall
+@
+
+Pour récupérer uniquement les valuers de \emph{a}, on dispose des eux options suivantes:
+
+<<introSubset2>>=
+ElDvSmall$a
+subset(morpho$a,(morpho$sppar=='eleg')&(morpho$sphote=='Divu')&(morpho$cc<=1))
+@
 
 \section{Tables de contingence}
+
+R permet très facilement de regrouper les données sous forme de table. Par exemple, on veut représenter la moyenne des mesures de la dimension \emph{a}:
+
+<<XtabAgr>>=
+moyA = aggregate(morpho,by=list(hote=morpho$sphot,parasite=morpho$sppar),mean,na.rm=TRUE)
+round(xtabs(a~hote+parasite,moyA),1)
+@
+
+La fonction \texttt{xtabs} permet de prendre une colonne du \emph{data frame}, et de créer un tableau à double entrées avec l'ensemble de ses valeurs. On peut s'en servir pour créer une table de contingence, en omettant de dire quelle valeur doit se trouver dans le tableau:
+
+<<XtabChisq>>=
+Conting = xtabs(~sphote+sppar,morpho)
+Conting
+sum(Conting)
+@
+
+Si aucune colonne n'est spécifiée, R fournit le nombre d'observatins. On peut vérifier que le total est de 189, on dispose donc, en une commande, du nombre d'échantillons pris pour chaque condition. Notez aussi que les objets retournés par \texttt{xtabs} peuvent aller directement dans un certain nombre de tests statistiques, notamment
+
+<<ChiSQ>>=
+chisq.test(Conting)
+@
+
+\section{Jonctions de tables de données}
+
+On souhaite regrouper dans un \texttt{data.frame} unique deux séries de données disponibles dans \textcite{Andrews1985}: le nombre de peaux de Lynx enregistrées par la compagnie de la Baie d'Hudson de 1857 à 1911 (\texttt{data/lynxunits.dat}), et le prix de ces peaux (\texttt{data/lynxprices.dat}). Il y a plusieurs problèmes avec ces données. D'une part, les années ne sont pas entrées dans le même ordre, et il n'est donc pas possible de faire un \texttt{cbind}. D'autre part, la colonne correspondant aux années est nommée \texttt{year} dans un cas, et \texttt{Year} dans l'autre.
+
+R propose une fonction nommée \texttt{merge}, qui permet d'aggéreger très facilement des données. On commence par les charger:
+
+<<>>=
+units = read.table('data/lynxunits.dat',h=T)
+prices = read.table('data/lynxprices.dat',h=T)
+head(units)
+head(prices)
+@
+
+La commande \texttt{merge} demande les deux tables de données, et deux arguments \texttt{by.x} et \texttt{by.y}, qui indique quelles colonnes doivent être utilisées pour le regroupement. Notez au passage que si les deux tables de données ont des colonnes avec le même nom, par défaut, R réunira les données selon ces colonnes.
+
+<<>>=
+dataset = merge(units,prices,by.x='year',by.y='Year')
+head(dataset)
+@
+
+Notez au passage que la fonction \texttt{merge} va trier automatiquement les colonnes sur lequelles elle opère le regroupement: les années sont maintenant en ordre. Avec ce qui a été vu dans la séance précédente, on peut écrire les données dans un fichier texte:
+
+<<>>=
+write.table(dataset,file='data/lynxdata.txt',row.names=FALSE)
+@

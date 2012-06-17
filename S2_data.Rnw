@@ -9,15 +9,14 @@ Pour la durée de la séance, on suppose que l'ensemble des données qu'on veut 
 
 La méthode la plus simple de stocker des données, et la seule que l'on devrait recommander si on veut s'assurer de pouvoir lire les données partout, en tout temps, est d'utiliser des fichiers texte.
 À la différence d'un fichier produit par \emph{Excel} ou \emph{OpenOffice Calc}, un fichier en texte brut ne contient pas d'autre informations que ce qu'on y a entré.
-Il est possible de lire dans n'importe quel programme, et son format ne changera \emph{jamais} -- sans mentionner que sa lecture ne coûte rien... 
+Il est possible de lire dans n'importe quel programme, et son format ne changera \emph{jamais} -- sans mentionner que sa lecture ne coûte rien, et qu'il est extrèmement difficile de corrompre un fichier texte. 
 
 \subsection{Depuis des fichiers textes}
 
-Dans cet exemple, on utilisera les données prises par \textcite{PoisotBJLS2010} sur 147 parasites du genre \emph{Lamellodiscus}, parasites de poissons communs en Méditerranée.
-Ces données correspondent aux relevés morphométriques effectuées sur les parties solides de l'appareil d'attachement. Les données sont classées selon l'espèce du parasite (\texttt{sppar}),
- et l'espéce de l'hôte sur lequel le parasite a été isolé (\texttt{sphote}).
+Dans cet exemple, on utilisera les données prises par \textcite{Kaci-Chaouch2008} et \textcite{PoisotBJLS2010} sur 189 parasites du genre \emph{Lamellodiscus}, parasites de poissons communs en Méditerranée.
+Ces données correspondent aux relevés morphométriques effectuées sur les parties solides de l'appareil d'attachement. Les données sont classées selon l'espèce du parasite (\texttt{sppar}), et l'espéce de l'hôte sur lequel le parasite a été isolé (\texttt{sphote}).
 
-<<>>=
+<<readMorpho>>=
 morpho = read.table("data/lamellodiscus.txt",h=TRUE,sep='\t')
 head(morpho)
 @
@@ -28,27 +27,29 @@ L'argument \texttt{sep} indique quel caractère est utilisé pour séparer les c
 Si les champs avaient été séparés par une espace, il aurait fallu utiliser \texttt{sep = ' '}.
 On peut aussi spécifier le séparateur décimal (\texttt{dec=','}), ainsi que d'autres options, \emph{cf.} \texttt{?read.table}.
 
+Cette fonction renvoie un objet de type \emph{data frame}. La commande \texttt{head} (resp. \texttt{tail}) donne accès aux premières (resp. dernières) lignes d'un \emph{data frame}. 
+
 R donne aussi accès directement à la lecture des fichiers \emph{comma separated value}, \texttt{csv}, \emph{via} la commande \texttt{read.csv}.
 Cette fonction est en réalité un appel a \texttt{read.table} avec une partie des arguments par défaut pré-remplis pour lire le format \texttt{csv}.
 
 Une fois les données lues, elles sont en général importées sous forme de \texttt{data.frame}.
 On peut voir les noms des colonnes:
 
-<<>>=
+<<colnaMorpho>>=
 colnames(morpho)
 @ 
 
 \noindent et afficher le contenu d'une des colonnes avec
 
-<<>>=
+<<morphoAccess>>=
 morpho$a
 @ 
 
-Dans \emph{RStudio}, et la plupart des autres plugins permettant d'utiliser R, après avoir entré le nom de la \emph{data frame}, vous aurez accès en appuyant sur tabulation à un menu déroulant,
+Dans \emph{RStudio}, et la plupart des autres plugins permettant d'utiliser R dans un environnement de travail, après avoir entré le nom de la \emph{data frame}, vous aurez accès en appuyant sur tabulation à un menu déroulant,
 lequel contient les noms des colonnes: 
 
 \begin{center}
-\includegraphics[width=.7\textwidth]{dopdownRStudio}
+\includegraphics[width=.7\textwidth]{dropdownRStudio}
 \end{center}
 
 Cette fonctionalité s'avère très utile quand on a tendance à oublier comment on a nommé ses variables.
@@ -75,8 +76,8 @@ morpho$a[c(1:10)]
 @
 
 \noindent Alors qu'on modifie \texttt{a}, les modifications ne sont pas rapportées à \texttt{morpho\$a}.
-Notez aussi que les noms de certaines colonnes de \texttt{a} vont venir remplacer des variables déjà existantes dans l'environnement de travail.
-Ce n'est pas problèmatique dans le cas de \texttt{a} ou \texttt{b}, mais ça l'est nettement plus dans le cas de \texttt{c}, une fonction nécessaire au bon fonctionnement de R.  
+Notez aussi que dans le caas ou des colonnes de la \emph{data.frame} sur laquelle on travaille ont le même nom que des variables déjà existantes dans l'environnement de travail, il n'est pas toujours évident de prédier comment R se comporte.
+Ce n'est pas problèmatique dans le cas de colonnes nommées \texttt{a} ou \texttt{b}, mais ça l'est nettement plus dans le cas de \texttt{c}, une fonction nécessaire au bon fonctionnement de R.
 
 Si vous souhaitez vraiment vous abstenir de l'appel complet au nom de la \emph{data frame}, la construction \texttt{with} fonctionnera aussi bien:
 
@@ -105,7 +106,7 @@ Il existe des \emph{packages} pour à peu près toutes les utilisations possible
 
 Pour charger un \emph{package}, il faut utiliser la commande \texttt{library}:
 
-<<>>=
+<<lgdata>>=
 library(gdata)
 @
 
@@ -119,14 +120,14 @@ installXLSXsupport(perl = "perl", verbose = FALSE)
 @
 
 Le dossier \texttt{data/} contient une feuille Excel au format \texttt{xls}, \texttt{data/netlists.xls}. Ce fichier comporte, pour une série de réseaux trophiques, leur nom, type, et le nombre d'espèces présentes à chaque niveau.
-On peut lire ce fichier avec la commande \textt{read.xls}:
+On peut lire ce fichier avec la commande \texttt{read.xls}:
 
 <<readXLS>>=
 webs = read.xls('data/netlists.xls', sheet = 1, h = TRUE)
 head(webs)
 @
 
-\noindent La commande \texttt{read.xls} prend les mêmes arguments que \textt{read.table}, et rajoute un argument \texttt{sheet}, qui permet de déterminer quelle feuille sera importée.
+\noindent La commande \texttt{read.xls} prend les mêmes arguments que \texttt{read.table}, et rajoute un argument \texttt{sheet}, qui permet de déterminer quelle feuille sera importée.
 Le fonctionnement de cette fonction quand la feuille Excel contient des macros, de la mise en forme, \empg{etc}, n'est pas prévisible.
 La meilleure solution reste toujours de convertir les données au format texte, ou au format \texttt{csv}, et de les importer dans R par \texttt{read.table}. 
 
@@ -144,7 +145,7 @@ save(morpho,file="data/morpho_data.Rdata")
 \noindent L'extension \texttt{Rdata} vous permet, en double cliquant sur ce fichier, de le charger directement dans R.
 Vous pouvez aussi charger un fichier de ce type en utilisant la commande \texttt{load}:
 
-<<>>=
+<<rmmopho>>=
 rm(morpho)
 ls()
 load('data/morpho_data.Rdata')
@@ -162,7 +163,7 @@ Si, par contre, vous voulez utiliser ces données dans un autre programme que R,
 En parallèle à la lecture avec \texttt{read.table}, R propose la fonction \texttt{write.table}.
 Cette fonction permet d'écrire les données au format texte:
 
-<<>>=
+<<writemorpho>>=
 write.table(morpho, file='data/morpho_txt.txt', sep = ' ', dec='.', col.names=TRUE, row.names=FALSE)
 @ 
 
@@ -172,15 +173,115 @@ La fonction \texttt{write.table} admet un argument \texttt{append}, qui permet d
 
 \section{Export formatté}
 
+Une fois qu'on a lu le fichier de données, il peut être utile de l'exporter dans un format plus lisible. R propose \emph{via} des \emph{packages} additionels, la possibilité de mettre en forme facilement des données. Pour ce-faire, nous avons besoin d'installer deux \emph{packages}: \texttt{xtable} et \texttt{SortableHTMLTables}.
+
+<<instpkg2,eval=FALSE>>=
+install.packages(c('SortableHTMLTables','xtable'))
+@
+
+On charge ces \emph{packages},
+
+<<libSHTMLP>>=
+library(SortableHTMLTables)
+library(xtable)
+@
+
+Le premier permet de créer un document au format \texttt{html} dans lequel on peut dynamiquement trier les colonnes en fonction de leur valeur. Par exemple, avec la base de données \texttt{morpho},
+
+<<SHTML1>>=
+sortable.html.table(df=morpho,output.directory='data/morphoHTML')
+@
+
+Si vous allez dans le répertoire \texttt{data/morphoHTML}, et que vous ouvrez le fichier \texttt{output.html} dans n'importe quel navigateur, vous devriez obtenir le résultat suivant:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{SortedTable}
+\end{center}
+
+Cliquer sur les flèches du nom de chaque colonne permet de facilement trier l'ensemble des lignes. C'est une manière assez efficace de représenter des données rapidement, et des les exporter en vue de les intégrer, par example, a une page web.
+
+Le \emph{package} \texttt{xtable} possède une fonctionnalité similaire, et permet d'exporter au format \LaTeX en plus du \texttt{html}. L'utilisation de la commande est très simple:
+
+<<xtableDemo>>=
+xtable(head(morpho[,c(1:6)]))
+@
+
+L'avantage de \texttt{xtable} est que ce \emph{package} contient des méthodes standard pour plusieurs analyses classiques en statistiques. Par exemple, on peut utiliser un objet \texttt{lm} au lieu d'un tableau, pour mettre en forme les résultats de manière cohérente:
+
+<<regdemo>>=
+x = c(1:10)
+y = 2*x + 1 + rnorm(length(x))
+regression = lm(y~x)
+RegTable = xtable(regression)
+@
+
+On peut imprimer cet objet de manières différentes, d'abord en \texttt{html}:
+
+<<redHTMLLaTeX>>=
+print(RegTable,type='html')
+print(RegTable,type='html',file='table.html')
+@
+
+Ce qui donne le résultat suivant:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{TableHTML}
+\end{center}
+
+On peut de la même manière exporter en \LaTeX:
+
+<<reghtmllatex2>>=
+print(RegTable)
+print(RegTable,file='table.tex')
+@
+
+Ce qui donne le résultat suivant:
+
+\input{table.tex}
+
+<<s2Table, child='table.tex', eval=FALSE>>=
+@
+
+Cette extension est donc particulièrement puissante pour la rédaction de rapport, ou le maintien à jour de documents \footnote{Il faut noter que \emph{knitr}, \texttt{http://yihui.name/knitr/}, une extension de R toujours activement en développement, permet de faire exatement la même tâche et bien plus encore -- génération de page webs, insertion automatique des figures, etc... . Cette extension a été utilisée pour réaliser ce document de cours. \emph{RStudio} permet d'utiliser \emph{knitr} directement, de manière très efficace et relativement simple.}.
 
 \section{Mises en application}
 
-\subsection{Lecture et écriture dans une table}
+\subsection{Ajout de deux tables à la suite}
 
-<<eval=FALSE>>=
-write.table(morpho, file='data/morpho_txt.txt', sep = ' ', dec='.', col.names=TRUE, row.names=FALSE)
-@
+On dispose de deux séries de mesures différentes, contenues dans deux fichiers texte (\texttt{mes1.txt} et \texttt{mes2.txt}, tous les deux dans le répertoire \texttt{data}), dont les champs sont séparés par une espace. On souhaite regrouper ces deux séries de mesures dans un seul fichier texte, \texttt{mes3.txt}, contenu dans le même répertoire. Il existe (au moins) deux méthodes pour le faire.
+
+\clearpage
+\section{Solution des mises en application}
 
 \subsection{Ajout de deux tables à la suite}
 
-Lire dans deux fichiers, deux manières d'écrire dans un seul
+La première étape est de lire les fichiers textes:
+
+<<joinTable1>>=
+mes1 = read.table('data/mes1.txt')
+mes2 = read.table('data/mes2.txt')
+dim(mes1)
+dim(mes2)
+@
+
+On peut maintenant combiner ces deux tableaux en un seul en ajoutant toutes les lignes de \texttt{mes2} à la fin des lignes de \texttt{mes1}, en utilisant la commande \texttt{rbind} (\emph{row bind}, littéralement adjoindre les lignes):
+
+<<joinTable2>>=
+mesTotal = rbind(mes1,mes2)
+dim(mesTotal)
+@
+
+On peut vérifier que les dimensions de \texttt{mesTotal} sont bien la somme de celles de \texttt{mes1} et \texttt{mes2}.
+Il ne reste maintenant plus qu'à écrire dans un nouveau fichier texte:
+
+<<joinTable3>>=
+write.table(mesTotal, file='data/mes3.txt', sep=' ',dec='.')
+@
+
+La deuxième méthode consiste a ajouter les lignes de \texttt{mes2} directement à la fin du fichier \texttt{mes1.txt} (faites donc une copie des deux avant de commencer!).
+
+<<joinTable4,eval=FALSE>>=
+write.table(mes2, file='data/mes1.txt', append=TRUE, sep=' ',dec='.')
+@
+
+Notez que dans ce cas, il faut faire attention à ce que les deux fichiers soient formattés de la même manière, sinon la lecture sera quasi impossible après.

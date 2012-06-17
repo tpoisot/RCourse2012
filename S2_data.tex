@@ -9,13 +9,12 @@ Pour la durée de la séance, on suppose que l'ensemble des données qu'on veut 
 
 La méthode la plus simple de stocker des données, et la seule que l'on devrait recommander si on veut s'assurer de pouvoir lire les données partout, en tout temps, est d'utiliser des fichiers texte.
 À la différence d'un fichier produit par \emph{Excel} ou \emph{OpenOffice Calc}, un fichier en texte brut ne contient pas d'autre informations que ce qu'on y a entré.
-Il est possible de lire dans n'importe quel programme, et son format ne changera \emph{jamais} -- sans mentionner que sa lecture ne coûte rien... 
+Il est possible de lire dans n'importe quel programme, et son format ne changera \emph{jamais} -- sans mentionner que sa lecture ne coûte rien, et qu'il est extrèmement difficile de corrompre un fichier texte. 
 
 \subsection{Depuis des fichiers textes}
 
-Dans cet exemple, on utilisera les données prises par \textcite{PoisotBJLS2010} sur 147 parasites du genre \emph{Lamellodiscus}, parasites de poissons communs en Méditerranée.
-Ces données correspondent aux relevés morphométriques effectuées sur les parties solides de l'appareil d'attachement. Les données sont classées selon l'espèce du parasite (\texttt{sppar}),
- et l'espéce de l'hôte sur lequel le parasite a été isolé (\texttt{sphote}).
+Dans cet exemple, on utilisera les données prises par \textcite{Kaci-Chaouch2008} et \textcite{PoisotBJLS2010} sur 189 parasites du genre \emph{Lamellodiscus}, parasites de poissons communs en Méditerranée.
+Ces données correspondent aux relevés morphométriques effectuées sur les parties solides de l'appareil d'attachement. Les données sont classées selon l'espèce du parasite (\texttt{sppar}), et l'espéce de l'hôte sur lequel le parasite a été isolé (\texttt{sphote}).
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
@@ -50,6 +49,8 @@ L'argument \texttt{h} est l'abbréviation de \emph{header}, à savoir, est-ce qu
 L'argument \texttt{sep} indique quel caractère est utilisé pour séparer les colonnes, ici une tabulation.
 Si les champs avaient été séparés par une espace, il aurait fallu utiliser \texttt{sep = ' '}.
 On peut aussi spécifier le séparateur décimal (\texttt{dec=','}), ainsi que d'autres options, \emph{cf.} \texttt{?read.table}.
+
+Cette fonction renvoie un objet de type \emph{data frame}. La commande \texttt{head} (resp. \texttt{tail}) donne accès aux premières (resp. dernières) lignes d'un \emph{data frame}. 
 
 R donne aussi accès directement à la lecture des fichiers \emph{comma separated value}, \texttt{csv}, \emph{via} la commande \texttt{read.csv}.
 Cette fonction est en réalité un appel a \texttt{read.table} avec une partie des arguments par défaut pré-remplis pour lire le format \texttt{csv}.
@@ -105,11 +106,11 @@ On peut voir les noms des colonnes:
 \end{knitrout}
 
 
-Dans \emph{RStudio}, et la plupart des autres plugins permettant d'utiliser R, après avoir entré le nom de la \emph{data frame}, vous aurez accès en appuyant sur tabulation à un menu déroulant,
+Dans \emph{RStudio}, et la plupart des autres plugins permettant d'utiliser R dans un environnement de travail, après avoir entré le nom de la \emph{data frame}, vous aurez accès en appuyant sur tabulation à un menu déroulant,
 lequel contient les noms des colonnes: 
 
 \begin{center}
-\includegraphics[width=.7\textwidth]{dopdownRStudio}
+\includegraphics[width=.7\textwidth]{dropdownRStudio}
 \end{center}
 
 Cette fonctionalité s'avère très utile quand on a tendance à oublier comment on a nommé ses variables.
@@ -127,7 +128,7 @@ Avec la syntaxe suivante,
 \begin{verbatim}
 ## The following object(s) are masked _by_ '.GlobalEnv':
 ## 
-##     a, b, c, d
+##     a, b, c
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -159,7 +160,7 @@ C'est une des pires pratiques d'écriture de code possible, et il est très fort
 \begin{verbatim}
 ## The following object(s) are masked _by_ '.GlobalEnv':
 ## 
-##     a, b, c, d
+##     a, b, c
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -192,8 +193,8 @@ C'est une des pires pratiques d'écriture de code possible, et il est très fort
 
 
 \noindent Alors qu'on modifie \texttt{a}, les modifications ne sont pas rapportées à \texttt{morpho\$a}.
-Notez aussi que les noms de certaines colonnes de \texttt{a} vont venir remplacer des variables déjà existantes dans l'environnement de travail.
-Ce n'est pas problèmatique dans le cas de \texttt{a} ou \texttt{b}, mais ça l'est nettement plus dans le cas de \texttt{c}, une fonction nécessaire au bon fonctionnement de R.  
+Notez aussi que dans le caas ou des colonnes de la \emph{data.frame} sur laquelle on travaille ont le même nom que des variables déjà existantes dans l'environnement de travail, il n'est pas toujours évident de prédier comment R se comporte.
+Ce n'est pas problèmatique dans le cas de colonnes nommées \texttt{a} ou \texttt{b}, mais ça l'est nettement plus dans le cas de \texttt{c}, une fonction nécessaire au bon fonctionnement de R.
 
 Si vous souhaitez vraiment vous abstenir de l'appel complet au nom de la \emph{data frame}, la construction \texttt{with} fonctionnera aussi bien:
 
@@ -246,6 +247,22 @@ Pour charger un \emph{package}, il faut utiliser la commande \texttt{library}:
 \hlfunctioncall{library}\hlkeyword{(}\hlsymbol{gdata}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
+\begin{verbatim}
+## gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+## 
+## gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+## 
+## Attaching package: 'gdata'
+## 
+## The following object(s) are masked from 'package:stats':
+## 
+##     nobs
+## 
+## The following object(s) are masked from 'package:utils':
+## 
+##     object.size
+## 
+\end{verbatim}
 \end{kframe}
 \end{knitrout}
 
@@ -267,7 +284,7 @@ Si vous utilisez des fichiers issus de Excel 2007, il faut avant tout chose lanc
 
 
 Le dossier \texttt{data/} contient une feuille Excel au format \texttt{xls}, \texttt{data/netlists.xls}. Ce fichier comporte, pour une série de réseaux trophiques, leur nom, type, et le nombre d'espèces présentes à chaque niveau.
-On peut lire ce fichier avec la commande \textt{read.xls}:
+On peut lire ce fichier avec la commande \texttt{read.xls}:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
@@ -290,7 +307,7 @@ On peut lire ce fichier avec la commande \textt{read.xls}:
 \end{knitrout}
 
 
-\noindent La commande \texttt{read.xls} prend les mêmes arguments que \textt{read.table}, et rajoute un argument \texttt{sheet}, qui permet de déterminer quelle feuille sera importée.
+\noindent La commande \texttt{read.xls} prend les mêmes arguments que \texttt{read.table}, et rajoute un argument \texttt{sheet}, qui permet de déterminer quelle feuille sera importée.
 Le fonctionnement de cette fonction quand la feuille Excel contient des macros, de la mise en forme, \empg{etc}, n'est pas prévisible.
 La meilleure solution reste toujours de convertir les données au format texte, ou au format \texttt{csv}, et de les importer dans R par \texttt{read.table}. 
 
@@ -324,17 +341,10 @@ Vous pouvez aussi charger un fichier de ce type en utilisant la commande \texttt
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] "a"             "b"             "c"             "colors"       
-##  [5] "d"             "dat"           "distrib"       "f"            
-##  [9] "faux"          "filename"      "group"         "i"            
-## [13] "is.even"       "k"             "morpho_split"  "moy"          
-## [17] "multipl"       "n"             "n_list"        "n_obs"        
-## [21] "pp"            "print_message" "resample"      "somme"        
-## [25] "somme_1"       "somme_2"       "step"          "t_list"       
-## [29] "t.test.permut" "test_data"     "test_df"       "test_mat"     
-## [33] "texte"         "thm"           "txt"           "u_list"       
-## [37] "val"           "value"         "vect"          "vecteur"      
-## [41] "vrai"          "webs"         
+##  [1] "DemoFacteur" "a"           "b"           "c"           "faux"       
+##  [6] "filename"    "n_list"      "t_list"      "test_mat"    "texte"      
+## [11] "thm"         "txt"         "u_list"      "vecteur"     "vrai"       
+## [16] "webs"       
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -343,17 +353,10 @@ Vous pouvez aussi charger un fichier de ce type en utilisant la commande \texttt
 \normalfont
 \end{flushleft}
 \begin{verbatim}
-##  [1] "a"             "b"             "c"             "colors"       
-##  [5] "d"             "dat"           "distrib"       "f"            
-##  [9] "faux"          "filename"      "group"         "i"            
-## [13] "is.even"       "k"             "morpho"        "morpho_split" 
-## [17] "moy"           "multipl"       "n"             "n_list"       
-## [21] "n_obs"         "pp"            "print_message" "resample"     
-## [25] "somme"         "somme_1"       "somme_2"       "step"         
-## [29] "t_list"        "t.test.permut" "test_data"     "test_df"      
-## [33] "test_mat"      "texte"         "thm"           "txt"          
-## [37] "u_list"        "val"           "value"         "vect"         
-## [41] "vecteur"       "vrai"          "webs"         
+##  [1] "DemoFacteur" "a"           "b"           "c"           "faux"       
+##  [6] "filename"    "morpho"      "n_list"      "t_list"      "test_mat"   
+## [11] "texte"       "thm"         "txt"         "u_list"      "vecteur"    
+## [16] "vrai"        "webs"       
 \end{verbatim}
 \begin{flushleft}
 \ttfamily\noindent
@@ -408,23 +411,267 @@ La fonction \texttt{write.table} admet un argument \texttt{append}, qui permet d
 
 \section{Export formatté}
 
-
-\section{Mises en application}
-
-\subsection{Lecture et écriture dans une table}
+Une fois qu'on a lu le fichier de données, il peut être utile de l'exporter dans un format plus lisible. R propose \emph{via} des \emph{packages} additionels, la possibilité de mettre en forme facilement des données. Pour ce-faire, nous avons besoin d'installer deux \emph{packages}: \texttt{xtable} et \texttt{SortableHTMLTables}.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
 \begin{flushleft}
 \ttfamily\noindent
-\hlfunctioncall{write.table}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/morpho\usebox{\hlnormalsizeboxunderscore}txt.txt"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}{\ }"{}}\hlkeyword{,}{\ }\hlargument{dec}{\ }\hlargument{=}{\ }\hlstring{"{}."{}}\hlkeyword{,}\hspace*{\fill}\\
-\hlstd{}{\ }{\ }{\ }{\ }\hlargument{col.names}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{row.names}{\ }\hlargument{=}{\ }\hlnumber{FALSE}\hlkeyword{)}\mbox{}
+\hlfunctioncall{install.packages}\hlkeyword{(}\hlfunctioncall{c}\hlkeyword{(}\hlstring{"{}SortableHTMLTables"{}}\hlkeyword{,}{\ }\hlstring{"{}xtable"{}}\hlkeyword{)}\hlkeyword{)}\mbox{}
 \normalfont
 \end{flushleft}
 \end{kframe}
 \end{knitrout}
 
 
+On charge ces \emph{packages},
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{library}\hlkeyword{(}\hlsymbol{SortableHTMLTables}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## Loading required package: testthat
+## Loading required package: brew
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{library}\hlkeyword{(}\hlsymbol{xtable}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Le premier permet de créer un document au format \texttt{html} dans lequel on peut dynamiquement trier les colonnes en fonction de leur valeur. Par exemple, avec la base de données \texttt{morpho},
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{sortable.html.table}\hlkeyword{(}\hlargument{df}{\ }\hlargument{=}{\ }\hlsymbol{morpho}\hlkeyword{,}{\ }\hlargument{output.directory}{\ }\hlargument{=}{\ }\hlstring{"{}data/morphoHTML"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Si vous allez dans le répertoire \texttt{data/morphoHTML}, et que vous ouvrez le fichier \texttt{output.html} dans n'importe quel navigateur, vous devriez obtenir le résultat suivant:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{SortedTable}
+\end{center}
+
+Cliquer sur les flèches du nom de chaque colonne permet de facilement trier l'ensemble des lignes. C'est une manière assez efficace de représenter des données rapidement, et des les exporter en vue de les intégrer, par example, a une page web.
+
+Le \emph{package} \texttt{xtable} possède une fonctionnalité similaire, et permet d'exporter au format \LaTeX en plus du \texttt{html}. L'utilisation de la commande est très simple:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{xtable}\hlkeyword{(}\hlfunctioncall{head}\hlkeyword{(}\hlsymbol{morpho}\hlkeyword{[}\hlkeyword{,}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{6}\hlkeyword{)}\hlkeyword{]}\hlkeyword{)}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## % latex table generated in R 2.14.2 by xtable 1.7-0 package
+## % Sun Jun 17 13:37:56 2012
+## \begin{table}[ht]
+## \begin{center}
+## \begin{tabular}{rlllrrr}
+##   \hline
+##  & sphote & sppar & para & a & b & c \\ 
+##   \hline
+## 1 & Divu & eleg & elegDivu1 & 2.06 & 1.93 &  \\ 
+##   2 & Divu & eleg & elegDivu2 & 1.93 & 1.82 & 1.51 \\ 
+##   3 & Divu & eleg & elegDivu2 & 1.67 & 1.56 & 1.20 \\ 
+##   4 & Disa & eleg & elegDisa1 & 1.46 & 1.41 & 1.04 \\ 
+##   5 & Disa & eleg & elegDisa1 & 1.30 & 1.25 & 0.94 \\ 
+##   6 & Disa & eleg & elegDisa1 & 1.41 & 1.35 & 0.99 \\ 
+##    \hline
+## \end{tabular}
+## \end{center}
+## \end{table}
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+L'avantage de \texttt{xtable} est que ce \emph{package} contient des méthodes standard pour plusieurs analyses classiques en statistiques. Par exemple, on peut utiliser un objet \texttt{lm} au lieu d'un tableau, pour mettre en forme les résultats de manière cohérente:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{x}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{c}\hlkeyword{(}\hlnumber{1}\hlkeyword{:}\hlnumber{10}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{y}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlnumber{2}{\ }\hlkeyword{*}{\ }\hlsymbol{x}{\ }\hlkeyword{+}{\ }\hlnumber{1}{\ }\hlkeyword{+}{\ }\hlfunctioncall{rnorm}\hlkeyword{(}\hlfunctioncall{length}\hlkeyword{(}\hlsymbol{x}\hlkeyword{)}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{regression}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{lm}\hlkeyword{(}\hlsymbol{y}{\ }\hlkeyword{\urltilda{}}{\ }\hlsymbol{x}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{RegTable}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{xtable}\hlkeyword{(}\hlsymbol{regression}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+On peut imprimer cet objet de manières différentes, d'abord en \texttt{html}:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{print}\hlkeyword{(}\hlsymbol{RegTable}\hlkeyword{,}{\ }\hlargument{type}{\ }\hlargument{=}{\ }\hlstring{"{}html"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## <!-- html table generated in R 2.14.2 by xtable 1.7-0 package -->
+## <!-- Sun Jun 17 13:37:56 2012 -->
+## <TABLE border=1>
+## <TR> <TH>  </TH> <TH> Estimate </TH> <TH> Std. Error </TH> <TH> t value </TH> <TH> Pr(&gt |t|) </TH>  </TR>
+##   <TR> <TD align="right"> (Intercept) </TD> <TD align="right"> 1.4411 </TD> <TD align="right"> 0.9462 </TD> <TD align="right"> 1.52 </TD> <TD align="right"> 0.1663 </TD> </TR>
+##   <TR> <TD align="right"> x </TD> <TD align="right"> 1.8713 </TD> <TD align="right"> 0.1525 </TD> <TD align="right"> 12.27 </TD> <TD align="right"> 0.0000 </TD> </TR>
+##    </TABLE>
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{print}\hlkeyword{(}\hlsymbol{RegTable}\hlkeyword{,}{\ }\hlargument{type}{\ }\hlargument{=}{\ }\hlstring{"{}html"{}}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}table.html"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Ce qui donne le résultat suivant:
+
+\begin{center}
+\includegraphics[width=.7\textwidth]{TableHTML}
+\end{center}
+
+On peut de la même manière exporter en \LaTeX:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{print}\hlkeyword{(}\hlsymbol{RegTable}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## % latex table generated in R 2.14.2 by xtable 1.7-0 package
+## % Sun Jun 17 13:37:56 2012
+## \begin{table}[ht]
+## \begin{center}
+## \begin{tabular}{rrrrr}
+##   \hline
+##  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+##   \hline
+## (Intercept) & 1.4411 & 0.9462 & 1.52 & 0.1663 \\ 
+##   x & 1.8713 & 0.1525 & 12.27 & 0.0000 \\ 
+##    \hline
+## \end{tabular}
+## \end{center}
+## \end{table}
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{print}\hlkeyword{(}\hlsymbol{RegTable}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}table.tex"{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Ce qui donne le résultat suivant:
+
+\input{table.tex}
+
+
+
+
+Cette extension est donc particulièrement puissante pour la rédaction de rapport, ou le maintien à jour de documents \footnote{Il faut noter que \emph{knitr}, \texttt{http://yihui.name/knitr/}, une extension de R toujours activement en développement, permet de faire exatement la même tâche et bien plus encore -- génération de page webs, insertion automatique des figures, etc... . Cette extension a été utilisée pour réaliser ce document de cours. \emph{RStudio} permet d'utiliser \emph{knitr} directement, de manière très efficace et relativement simple.}.
+
+\section{Mises en application}
+
 \subsection{Ajout de deux tables à la suite}
 
-Lire dans deux fichiers, deux manières d'écrire dans un seul
+On dispose de deux séries de mesures différentes, contenues dans deux fichiers texte (\texttt{mes1.txt} et \texttt{mes2.txt}, tous les deux dans le répertoire \texttt{data}), dont les champs sont séparés par une espace. On souhaite regrouper ces deux séries de mesures dans un seul fichier texte, \texttt{mes3.txt}, contenu dans le même répertoire. Il existe (au moins) deux méthodes pour le faire.
+
+\clearpage
+\section{Solution des mises en application}
+
+\subsection{Ajout de deux tables à la suite}
+
+La première étape est de lire les fichiers textes:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{mes1}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/mes1.txt"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlsymbol{mes2}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{read.table}\hlkeyword{(}\hlstring{"{}data/mes2.txt"{}}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{dim}\hlkeyword{(}\hlsymbol{mes1}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 22 21
+\end{verbatim}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{dim}\hlkeyword{(}\hlsymbol{mes2}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 54 21
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+On peut maintenant combiner ces deux tableaux en un seul en ajoutant toutes les lignes de \texttt{mes2} à la fin des lignes de \texttt{mes1}, en utilisant la commande \texttt{rbind} (\emph{row bind}, littéralement adjoindre les lignes):
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlsymbol{mesTotal}{\ }\hlassignement{\usebox{\hlnormalsizeboxlessthan}-}{\ }\hlfunctioncall{rbind}\hlkeyword{(}\hlsymbol{mes1}\hlkeyword{,}{\ }\hlsymbol{mes2}\hlkeyword{)}\hspace*{\fill}\\
+\hlstd{}\hlfunctioncall{dim}\hlkeyword{(}\hlsymbol{mesTotal}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\begin{verbatim}
+## [1] 76 21
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+On peut vérifier que les dimensions de \texttt{mesTotal} sont bien la somme de celles de \texttt{mes1} et \texttt{mes2}.
+Il ne reste maintenant plus qu'à écrire dans un nouveau fichier texte:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{write.table}\hlkeyword{(}\hlsymbol{mesTotal}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/mes3.txt"{}}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}{\ }"{}}\hlkeyword{,}{\ }\hlargument{dec}{\ }\hlargument{=}{\ }\hlstring{"{}."{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+La deuxième méthode consiste a ajouter les lignes de \texttt{mes2} directement à la fin du fichier \texttt{mes1.txt} (faites donc une copie des deux avant de commencer!).
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{1, 1, 1}\color{fgcolor}\begin{kframe}
+\begin{flushleft}
+\ttfamily\noindent
+\hlfunctioncall{write.table}\hlkeyword{(}\hlsymbol{mes2}\hlkeyword{,}{\ }\hlargument{file}{\ }\hlargument{=}{\ }\hlstring{"{}data/mes1.txt"{}}\hlkeyword{,}{\ }\hlargument{append}{\ }\hlargument{=}{\ }\hlnumber{TRUE}\hlkeyword{,}{\ }\hlargument{sep}{\ }\hlargument{=}{\ }\hlstring{"{}{\ }"{}}\hlkeyword{,}\hspace*{\fill}\\
+\hlstd{}{\ }{\ }{\ }{\ }\hlargument{dec}{\ }\hlargument{=}{\ }\hlstring{"{}."{}}\hlkeyword{)}\mbox{}
+\normalfont
+\end{flushleft}
+\end{kframe}
+\end{knitrout}
+
+
+Notez que dans ce cas, il faut faire attention à ce que les deux fichiers soient formattés de la même manière, sinon la lecture sera quasi impossible après.

@@ -3,9 +3,10 @@
 L'objectif de ce cours est de fournir une introduction générale à R \parencite{R-Development-Core-Team2008}, un langage qui est en train de devenir un standard en analyse de données et en calcul scientifique.
 R est souvent présenté dans l'optique d'une utilisation pour les statistiques.
 Si c'est effectivement une des capacités les plus souvent utilisées de ce langage, ce cours n'abordera pas ce domaine.
-L'objectif des 6 séances est plutôt de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste de R pour le rendre utilisable dans la plus grande majorité des situations:
+L'objectif des 6 séances est plutôt de fournir, au travers d'exemples et de mises en application, un apercu suffisament vaste et complet de R pour le rendre utilisable dans la plus grande majorité des situations:
 nous aborderons donc les bases du langage, en commençant par les types d'objets utilisés par R, puis consacrerons une partie importante du temps a lire, écrire, et manipuler des jeux de données.
-Les dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite.
+Les deux dernières séances sont consacrées à la programmation et aux graphiques, qui permettront d'aller plus loin par la suite.
+À chaque séance, vous êtes encouragés a aller lire l'aide des différentes fonctions abordées, pour mieux comprendre les différentes options possibles: nous verrons les options principales, mais la maturité du langage R fait qu'il est impossible de couvrir tous les usages possibles en seulement 6 séances.
 
 Si R a acquis une très grande popularité dans le milieu de la recherche, c'est parce qu'il permet très facilement de rajouter des fonctionnalités. \emph{via} le système de \emph{packages}.
 En écologie et biologie évolutive, les principaux sont \emph{vegan} (analyse de structure des communautés), \emph{simecol} (simulation de systèmes dynamiques), \emph{ape} (analyses phylogénétiques), \emph{bipartite} (analyse des réseaux de pollinisation), et \emph{emdbook} (modèles statistiques).
@@ -32,7 +33,7 @@ Au lancement de R s'affiche la fenêtre suivante:
 \includegraphics[width=.7\textwidth]{RConsole}
 \end{center}
 
-\noindent On peut aussi lancer R depuis un terminalm, en écrivant simplement \texttt{R}:
+\noindent On peut aussi lancer R depuis un terminal, en écrivant simplement \texttt{R}:
 
 \begin{center}
 \includegraphics[width=.7\textwidth]{RTerminal}
@@ -41,30 +42,22 @@ Au lancement de R s'affiche la fenêtre suivante:
 R n'est donc pas un logiciel comme \emph{JMP}, \emph{Statistica} ou \emph{Excel}.
 Sa philosophie est entièrement différente: plutôt que d'utiliser des boutons et des menus, on communique avec R via des commandes, qu'on entre soit directement dans la console, soit dans des fichiers \texttt{.r}.
 R est accessible depuis de nombreux autres programmes, incluant \emph{Komodo Edit}\footnote{\url{http://www.sciviews.org/SciViews-K/}}, \emph{Eclipse}\footnote{\url{http://www.walware.de/goto/statet}}, et \emph{NotePad ++}\footnote{\url{http://sourceforge.net/projects/npptor/}}.
-De tous, \emph{Eclispe/StatET} est sans doute le plus avancé et le plus complet, mais aussi celui qui possède la courbe d'apprentissage la plus difficile. 
+De tous, \emph{Eclispe/StatET} est sans doute le plus avancé et le plus complet, mais aussi celui qui possède la courbe d'apprentissage la plus difficile.
+Apprendre a maitriser les fonctions de base vous demandera sans doute du temps, mais une fois cette étape franchie, les fonctions les plus avancées fonctionnant sur la même logique, votre progression sera beaucoup plus rapide.
 
-Dans le cadre de ce cours, nous utiliserons \emph{RStudio}, un programme relativement récent qui possède l'ensemble des fonctions qui nous intéressent au jour le jour.
-\emph{RStudio} est un environnement intégré de travail pour R gratuit, multi-plateforme, disponible en ligne à \url{http://rstudio.org/}.
-Ce programme permet de réaliser, dans le même environnement, la majorité des tâches qu'on peut vouloir effectuer dans R.
-\emph{RStudio} possède aussi la propriété vraiment intéressante de pouvoir tourner sur un serveur web:
-une fois un serveur de ce type mis en place, vous pouvez accéder à \emph{RStudio} de n'importe où, à condition d'avoir un navigateur relativement respectueux des standards.
-\emph{Chrome}, \emph{Firefox} et \emph{Safari} devraient n'avoir aucun problème. 
+Dans le cadre de ce cours, nous utiliserons \emph{RStudio}, un programme relativement récent qui possède l'ensemble des fonctions qui nous intéressent au jour le jour. \emph{RStudio} est un environnement intégré de travail pour R qui est gratuit, multi-plateforme, et disponible en ligne à \url{http://rstudio.org/}. Ce programme permet de réaliser, dans le même environnement, la majorité des tâches qu'on peut vouloir effectuer dans R. \emph{RStudio} possède aussi la propriété vraiment intéressante de pouvoir tourner sur un serveur web: une fois un serveur de ce type mis en place, vous pouvez accéder à \emph{RStudio} de n'importe où, à condition d'avoir un navigateur relativement respectueux des standards. \emph{Chrome}, \emph{Firefox} et \emph{Safari} devraient n'avoir aucun problème. 
 
-Au lacenemt de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'affice:
+Au lancement de \emph{RStudio}, une fenêtre ressemblant à celle ci-dessous s'affiche:
 
 \begin{center}
 \includegraphics[width=.7\textwidth]{RStudio}
 \end{center}
 
-Les difféerentes sections permettent d'avoir accès simultanément à la console R (en bas à gauche), à la fenêtre des scripts (en haut à gauche), à l'historique des dernières commandes, et aux graphiques.
-Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}.
+Les difféerentes sections permettent d'avoir accès simultanément à la console R (en bas à gauche), à la fenêtre des scripts (en haut à gauche), à l'historique des dernières commandes, et aux graphiques (la disposition des fenêtres peut changer de celle présentée, et se régle dans le menu \emph{Options}, puis \emph{Pane layout}). Au cours de la première séance, en même temps que nous découvrirons les bases du langage R, nous survolerons les fonctionnalités de \emph{RStudio}.
 
 \section{Types de données}
 
-Cette section présente les types de données comprises par R.
-Les langages de programmation stockent en général des variables de différents types d'une manière différente.
-Dans les langages de bas niveau, comme C, ces différences peuvent être relativement restrictives, pour, par exemple, convertir un entier en flottant.
-R est un langage dit faiblement typé (dans la réalité, R est surtout \emph{très mal} typé, mais c'est un autre problème...), en ce que les valeurs peuvent facilement changer de type.
+Cette section présente les types de données comprises par R. C'est sans doute la section la plus importante de l'ensemble du cours, dans la mesure ou toute la logique de R repose sur les différents types de données disponibles. Les langages de programmation stockent en général des variables de différents types d'une manière différente. Dans les langages de bas niveau, comme C, ces différences peuvent être relativement restrictives, pour, par exemple, convertir un entier en flottant. R est un langage dit faiblement typé, en ce que les valeurs peuvent facilement changer de type \footnote{Dans la réalité, R est surtout \emph{très mal} typé, et il est beaucoup trop facile de faire des erreurs de type. Il faut donc une grande discipline de programmation, et surtout bien savoir sur quel type d'objet on travaille}.
 
 
 Il existe deux niveaux d'organisation pour représenter des valeurs dans un format compris par R: les types de données, et les collections de données.
@@ -74,7 +67,7 @@ Ce vocabulaire n'est certainement pas le plus précis, mais établit au moins un
 
 Dans R, stocker n'importe quelle valeur, ou collection de valeurs, dans un objet, se fait de la manière suivante:
 
-<<eval=FALSE>>=
+<<objectval,eval=FALSE>>=
 objet = valeur
 @ 
 
@@ -87,7 +80,7 @@ Cependant, les recommandations sur la présentation de la syntaxe de R vont dans
 R est extrèmement performant dans le stockage de nombres, ce qui ne devrait pas surprendre de la part d'un langage dévellopé pour traiter des problèmes statistiques.
 Les exemples suivants montrent les difféerentes manières de déclarer un object contenant un nombre:
 
-<<>>=
+<<basicassign>>=
 a = 0.1
 b = 1
 c = 1e-6
@@ -137,7 +130,7 @@ strsplit(filename,'_')
 
 \noident Le fait d'écrire \texttt{\ \.} et pas simplement \texttt{.} vient du fait que R peut utiliser des expressions régulières pour la découpe des chaînes,
 par exemple couper au premier chiffre, et que \texttt{.} a dans ce contexte un sens différent du caractètre \texttt{.}.
-On oeut séparer une chaîne de caractères par lettres, de la manière suivante:
+On peut séparer une chaîne de caractères par lettres, de la manière suivante:
 
 <<splitletters>>=
 strsplit('abcdefgh','')
@@ -155,7 +148,7 @@ LETTERS
 Le type booléen (\texttt{logical}) permet de représenter les états \emph{vrai} (\texttt{TRUE}) et \emph{faux} (\texttt{FALSE}).
 Il est possible d'utiliser des raccourcis, à savoir \texttt{T} et \texttt{F}.
 Par exemple:
-<<>>=
+<<demoBool>>=
 vrai = TRUE
 faux = FALSE
 vrai
@@ -168,17 +161,35 @@ La manière d'utiliser les booléens est vue plus en détail dans la séance~\re
 
 \subsubsection{Facteurs}
 
+Les facteurs sont une notion importante dans R. Ils permettent de stocker des données catégorielles, par exemple des traitements expérimentaux. On peut créer un facteur de la manière suivante:
+
+<<demoFactor>>=
+DemoFacteur = factor(c(1,2,3,4,3,3,3,2,1))
+DemoFacteur
+@
+
+Les facteurs possèdent un \texttt{level}, c'est-à-dire les différentes catégories:
+
+<<demoLevels>>=
+levels(DemoFacteur)
+@
+
+On peut facilement renommer les niveaux d'un facteur:
+
+<<demoLevelsAssign>>=
+levels(DemoFacteur) = c('a','b','c','d')
+DemoFacteur
+@
+
 \subsubsection{Conversions}
 
 R est un langage faiblement typé, dans la mesure ou une commande comme
 
-<<>>=
+<<demoPaste>>=
 paste(99, 'luftballons', sep=' ')
 @
 
-\noindent est parfaitement valide.
-Pourtant, elle mélange un type numérique avec un type chaîne.
-R permet en effet de convertir les données d'un type à l'autre assez facilement:
+\noindent est parfaitement valide. Pourtant, elle mélange un type numérique avec un type chaîne, ce qui provoquerait une erreur dans d'autres langages de plus bas niveau. R permet en effet de convertir les données d'un type à l'autre assez facilement:
 
 <<convert>>=
 as.numeric('4')
@@ -195,7 +206,7 @@ as.vector(as.factor(c(1,2,3,4,3)))
 
 Cette possibilité de convertir les variables d'un type à l'autre est importante si, par exemple, R importe des colonnes d'un tableau de données comme étant des facteurs:
 
-<<eval=FALSE>>=
+<<convertDF,eval=FALSE>>=
 mydata$x = as.numeric(as.vector(mydata$x))
 @
 
@@ -207,7 +218,7 @@ Le vecteur est, avec la matrice, l'objet le plus important de R.
 R est un langage dit \emph{vectorisé}, c'est-à-dire qui peut traîter plusieurs valeurs regroupées dans un objet unique.
 Si on utilise une commande très simple, comme
 
-<<>>=
+<<printBasic>>=
 2
 @
 
@@ -216,7 +227,7 @@ L'indicateur \texttt{[1]} indique que la valeur retournée est le premier élém
 La puissance de la notation vectorielle est qu'on peut accéder à une partie du vecteur, avec un \emph{indice}.
 Si on prend l'exemple suivant,
 
-<<>>=
+<<vectorization1>>=
 a = 2
 a[1]
 a[2]
@@ -228,14 +239,14 @@ Accéder à la position \texttt{[2]} retourne \texttt{NA}, parce que le vecteur 
 
 On peut créer des vecteurs dans R en utilisant la commande \texttt{c}.
 
-<<>>=
+<<vecCreation>>=
 vecteur = c(1,2,3,4,5)
 @
 
 R propose différents raccourcis pour créer rapidement des vecteurs.
 Par exemple, examinez le comportement des commandes suivantes:
 
-<<>>=
+<<seqCreation>>=
 seq(from=0,to=5,by=1)
 seq(from=0,to=10,length=3)
 c(0:5)
@@ -244,7 +255,7 @@ c(0:5)
 L'avantage de la vectorisation est que R va automatiser une grande partie des opérations sur les vecteurs.
 Par exemple, examinez l'effet des commandes suivantes:
 
-<<>>=
+<<vectorizationAdvanced>>=
 a = c(1:10)
 a/2
 log(a,10)
@@ -256,13 +267,13 @@ Avec les vecteurs vient le concept important de \emph{recyclage}.
 Le recyclage consiste a répéter un vecteur autant de fois que nécessaire pour le rendre compatible avec un autre vecteur dans le cadre d'une opération.
 Par exemple, les commandes
 
-<<>>=
+<<recycl1>>=
 c(1,2,3,4,5) + c(1,2)
 @ 
 
 \noindent et
 
-<<>>=
+<<recycl2>>=
 c(1,2,3,4,5) + c(1,2,1,2,1)
 @ 
 
@@ -271,12 +282,17 @@ Le vecteur \texttt{c(1,2)} du premier exemple est \emph{recyclé} pour atteindre
 
 La taille d'un vecteur est obtenue en utilisant la fonction \texttt{length}:
 
-<<>>=
+<<lengthDemo>>=
 length(1)
 length(c(1:5))
 @ 
 
-\textbf{todo} Créer des vecteurs null
+On peut créer facilement des vecteurs d'une taille désirée avec les fonctions \texttt{numeric} et \texttt{character}:
+
+<<voidvector>>=
+numeric(3)
+character(5)
+@
 
 \subsubsection{Matrices}
 
@@ -286,14 +302,14 @@ Une matrice est en fait un vecteur a deux dimensions.
 Si un vecteur est une ligne, une matrice est une série de lignes et de colonnes.
 Dans R, on peut créer une matrice avec la commande \texttt{matrix}, de sorte que
 
-<<>>=
+<<matcrea>>=
 test_mat = matrix(0,ncol=2,nrow=4)
 @
 
 \noindent renvoie une matrice pleine de 0, avec 2 colonnes (\texttt{ncol}) et 4 lignes (\texttt{nrow}).
 
 On peut connaître les dimensions d'une matrice de différentes manières:
-<<>>=
+<<matDim>>=
 dim(test_mat)
 nrow(test_mat)
 ncol(test_mat)
@@ -303,7 +319,7 @@ Accéder à une position particulière d'une matrice se fait en deux temps.
 D'abord, par le numéro de la ligne, ensuite par le numéro de la colonne.
 Par exemple, on peut fixer l'élément sur la première ligne, deuxième colonne de \texttt{test\_mat} à 2, avec
 
-<<>>=
+<<matAssign>>=
 test_mat[1,2] = 2
 test_mat
 @
@@ -311,14 +327,14 @@ test_mat
 Dans certaines situations, on peut souhaiter avoir accès à une ligne ou une colonne en particulier.
 R permet donc de ne spécifier qu'un numéro de ligne, ou un numéro de colonne:
 
-<<>>=
+<<matAccess>>=
 test_mat[,2]
 test_mat[1,]
 @
 
 Une matrice peut aussi posséder des noms de lignes et de colonnes:
 
-<<>>=
+<<matNames>>=
 colnames(test_mat) = c('a','b')
 rownames(test_mat) = c('A','B','C','D')
 test_mat
@@ -327,7 +343,7 @@ colnames(test_mat)
 
 Cela permet aussi d'accéder plus facilement a certaines positions de la matrice:
 
-<<>>=
+<<matAccesID>>=
 test_mat['A',]
 test_mat['A','b']
 @
@@ -340,7 +356,7 @@ On verra dans la séance~\ref{c:tables} que les listes permettent aussi de trait
 
 Pour créer une liste, on peut utiliser différentes méthodes:
 
-<<>>=
+<<ListDemo>>=
 n_list = list(a = 1, b = 2, c = 3)
 n_list
 u_list = list(1, 2, 3)
@@ -349,14 +365,14 @@ u_list
 
 Les listes, comme \texttt{n\_list}, peuvent être nommées:
 
-<<>>=
+<<ListNames>>=
 names(n_list)
 @
 
 On peut accéder aux éléments des listes de différentes manières.
 Si la liste est nommée, la notation \texttt{liste\$nom} est possible; dans tous les autres cas, \texttt{liste[[indice]]} fonctionne.
 
-<<>>=
+<<LisPoundSign>>=
 n_list$a
 n_list[[1]]
 @
@@ -364,7 +380,7 @@ n_list[[1]]
 Les listes peuvent être utilisées dans le contexte de la structure \texttt{with}, qui permet d'accéder facilement aux différents éléments.
 Pour simplifier, \texttt{with} permet d'éviter d'écrire \texttt{liste\$nom} pour n'écrire que \texttt{nom}; les deux commandes ci-dessous sont donc équivalentes:
 
-<<>>=
+<<ListWith>>=
 n_list$a + n_list$b - n_list$c 
 with(n_list,{
 			a + b - c
@@ -382,6 +398,4 @@ unlist(t_list)
 
 \subsubsection{\emph{Data frames}}
 
-Vu plus en détail dans les autres séances.
-
-rbind, cbind
+Les \emph{data frames} sont un des objets les plus puissants de R, que nous verrons en détail dans les autres séances: la majorité des données que nous lirons seront stockées de cette manière.
